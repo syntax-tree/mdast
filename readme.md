@@ -353,7 +353,7 @@ interface Footnote <: Parent {
 
 ### LinkReference
 
-**Link** ([**Parent**](#parent)) represents a humble hyperlink, its `href`
+**LinkReference** ([**Parent**](#parent)) represents a humble hyperlink, its `href`
 and `title` defined somewhere else in the document by a **Definition**.
 
 ```idl
@@ -365,7 +365,7 @@ interface LinkReference <: Parent {
 
 ### ImageReference
 
-**Link** ([**Node**](#node)) represents a figurative figure, its `src` and
+**ImageReference** ([**Node**](#node)) represents a figurative figure, its `src` and
 `title` defined somewhere else in the document by a **Definition**.
 
 ```idl
