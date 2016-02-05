@@ -23,7 +23,7 @@ re-created.
 
 ### `Root`
 
-**Root** ([**Parent**][parent]) houses all nodes.
+`Root` ([`Parent`][parent]) houses all nodes.
 
 ```idl
 interface Root <: Parent {
@@ -33,7 +33,7 @@ interface Root <: Parent {
 
 ### `Paragraph`
 
-**Paragraph** ([**Parent**][parent]) represents a unit of discourse dealing
+`Paragraph` ([`Parent`][parent]) represents a unit of discourse dealing
 with a particular point or idea.
 
 ```idl
@@ -62,7 +62,7 @@ Yields:
 
 ### `Blockquote`
 
-**Blockquote** ([**Parent**][parent]) represents a quote.
+`Blockquote` ([`Parent`][parent]) represents a quote.
 
 ```idl
 interface Blockquote <: Parent {
@@ -93,7 +93,7 @@ Yields:
 
 ### `Heading`
 
-**Heading** ([**Parent**][parent]), just like with HTML, with a level greater
+`Heading` ([`Parent`][parent]), just like with HTML, with a level greater
 than or equal to 1, lower than or equal to 6.
 
 ```idl
@@ -124,9 +124,10 @@ Yields:
 
 ### `Code`
 
-**Code** ([**Text**][text]) occurs at block level (see **InlineCode** for
-code spans).  **Code** sports a language tag (when using GitHub Flavoured
-Markdown fences with a flag, `null` otherwise).
+`Code` ([`Text`][text]) occurs at block level (see
+[`InlineCode`][inlinecode] for code spans).  `Code` sports a language
+tag (when using GitHub Flavoured Markdown fences with a flag, `null`
+otherwise).
 
 ```idl
 interface Code <: Text {
@@ -153,8 +154,8 @@ Yields:
 
 ### `InlineCode`
 
-**InlineCode** ([**Text**][text]) occurs inline (see **Code** for blocks).
-Inline code does not sport a `lang` attribute.
+`InlineCode` ([`Text`][text]) occurs inline (see [`Code`][code] for
+blocks). Inline code does not sport a `lang` attribute.
 
 ```idl
 interface InlineCode <: Text {
@@ -179,7 +180,7 @@ Yields:
 
 ### `YAML`
 
-**YAML** ([**Text**][text]) can occur at the start of a document, and
+`YAML` ([`Text`][text]) can occur at the start of a document, and
 contains embedded YAML data.
 
 ```idl
@@ -207,7 +208,7 @@ Yields:
 
 ### `HTML`
 
-**HTML** ([**Text**][text]) contains embedded HTML.
+`HTML` ([`Text`][text]) contains embedded HTML.
 
 ```idl
 interface HTML <: Text {
@@ -232,7 +233,7 @@ Yields:
 
 ### `List`
 
-**List** ([**Parent**][parent]) contains **ListItem**’s.
+`List` ([`Parent`][parent]) contains [`ListItem`s][listitem].
 
 The `start` property contains the starting number of the list when
 `ordered: true`; `null` otherwise.
@@ -243,9 +244,9 @@ When all list items have `loose: false`, the list’s `loose` property is also
 ```idl
 interface List <: Parent {
   type: "list";
-  loose: true | false;
-  start: uint32 | null;
   ordered: true | false;
+  start: uint32 | null;
+  loose: true | false;
 }
 ```
 
@@ -280,11 +281,11 @@ Yields:
 
 ### `ListItem`
 
-**ListItem** ([**Parent**][parent]) is a child of a **List**.
+`ListItem` ([`Parent`][parent]) is a child of a [`List`][list].
 
-Loose **ListItem**’s often contain more than one block-level elements.
+Loose `ListItem`s often contain more than one block-level elements.
 
-When in `gfm: true` mode, a checked property exists on **ListItem**’s,
+When in `gfm: true` mode, a checked property exists on `ListItem`s,
 either set to `true` (when checked), `false` (when unchecked), or `null`
 (when not containing a checkbox).  See [Task Lists on GitHub][task-list]
 for information.
@@ -297,13 +298,13 @@ interface ListItem <: Parent {
 }
 ```
 
-For an example, see the definition of **List**.
+For an example, see the definition of [`List`][list].
 
 ### `Table`
 
-**Table** ([**Parent**][parent]) represents tabular data, with alignment.
-Its children are either **TableHeader** (the first child), or **TableRow**
-(all other children).
+`Table` ([`Parent`][parent]) represents tabular data, with alignment.
+Its children are either [`TableHeader`][tableheader] (the first child),
+or [`TableRow`][tablerow] (all other children).
 
 `table.align` represents the alignment of columns.
 
@@ -379,7 +380,8 @@ Yields:
 
 ### `TableHeader`
 
-**TableHeader** ([**Parent**][parent]).  Its children are always **TableCell**.
+`TableHeader` ([`Parent`][parent]).  Its children are always
+[`TableCell`][tablecell].
 
 ```idl
 interface TableHeader <: Parent {
@@ -387,11 +389,12 @@ interface TableHeader <: Parent {
 }
 ```
 
-For an example, see the definition of **Table**.
+For an example, see the definition of [`Table`][table].
 
 ### `TableRow`
 
-**TableRow** ([**Parent**][parent]).  Its children are always **TableCell**.
+`TableRow` ([`Parent`][parent]).  Its children are always
+[`TableCell`][tablecell].
 
 ```idl
 interface TableRow <: Parent {
@@ -399,11 +402,11 @@ interface TableRow <: Parent {
 }
 ```
 
-For an example, see the definition of **Table**.
+For an example, see the definition of `Table`.
 
 ### `TableCell`
 
-**TableCell** ([**Parent**][parent]).  Contains a single tabular field.
+`TableCell` ([`Parent`][parent]).  Contains a single tabular field.
 
 ```idl
 interface TableCell <: Parent {
@@ -411,11 +414,11 @@ interface TableCell <: Parent {
 }
 ```
 
-For an example, see the definition of **Table**.
+For an example, see the definition of [`Table`][table].
 
 ### `ThematicBreak`
 
-A **ThematicBreak** ([**Node**][node]) represents a break in content,
+A `ThematicBreak` ([`Node`][node]) represents a break in content,
 often shown as a horizontal rule, or by two HTML section elements.
 
 ```idl
@@ -440,7 +443,7 @@ Yields:
 
 ### `Break`
 
-**Break** ([**Node**][node]) represents an explicit line break.
+`Break` ([`Node`][node]) represents an explicit line break.
 
 ```idl
 interface Break <: Node {
@@ -478,7 +481,7 @@ Yields:
 
 ### `Emphasis`
 
-**Emphasis** ([**Parent**][parent]) represents slightly important text.
+`Emphasis` ([`Parent`][parent]) represents slightly important text.
 
 ```idl
 interface Emphasis <: Parent {
@@ -522,7 +525,7 @@ Yields:
 
 ### `Strong`
 
-**Strong** ([**Parent**][parent]) represents super important text.
+`Strong` ([`Parent`][parent]) represents super important text.
 
 ```idl
 interface Strong <: Parent {
@@ -566,7 +569,7 @@ Yields:
 
 ### `Delete`
 
-**Delete** ([**Parent**][parent]) represents text ready for removal.
+`Delete` ([`Parent`][parent]) represents text ready for removal.
 
 ```idl
 interface Delete <: Parent {
@@ -594,7 +597,7 @@ Yields:
 
 ### `Link`
 
-**Link** ([**Parent**][parent]) represents the humble hyperlink.
+`Link` ([`Parent`][parent]) represents the humble hyperlink.
 
 ```idl
 interface Link <: Parent {
@@ -626,7 +629,7 @@ Yields:
 
 ### `Image`
 
-**Image** ([**Node**][node]) represents the figurative figure.
+`Image` ([`Node`][node]) represents the figurative figure.
 
 ```idl
 interface Image <: Node {
@@ -656,7 +659,7 @@ Yields:
 
 ### `Footnote`
 
-**Footnote** ([**Parent**][parent]) represents an inline marker, whose
+`Footnote` ([`Parent`][parent]) represents an inline marker, whose
 content relates to the document but is outside its flow.
 
 ```idl
@@ -685,9 +688,9 @@ Yields:
 
 ### `LinkReference`
 
-**LinkReference** ([**Parent**][parent]) represents a humble hyperlink,
+`LinkReference` ([`Parent`][parent]) represents a humble hyperlink,
 its `href` and `title` defined somewhere else in the document by a
-**Definition**.
+[`Definition`][definition].
 
 `referenceType` is needed to detect if a reference was meant as a
 reference (`[foo][]`) or just unescaped brackets (`[foo]`).
@@ -728,13 +731,13 @@ Yields:
 
 ### `ImageReference`
 
-**ImageReference** ([**Node**][node]) represents a figurative figure,
+`ImageReference` ([`Node`][node]) represents a figurative figure,
 its `src` and `title` defined somewhere else in the document by a
-**Definition**.
+[`Definition`][definition].
 
 `referenceType` is needed to detect if a reference was meant as a
 reference (`![foo][]`) or just unescaped brackets (`![foo]`).
-See **LinkReference** for the definition of `referenceType`.
+See [`LinkReference`][linkreference] for the definition of `referenceType`.
 
 ```idl
 interface ImageReference <: Node {
@@ -764,9 +767,9 @@ Yields:
 
 ### `FootnoteReference`
 
-**FootnoteReference** ([**Node**][node]) is like **Footnote**, but its
-content is already outside the documents flow: placed in a
-**FootnoteDefinition**.
+`FootnoteReference` ([`Node`][node]) is like [`Footnote`][footnote],
+but its content is already outside the documents flow: placed in a
+[`FootnoteDefinition`][footnotedefinition].
 
 ```idl
 interface FootnoteReference <: Node {
@@ -792,8 +795,9 @@ Yields:
 
 ### `Definition`
 
-**Definition** ([**Node**][node]) represents the definition (i.e., location
-and title) of a **LinkReference** or an **ImageReference**.
+`Definition` ([`Node`][node]) represents the definition (i.e., location
+and title) of a [`LinkReference`][linkreference] or an
+[`ImageReference`][imagereference].
 
 ```idl
 interface Definition <: Node {
@@ -823,8 +827,8 @@ Yields:
 
 ### `FootnoteDefinition`
 
-**FootnoteDefinition** ([**Parent**][parent]) represents the definition
-(i.e., content) of a **FootnoteReference**.
+`FootnoteDefinition` ([`Parent`][parent]) represents the definition
+(i.e., content) of a [`FootnoteReference`][footnotereference].
 
 ```idl
 interface FootnoteDefinition <: Parent {
@@ -857,8 +861,9 @@ Yields:
 
 ### `TextNode`
 
-**TextNode** ([**Text**][text]) represents everything that is just text.
-Note that its `type` property is `text`, but it is different from **Text**.
+`TextNode` ([`Text`][text]) represents everything that is just text.
+Note that its `type` property is `text`, but it is different from
+[`Text`][text].
 
 ```idl
 interface TextNode <: Text {
@@ -913,3 +918,31 @@ MIT © [Titus Wormer](http://wooorm.com)
 [migrate]: https://github.com/wooorm/remark/releases/tag/3.0.0
 
 [task-list]: https://help.github.com/articles/writing-on-github/#task-lists
+
+[inlinecode]: #inlinecode
+
+[code]: #code
+
+[list]: #list
+
+[listitem]: #listitem
+
+[table]: #table
+
+[tableheader]: #tableheader
+
+[tablerow]: #tablerow
+
+[tablecell]: #tablecell
+
+[definition]: #definition
+
+[linkreference]: #linkreference
+
+[imagereference]: #imagereference
+
+[footnote]: #footnote
+
+[footnotereference]: #footnotereference
+
+[footnotedefinition]: #footnotedefinition
