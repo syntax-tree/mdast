@@ -481,7 +481,7 @@ Yields:
 
 ### `Emphasis`
 
-`Emphasis` ([`Parent`][parent]) represents slightly important text.
+`Emphasis` ([`Parent`][parent]) represents slight emphasis.
 
 ```idl
 interface Emphasis <: Parent {
@@ -525,7 +525,7 @@ Yields:
 
 ### `Strong`
 
-`Strong` ([`Parent`][parent]) represents super important text.
+`Strong` ([`Parent`][parent]) represents strong emphasis.
 
 ```idl
 interface Strong <: Parent {
