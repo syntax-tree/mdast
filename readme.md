@@ -42,6 +42,24 @@ interface Paragraph <: Parent {
 }
 ```
 
+For example, the following markdown:
+
+```md
+Alpha bravo charlie.
+```
+
+Yields:
+
+```json
+{
+  "type": "paragraph",
+  "children": [{
+    "type": "text",
+    "value": "Alpha bravo charlie."
+  }]
+}
+```
+
 ### `Blockquote`
 
 **Blockquote** ([**Parent**][parent]) represents a quote.
@@ -49,6 +67,27 @@ interface Paragraph <: Parent {
 ```idl
 interface Blockquote <: Parent {
     type: "blockquote";
+}
+```
+
+For example, the following markdown:
+
+```md
+> Alpha bravo charlie.
+```
+
+Yields:
+
+```json
+{
+  "type": "blockquote",
+  "children": [{
+    "type": "paragraph",
+    "children": [{
+      "type": "text",
+      "value": "Alpha bravo charlie."
+    }]
+  }]
 }
 ```
 
@@ -61,6 +100,25 @@ than or equal to 1, lower than or equal to 6.
 interface Heading <: Parent {
     type: "heading";
     depth: 1 <= uint32 <= 6;
+}
+```
+
+For example, the following markdown:
+
+```md
+# Alpha
+```
+
+Yields:
+
+```json
+{
+  "type": "heading",
+  "depth": 1,
+  "children": [{
+    "type": "text",
+    "value": "Alpha"
+  }]
 }
 ```
 
@@ -77,6 +135,22 @@ interface Code <: Text {
 }
 ```
 
+For example, the following markdown:
+
+```md
+    foo()
+```
+
+Yields:
+
+```json
+{
+  "type": "code",
+  "lang": null,
+  "value": "foo()"
+}
+```
+
 ### `InlineCode`
 
 **InlineCode** ([**Text**][text]) occurs inline (see **Code** for blocks).
@@ -85,6 +159,21 @@ Inline code does not sport a `lang` attribute.
 ```idl
 interface InlineCode <: Text {
     type: "inlineCode";
+}
+```
+
+For example, the following markdown:
+
+```md
+`foo()`
+```
+
+Yields:
+
+```json
+{
+  "type": "inlineCode",
+  "value": "foo()"
 }
 ```
 
@@ -99,6 +188,23 @@ interface YAML <: Text {
 }
 ```
 
+For example, the following markdown:
+
+```md
+---
+foo: bar
+---
+```
+
+Yields:
+
+```json
+{
+  "type": "yaml",
+  "value": "foo: bar"
+}
+```
+
 ### `HTML`
 
 **HTML** ([**Text**][text]) contains embedded HTML.
@@ -106,6 +212,21 @@ interface YAML <: Text {
 ```idl
 interface HTML <: Text {
     type: "html";
+}
+```
+
+For example, the following markdown:
+
+```md
+<div>
+```
+
+Yields:
+
+```json
+{
+  "type": "html",
+  "value": "<div>"
 }
 ```
 
@@ -128,6 +249,35 @@ interface List <: Parent {
 }
 ```
 
+For example, the following markdown:
+
+```md
+1. [x] foo
+```
+
+Yields:
+
+```json
+{
+  "type": "list",
+  "ordered": true,
+  "start": 1,
+  "loose": false,
+  "children": [{
+    "type": "listItem",
+    "loose": false,
+    "checked": true,
+    "children": [{
+      "type": "paragraph",
+      "children": [{
+        "type": "text",
+        "value": "foo",
+      }]
+    }]
+  }]
+}
+```
+
 ### `ListItem`
 
 **ListItem** ([**Parent**][parent]) is a child of a **List**.
@@ -146,6 +296,8 @@ interface ListItem <: Parent {
     checked: true | false | null | undefined;
 }
 ```
+
+For an example, see the definition of **List**.
 
 ### `Table`
 
@@ -168,6 +320,63 @@ enum alignType {
 }
 ```
 
+For example, the following markdown:
+
+```md
+| foo | bar |
+| :-- | :-: |
+| baz | qux |
+```
+
+Yields:
+
+```json
+{
+  "type": "table",
+  "align": ["left", "center"],
+  "children": [
+    {
+      "type": "tableHeader",
+      "children": [
+        {
+          "type": "tableCell",
+          "children": [{
+            "type": "text",
+            "value": "foo"
+          }]
+        },
+        {
+          "type": "tableCell",
+          "children": [{
+            "type": "text",
+            "value": "bar"
+          }]
+        }
+      ]
+    },
+    {
+      "type": "tableRow",
+      "children": [
+        {
+          "type": "tableCell",
+          "children": [{
+            "type": "text",
+            "value": "baz"
+          }]
+        },
+        {
+          "type": "tableCell",
+          "children": [{
+            "type": "text",
+            "value": "qux"
+          }]
+        }
+      ]
+    }
+  ]
+}
+```
+
 ### `TableHeader`
 
 **TableHeader** ([**Parent**][parent]).  Its children are always **TableCell**.
@@ -177,6 +386,8 @@ interface TableHeader <: Parent {
     type: "tableHeader";
 }
 ```
+
+For an example, see the definition of **Table**.
 
 ### `TableRow`
 
@@ -188,6 +399,8 @@ interface TableRow <: Parent {
 }
 ```
 
+For an example, see the definition of **Table**.
+
 ### `TableCell`
 
 **TableCell** ([**Parent**][parent]).  Contains a single tabular field.
@@ -198,6 +411,8 @@ interface TableCell <: Parent {
 }
 ```
 
+For an example, see the definition of **Table**.
+
 ### `ThematicBreak`
 
 A **ThematicBreak** ([**Node**][node]) represents a break in content,
@@ -206,6 +421,20 @@ often shown as a horizontal rule, or by two HTML section elements.
 ```idl
 interface ThematicBreak <: Node {
     type: "thematicBreak";
+}
+```
+
+For example, the following markdown:
+
+```md
+***
+```
+
+Yields:
+
+```json
+{
+  "type": "thematicBreak"
 }
 ```
 
@@ -219,6 +448,34 @@ interface Break <: Node {
 }
 ```
 
+For example, the following markdown (interpuncts represent spaces):
+
+```md
+foo··
+bar
+```
+
+Yields:
+
+```json
+{
+  "type": "paragraph",
+  "children": [
+    {
+      "type": "text",
+      "value": "foo"
+    },
+    {
+      "type": "break"
+    },
+    {
+      "type": "text",
+      "value": "bar"
+    }
+  ]
+}
+```
+
 ### `Emphasis`
 
 **Emphasis** ([**Parent**][parent]) represents slightly important text.
@@ -226,6 +483,40 @@ interface Break <: Node {
 ```idl
 interface Emphasis <: Parent {
     type: "emphasis";
+}
+```
+
+For example, the following markdown:
+
+```md
+*alpha* _bravo_
+```
+
+Yields:
+
+```json
+{
+  "type": "paragraph",
+  "children": [
+    {
+      "type": "emphasis",
+      "children": [{
+        "type": "text",
+        "value": "alpha"
+      }]
+    },
+    {
+      "type": "text",
+      "value": " "
+    },
+    {
+      "type": "emphasis",
+      "children": [{
+        "type": "text",
+        "value": "bravo"
+      }]
+    }
+  ]
 }
 ```
 
@@ -239,6 +530,40 @@ interface Strong <: Parent {
 }
 ```
 
+For example, the following markdown:
+
+```md
+**alpha** __bravo__
+```
+
+Yields:
+
+```json
+{
+  "type": "paragraph",
+  "children": [
+    {
+      "type": "strong",
+      "children": [{
+        "type": "text",
+        "value": "alpha"
+      }]
+    },
+    {
+      "type": "text",
+      "value": " "
+    },
+    {
+      "type": "strong",
+      "children": [{
+        "type": "text",
+        "value": "bravo"
+      }]
+    }
+  ]
+}
+```
+
 ### `Delete`
 
 **Delete** ([**Parent**][parent]) represents text ready for removal.
@@ -246,6 +571,24 @@ interface Strong <: Parent {
 ```idl
 interface Delete <: Parent {
     type: "delete";
+}
+```
+
+For example, the following markdown:
+
+```md
+~~alpha~~
+```
+
+Yields:
+
+```json
+{
+  "type": "delete",
+  "children": [{
+    "type": "text",
+    "value": "alpha"
+  }]
 }
 ```
 
@@ -258,6 +601,26 @@ interface Link <: Parent {
     type: "link";
     title: string | null;
     href: string;
+}
+```
+
+For example, the following markdown:
+
+```md
+[alpha](http://example.com "bravo")
+```
+
+Yields:
+
+```json
+{
+  "type": "link",
+  "title": "bravo",
+  "href": "http://example.com",
+  "children": [{
+    "type": "text",
+    "value": "alpha"
+  }]
 }
 ```
 
@@ -274,6 +637,23 @@ interface Image <: Node {
 }
 ```
 
+For example, the following markdown:
+
+```md
+![alpha](http://example.com/favicon.ico "bravo")
+```
+
+Yields:
+
+```json
+{
+  "type": "link",
+  "title": "bravo",
+  "src": "http://example.com",
+  "alt": "alpha"
+}
+```
+
 ### `Footnote`
 
 **Footnote** ([**Parent**][parent]) represents an inline marker, whose
@@ -282,6 +662,24 @@ content relates to the document but is outside its flow.
 ```idl
 interface Footnote <: Parent {
     type: "footnote";
+}
+```
+
+For example, the following markdown:
+
+```md
+[^alpha bravo]
+```
+
+Yields:
+
+```json
+{
+  "type": "footnote",
+  "children": [{
+    "type": "text",
+    "value": "alpha bravo"
+  }]
 }
 ```
 
@@ -308,6 +706,26 @@ enum referenceType {
 }
 ```
 
+For example, the following markdown:
+
+```md
+[alpha][bravo]
+```
+
+Yields:
+
+```json
+{
+  "type": "linkReference",
+  "identifier": "bravo",
+  "referenceType": "full",
+  "children": [{
+    "type": "text",
+    "value": "alpha"
+  }]
+}
+```
+
 ### `ImageReference`
 
 **ImageReference** ([**Node**][node]) represents a figurative figure,
@@ -327,6 +745,23 @@ interface ImageReference <: Node {
 }
 ```
 
+For example, the following markdown:
+
+```md
+![alpha][bravo]
+```
+
+Yields:
+
+```json
+{
+  "type": "imageReference",
+  "identifier": "bravo",
+  "referenceType": "full",
+  "alt": "alpha"
+}
+```
+
 ### `FootnoteReference`
 
 **FootnoteReference** ([**Node**][node]) is like **Footnote**, but its
@@ -337,6 +772,21 @@ content is already outside the documents flow: placed in a
 interface FootnoteReference <: Node {
     type: "footnoteReference";
     identifier: string;
+}
+```
+
+For example, the following markdown:
+
+```md
+[^alpha]
+```
+
+Yields:
+
+```json
+{
+  "type": "footnoteReference",
+  "identifier": "alpha"
 }
 ```
 
@@ -354,6 +804,23 @@ interface Definition <: Node {
 }
 ```
 
+For example, the following markdown:
+
+```md
+[alpha]: http://example.com
+```
+
+Yields:
+
+```json
+{
+  "type": "definition",
+  "identifier": "alpha",
+  "title": null,
+  "link": "http://example.com"
+}
+```
+
 ### `FootnoteDefinition`
 
 **FootnoteDefinition** ([**Parent**][parent]) represents the definition
@@ -366,6 +833,28 @@ interface FootnoteDefinition <: Parent {
 }
 ```
 
+For example, the following markdown:
+
+```md
+[^alpha]: bravo and charlie.
+```
+
+Yields:
+
+```json
+{
+  "type": "footnoteDefinition",
+  "identifier": "alpha",
+  "children": [{
+    "type": "paragraph",
+    "children": [{
+      "type": "text",
+      "value": "bravo and charlie."
+    }]
+  }]
+}
+```
+
 ### `TextNode`
 
 **TextNode** ([**Text**][text]) represents everything that is just text.
@@ -374,6 +863,21 @@ Note that its `type` property is `text`, but it is different from **Text**.
 ```idl
 interface TextNode <: Text {
     type: "text";
+}
+```
+
+For example, the following markdown:
+
+```md
+Alpha bravo charlie.
+```
+
+Yields:
+
+```json
+{
+  "type": "text",
+  "value": "Alpha bravo charlie."
 }
 ```
 
