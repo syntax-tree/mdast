@@ -291,10 +291,20 @@ interface Footnote <: Parent {
 its `href` and `title` defined somewhere else in the document by a
 **Definition**.
 
+`referenceType` is needed to detect if a reference was meant as a
+reference (`[foo][]`) or just unescaped brackets (`[foo]`).
+
 ```idl
 interface LinkReference <: Parent {
     type: "linkReference";
     identifier: string;
+    referenceType: referenceType;
+}
+```
+
+```idl
+enum referenceType {
+    "shortcut" | "collapsed" | "full";
 }
 ```
 
@@ -304,11 +314,16 @@ interface LinkReference <: Parent {
 its `src` and `title` defined somewhere else in the document by a
 **Definition**.
 
+`referenceType` is needed to detect if a reference was meant as a
+reference (`![foo][]`) or just unescaped brackets (`![foo]`).
+See **LinkReference** for the definition of `referenceType`.
+
 ```idl
 interface ImageReference <: Node {
     type: "imageReference";
-    alt: string | null;
     identifier: string;
+    referenceType: referenceType;
+    alt: string | null;
 }
 ```
 
