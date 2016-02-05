@@ -198,13 +198,14 @@ interface TableCell <: Parent {
 }
 ```
 
-### `HorizontalRule`
+### `ThematicBreak`
 
-Just a **HorizontalRule** ([**Node**][node]).
+A **ThematicBreak** ([**Node**][node]) represents a break in content,
+often shown as a horizontal rule, or by two HTML section elements.
 
 ```idl
-interface HorizontalRule <: Node {
-    type: "horizontalRule";
+interface ThematicBreak <: Node {
+    type: "thematicBreak";
 }
 ```
 
