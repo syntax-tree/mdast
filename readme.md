@@ -285,16 +285,15 @@ Yields:
 
 Loose `ListItem`s often contain more than one block-level elements.
 
-When in `gfm: true` mode, a checked property exists on `ListItem`s,
-either set to `true` (when checked), `false` (when unchecked), or `null`
-(when not containing a checkbox).  See [Task Lists on GitHub][task-list]
-for information.
+A checked property exists on `ListItem`s, set to `true` (when checked),
+`false` (when unchecked), or `null` (when not containing a checkbox).
+See [Task Lists on GitHub][task-list] for information.
 
 ```idl
 interface ListItem <: Parent {
   type: "listItem";
   loose: true | false;
-  checked: true | false | null | undefined;
+  checked: true | false | null;
 }
 ```
 
