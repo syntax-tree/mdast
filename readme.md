@@ -27,7 +27,7 @@ re-created.
 
 ```idl
 interface Root <: Parent {
-    type: "root";
+  type: "root";
 }
 ```
 
@@ -38,7 +38,7 @@ with a particular point or idea.
 
 ```idl
 interface Paragraph <: Parent {
-    type: "paragraph";
+  type: "paragraph";
 }
 ```
 
@@ -66,7 +66,7 @@ Yields:
 
 ```idl
 interface Blockquote <: Parent {
-    type: "blockquote";
+  type: "blockquote";
 }
 ```
 
@@ -98,8 +98,8 @@ than or equal to 1, lower than or equal to 6.
 
 ```idl
 interface Heading <: Parent {
-    type: "heading";
-    depth: 1 <= uint32 <= 6;
+  type: "heading";
+  depth: 1 <= uint32 <= 6;
 }
 ```
 
@@ -130,8 +130,8 @@ Markdown fences with a flag, `null` otherwise).
 
 ```idl
 interface Code <: Text {
-    type: "code";
-    lang: string | null;
+  type: "code";
+  lang: string | null;
 }
 ```
 
@@ -158,7 +158,7 @@ Inline code does not sport a `lang` attribute.
 
 ```idl
 interface InlineCode <: Text {
-    type: "inlineCode";
+  type: "inlineCode";
 }
 ```
 
@@ -184,7 +184,7 @@ contains embedded YAML data.
 
 ```idl
 interface YAML <: Text {
-    type: "yaml";
+  type: "yaml";
 }
 ```
 
@@ -211,7 +211,7 @@ Yields:
 
 ```idl
 interface HTML <: Text {
-    type: "html";
+  type: "html";
 }
 ```
 
@@ -242,10 +242,10 @@ When all list items have `loose: false`, the list’s `loose` property is also
 
 ```idl
 interface List <: Parent {
-    type: "list";
-    loose: true | false;
-    start: uint32 | null;
-    ordered: true | false;
+  type: "list";
+  loose: true | false;
+  start: uint32 | null;
+  ordered: true | false;
 }
 ```
 
@@ -291,9 +291,9 @@ for information.
 
 ```idl
 interface ListItem <: Parent {
-    type: "listItem";
-    loose: true | false;
-    checked: true | false | null | undefined;
+  type: "listItem";
+  loose: true | false;
+  checked: true | false | null | undefined;
 }
 ```
 
@@ -309,14 +309,14 @@ Its children are either **TableHeader** (the first child), or **TableRow**
 
 ```idl
 interface Table <: Parent {
-    type: "table";
-    align: [alignType];
+  type: "table";
+  align: [alignType];
 }
 ```
 
 ```idl
 enum alignType {
-    "left" | "right" | "center" | null;
+  "left" | "right" | "center" | null;
 }
 ```
 
@@ -383,7 +383,7 @@ Yields:
 
 ```idl
 interface TableHeader <: Parent {
-    type: "tableHeader";
+  type: "tableHeader";
 }
 ```
 
@@ -395,7 +395,7 @@ For an example, see the definition of **Table**.
 
 ```idl
 interface TableRow <: Parent {
-    type: "tableRow";
+  type: "tableRow";
 }
 ```
 
@@ -407,7 +407,7 @@ For an example, see the definition of **Table**.
 
 ```idl
 interface TableCell <: Parent {
-    type: "tableCell";
+  type: "tableCell";
 }
 ```
 
@@ -420,7 +420,7 @@ often shown as a horizontal rule, or by two HTML section elements.
 
 ```idl
 interface ThematicBreak <: Node {
-    type: "thematicBreak";
+  type: "thematicBreak";
 }
 ```
 
@@ -444,7 +444,7 @@ Yields:
 
 ```idl
 interface Break <: Node {
-    type: "break";
+  type: "break";
 }
 ```
 
@@ -482,7 +482,7 @@ Yields:
 
 ```idl
 interface Emphasis <: Parent {
-    type: "emphasis";
+  type: "emphasis";
 }
 ```
 
@@ -526,7 +526,7 @@ Yields:
 
 ```idl
 interface Strong <: Parent {
-    type: "strong";
+  type: "strong";
 }
 ```
 
@@ -570,7 +570,7 @@ Yields:
 
 ```idl
 interface Delete <: Parent {
-    type: "delete";
+  type: "delete";
 }
 ```
 
@@ -598,9 +598,9 @@ Yields:
 
 ```idl
 interface Link <: Parent {
-    type: "link";
-    title: string | null;
-    href: string;
+  type: "link";
+  title: string | null;
+  href: string;
 }
 ```
 
@@ -630,10 +630,10 @@ Yields:
 
 ```idl
 interface Image <: Node {
-    type: "image";
-    title: string | null;
-    alt: string | null;
-    src: string;
+  type: "image";
+  title: string | null;
+  alt: string | null;
+  src: string;
 }
 ```
 
@@ -661,7 +661,7 @@ content relates to the document but is outside its flow.
 
 ```idl
 interface Footnote <: Parent {
-    type: "footnote";
+  type: "footnote";
 }
 ```
 
@@ -694,15 +694,15 @@ reference (`[foo][]`) or just unescaped brackets (`[foo]`).
 
 ```idl
 interface LinkReference <: Parent {
-    type: "linkReference";
-    identifier: string;
-    referenceType: referenceType;
+  type: "linkReference";
+  identifier: string;
+  referenceType: referenceType;
 }
 ```
 
 ```idl
 enum referenceType {
-    "shortcut" | "collapsed" | "full";
+  "shortcut" | "collapsed" | "full";
 }
 ```
 
@@ -738,10 +738,10 @@ See **LinkReference** for the definition of `referenceType`.
 
 ```idl
 interface ImageReference <: Node {
-    type: "imageReference";
-    identifier: string;
-    referenceType: referenceType;
-    alt: string | null;
+  type: "imageReference";
+  identifier: string;
+  referenceType: referenceType;
+  alt: string | null;
 }
 ```
 
@@ -770,8 +770,8 @@ content is already outside the documents flow: placed in a
 
 ```idl
 interface FootnoteReference <: Node {
-    type: "footnoteReference";
-    identifier: string;
+  type: "footnoteReference";
+  identifier: string;
 }
 ```
 
@@ -797,10 +797,10 @@ and title) of a **LinkReference** or an **ImageReference**.
 
 ```idl
 interface Definition <: Node {
-    type: "definition";
-    identifier: string;
-    title: string | null;
-    link: string;
+  type: "definition";
+  identifier: string;
+  title: string | null;
+  link: string;
 }
 ```
 
@@ -828,8 +828,8 @@ Yields:
 
 ```idl
 interface FootnoteDefinition <: Parent {
-    type: "footnoteDefinition";
-    identifier: string;
+  type: "footnoteDefinition";
+  identifier: string;
 }
 ```
 
@@ -862,7 +862,7 @@ Note that its `type` property is `text`, but it is different from **Text**.
 
 ```idl
 interface TextNode <: Text {
-    type: "text";
+  type: "text";
 }
 ```
 
