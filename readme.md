@@ -649,7 +649,7 @@ Yields:
 
 ```json
 {
-  "type": "link",
+  "type": "image",
   "title": "bravo",
   "url": "http://example.com",
   "alt": "alpha"
