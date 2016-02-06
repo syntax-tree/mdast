@@ -602,7 +602,7 @@ Yields:
 interface Link <: Parent {
   type: "link";
   title: string | null;
-  href: string;
+  url: string;
 }
 ```
 
@@ -618,7 +618,7 @@ Yields:
 {
   "type": "link",
   "title": "bravo",
-  "href": "http://example.com",
+  "url": "http://example.com",
   "children": [{
     "type": "text",
     "value": "alpha"
@@ -635,7 +635,7 @@ interface Image <: Node {
   type: "image";
   title: string | null;
   alt: string | null;
-  src: string;
+  url: string;
 }
 ```
 
@@ -651,7 +651,7 @@ Yields:
 {
   "type": "link",
   "title": "bravo",
-  "src": "http://example.com",
+  "url": "http://example.com",
   "alt": "alpha"
 }
 ```
@@ -688,7 +688,7 @@ Yields:
 ### `LinkReference`
 
 `LinkReference` ([`Parent`][parent]) represents a humble hyperlink,
-its `href` and `title` defined somewhere else in the document by a
+its `url` and `title` defined somewhere else in the document by a
 [`Definition`][definition].
 
 `referenceType` is needed to detect if a reference was meant as a
@@ -731,7 +731,7 @@ Yields:
 ### `ImageReference`
 
 `ImageReference` ([`Node`][node]) represents a figurative figure,
-its `src` and `title` defined somewhere else in the document by a
+its `url` and `title` defined somewhere else in the document by a
 [`Definition`][definition].
 
 `referenceType` is needed to detect if a reference was meant as a
@@ -803,7 +803,7 @@ interface Definition <: Node {
   type: "definition";
   identifier: string;
   title: string | null;
-  link: string;
+  url: string;
 }
 ```
 
@@ -820,7 +820,7 @@ Yields:
   "type": "definition",
   "identifier": "alpha",
   "title": null,
-  "link": "http://example.com"
+  "url": "http://example.com"
 }
 ```
 
