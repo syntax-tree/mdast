@@ -19,6 +19,8 @@ re-created.
 
 **MDAST** is a subset of [unist][], and implemented by [remark][].
 
+This document describes version 2.0.0 of **MDAST**. [Changelog »][changelog].
+
 ## AST
 
 ### `Root`
@@ -894,6 +896,8 @@ MIT © [Titus Wormer](http://wooorm.com)
 [nlcst]: https://github.com/wooorm/nlcst
 
 [vfile]: https://github.com/wooorm/vfile
+
+[changelog]: https://github.com/wooorm/mdast/releases
 
 [node]: https://github.com/wooorm/unist#node
 
