@@ -302,8 +302,8 @@ For an example, see the definition of [`List`][list].
 ### `Table`
 
 `Table` ([`Parent`][parent]) represents tabular data, with alignment.
-Its children are either [`TableHeader`][tableheader] (the first child),
-or [`TableRow`][tablerow] (all other children).
+Its children are [`TableRow`][tablerow]s, the first of which acts as
+a table header row.
 
 `table.align` represents the alignment of columns.
 
@@ -336,7 +336,7 @@ Yields:
   "align": ["left", "center"],
   "children": [
     {
-      "type": "tableHeader",
+      "type": "tableRow",
       "children": [
         {
           "type": "tableCell",
@@ -376,19 +376,6 @@ Yields:
   ]
 }
 ```
-
-### `TableHeader`
-
-`TableHeader` ([`Parent`][parent]).  Its children are always
-[`TableCell`][tablecell].
-
-```idl
-interface TableHeader <: Parent {
-  type: "tableHeader";
-}
-```
-
-For an example, see the definition of [`Table`][table].
 
 ### `TableRow`
 
@@ -927,8 +914,6 @@ MIT © [Titus Wormer](http://wooorm.com)
 [listitem]: #listitem
 
 [table]: #table
-
-[tableheader]: #tableheader
 
 [tablerow]: #tablerow
 
