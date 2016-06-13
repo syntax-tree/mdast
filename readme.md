@@ -4,13 +4,6 @@
 
 ***
 
-> :warning:
->
-> **MDAST**, the pluggable markdown parser, was recently
-> separated from this project and given a new name:
-> **remark**.  See its documentation to read more about
-> [what changed and how to migrate »][migrate]
-
 **MDAST** discloses markdown as an abstract syntax tree.  _Abstract_
 means not all information is stored in this tree and an exact replica
 of the original document cannot be re-created.  _Syntax Tree_ means syntax
@@ -904,8 +897,6 @@ MIT © [Titus Wormer](http://wooorm.com)
 [parent]: https://github.com/wooorm/unist#parent
 
 [text]: https://github.com/wooorm/unist#text
-
-[migrate]: https://github.com/wooorm/remark/releases/tag/3.0.0
 
 [task-list]: https://help.github.com/articles/writing-on-github/#task-lists
 
