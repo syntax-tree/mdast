@@ -14,6 +14,44 @@ re-created.
 
 This document describes version 2.0.0 of **MDAST**. [Changelog »][changelog].
 
+## Table of Contents
+
+*   [AST](#ast)
+
+    *   [Root](#root)
+    *   [Paragraph](#paragraph)
+    *   [Blockquote](#blockquote)
+    *   [Heading](#heading)
+    *   [Code](#code)
+    *   [InlineCode](#inlinecode)
+    *   [YAML](#yaml)
+    *   [HTML](#html)
+    *   [List](#list)
+    *   [ListItem](#listitem)
+    *   [Table](#table)
+    *   [TableRow](#tablerow)
+    *   [TableCell](#tablecell)
+    *   [ThematicBreak](#thematicbreak)
+    *   [Break](#break)
+    *   [Emphasis](#emphasis)
+    *   [Strong](#strong)
+    *   [Delete](#delete)
+    *   [Link](#link)
+    *   [Image](#image)
+    *   [Footnote](#footnote)
+    *   [LinkReference](#linkreference)
+    *   [ImageReference](#imagereference)
+    *   [FootnoteReference](#footnotereference)
+    *   [Definition](#definition)
+    *   [FootnoteDefinition](#footnotedefinition)
+    *   [TextNode](#textnode)
+
+*   [List of Utilities](#list-of-utilities)
+
+*   [Related](#related)
+
+*   [License](#license)
+
 ## AST
 
 ### `Root`
