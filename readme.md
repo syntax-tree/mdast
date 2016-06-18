@@ -925,6 +925,8 @@ Yields:
     — Ensure at most one top-level heading is in the document;
 *   [`eush77/mdast-squeeze-paragraphs`](https://github.com/eush77/mdast-squeeze-paragraphs)
     — Remove empty paragraphs;
+*   [`wooorm/mdast-util-to-hast`](https://github.com/wooorm/mdast-util-to-hast)
+    — Transform MDAST to HAST;
 *   [`wooorm/mdast-zone`](https://github.com/wooorm/mdast-zone)
     — HTML comments as ranges or markers.
 
