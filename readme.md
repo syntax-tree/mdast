@@ -913,6 +913,8 @@ Yields:
     — Assert MDAST nodes;
 *   [`wooorm/mdast-comment-marker`](https://github.com/wooorm/mdast-comment-marker)
     — Parse a comment marker;
+*   [`wooorm/mdast-util-compact`](https://github.com/wooorm/mdast-util-compact)
+    — Make an MDAST tree compact;
 *   [`wooorm/mdast-util-definitions`](https://github.com/wooorm/mdast-util-definitions)
     — Find definition nodes;
 *   [`wooorm/mdast-util-heading-range`](https://github.com/wooorm/mdast-util-heading-range)
