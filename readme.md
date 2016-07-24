@@ -925,6 +925,8 @@ Yields:
     — Ensure at most one top-level heading is in the document;
 *   [`eush77/mdast-squeeze-paragraphs`](https://github.com/eush77/mdast-squeeze-paragraphs)
     — Remove empty paragraphs;
+*   [`BarryThePenguin/mdast-util-toc`](https://github.com/BarryThePenguin/mdast-util-toc)
+    — Generate a Table of Contents from a tree;
 *   [`wooorm/mdast-util-to-hast`](https://github.com/wooorm/mdast-util-to-hast)
     — Transform MDAST to HAST;
 *   [`wooorm/mdast-zone`](https://github.com/wooorm/mdast-zone)
