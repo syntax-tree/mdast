@@ -909,6 +909,8 @@ Yields:
 
 <!--lint disable list-item-spacing-->
 
+*   [`wooorm/mdast-util-assert`](https://github.com/wooorm/mdast-util-assert)
+    — Assert MDAST nodes;
 *   [`wooorm/mdast-comment-marker`](https://github.com/wooorm/mdast-comment-marker)
     — Parse a comment marker;
 *   [`wooorm/mdast-util-definitions`](https://github.com/wooorm/mdast-util-definitions)
