@@ -933,6 +933,8 @@ Yields:
     — Generate a Table of Contents from a tree;
 *   [`wooorm/mdast-util-to-hast`](https://github.com/wooorm/mdast-util-to-hast)
     — Transform MDAST to HAST;
+*   [`wooorm/mdast-util-to-nlcst`](https://github.com/wooorm/mdast-util-to-nlcst)
+    — Transform MDAST to NLCST;
 *   [`wooorm/mdast-zone`](https://github.com/wooorm/mdast-zone)
     — HTML comments as ranges or markers.
 
