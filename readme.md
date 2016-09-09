@@ -951,7 +951,7 @@ MIT © [Titus Wormer](http://wooorm.com)
 
 <!-- Definitions -->
 
-[logo]: https://cdn.rawgit.com/wooorm/mdast/master/logo.svg
+[logo]: https://cdn.rawgit.com/wooorm/mdast/39a0f3b/logo.svg
 
 [unist]: https://github.com/wooorm/unist
 
