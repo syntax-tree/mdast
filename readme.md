@@ -951,23 +951,23 @@ MIT © [Titus Wormer](http://wooorm.com)
 
 <!-- Definitions -->
 
-[logo]: https://cdn.rawgit.com/wooorm/mdast/39a0f3b/logo.svg
+[logo]: https://cdn.rawgit.com/syntax-tree/mdast/39a0f3b/logo.svg
 
-[unist]: https://github.com/wooorm/unist
+[unist]: https://github.com/syntax-tree/unist
 
 [remark]: https://github.com/wooorm/remark
 
 [nlcst]: https://github.com/wooorm/nlcst
 
-[vfile]: https://github.com/wooorm/vfile
+[vfile]: https://github.com/vfile/vfile
 
-[changelog]: https://github.com/wooorm/mdast/releases
+[changelog]: https://github.com/syntax-tree/mdast/releases
 
-[node]: https://github.com/wooorm/unist#node
+[node]: https://github.com/syntax-tree/unist#node
 
-[parent]: https://github.com/wooorm/unist#parent
+[parent]: https://github.com/syntax-tree/unist#parent
 
-[text]: https://github.com/wooorm/unist#text
+[text]: https://github.com/syntax-tree/unist#text
 
 [task-list]: https://help.github.com/articles/writing-on-github/#task-lists
 
