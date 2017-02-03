@@ -909,33 +909,33 @@ Yields:
 
 <!--lint disable list-item-spacing-->
 
-*   [`syntax-tree/mdast-util-assert`](https://github.com/syntax-tree/mdast-util-assert)
+*   [`mdast-util-assert`](https://github.com/syntax-tree/mdast-util-assert)
     — Assert MDAST nodes;
-*   [`syntax-tree/mdast-comment-marker`](https://github.com/syntax-tree/mdast-comment-marker)
+*   [`mdast-comment-marker`](https://github.com/syntax-tree/mdast-comment-marker)
     — Parse a comment marker;
-*   [`syntax-tree/mdast-util-compact`](https://github.com/syntax-tree/mdast-util-compact)
+*   [`mdast-util-compact`](https://github.com/syntax-tree/mdast-util-compact)
     — Make an MDAST tree compact;
-*   [`syntax-tree/mdast-util-definitions`](https://github.com/syntax-tree/mdast-util-definitions)
+*   [`mdast-util-definitions`](https://github.com/syntax-tree/mdast-util-definitions)
     — Find definition nodes;
-*   [`syntax-tree/mdast-util-heading-range`](https://github.com/syntax-tree/mdast-util-heading-range)
+*   [`mdast-util-heading-range`](https://github.com/syntax-tree/mdast-util-heading-range)
     — Markdown heading as ranges;
-*   [`syntax-tree/mdast-util-heading-style`](https://github.com/syntax-tree/mdast-util-heading-style)
+*   [`mdast-util-heading-style`](https://github.com/syntax-tree/mdast-util-heading-style)
     — Get the style of a heading node;
-*   [`anandthakker/mdast-util-inject`](https://github.com/anandthakker/mdast-util-inject)
+*   [`mdast-util-inject`](https://github.com/anandthakker/mdast-util-inject)
     — Inject a tree into another at a given heading;
-*   [`syntax-tree/mdast-util-to-string`](https://github.com/syntax-tree/mdast-util-to-string)
+*   [`mdast-util-to-string`](https://github.com/syntax-tree/mdast-util-to-string)
     — Get the plain text content of a node;
-*   [`eush77/mdast-normalize-headings`](https://github.com/eush77/mdast-normalize-headings)
+*   [`mdast-normalize-headings`](https://github.com/eush77/mdast-normalize-headings)
     — Ensure at most one top-level heading is in the document;
-*   [`eush77/mdast-squeeze-paragraphs`](https://github.com/eush77/mdast-squeeze-paragraphs)
+*   [`mdast-squeeze-paragraphs`](https://github.com/eush77/mdast-squeeze-paragraphs)
     — Remove empty paragraphs;
-*   [`BarryThePenguin/mdast-util-toc`](https://github.com/BarryThePenguin/mdast-util-toc)
+*   [`mdast-util-toc`](https://github.com/BarryThePenguin/mdast-util-toc)
     — Generate a Table of Contents from a tree;
-*   [`syntax-tree/mdast-util-to-hast`](https://github.com/syntax-tree/mdast-util-to-hast)
+*   [`mdast-util-to-hast`](https://github.com/syntax-tree/mdast-util-to-hast)
     — Transform MDAST to HAST;
-*   [`syntax-tree/mdast-util-to-nlcst`](https://github.com/syntax-tree/mdast-util-to-nlcst)
+*   [`mdast-util-to-nlcst`](https://github.com/syntax-tree/mdast-util-to-nlcst)
     — Transform MDAST to NLCST;
-*   [`syntax-tree/mdast-zone`](https://github.com/syntax-tree/mdast-zone)
+*   [`mdast-zone`](https://github.com/syntax-tree/mdast-zone)
     — HTML comments as ranges or markers.
 
 ## Related
