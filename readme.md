@@ -909,21 +909,21 @@ Yields:
 
 <!--lint disable list-item-spacing-->
 
-*   [`wooorm/mdast-util-assert`](https://github.com/wooorm/mdast-util-assert)
+*   [`syntax-tree/mdast-util-assert`](https://github.com/syntax-tree/mdast-util-assert)
     — Assert MDAST nodes;
-*   [`wooorm/mdast-comment-marker`](https://github.com/wooorm/mdast-comment-marker)
+*   [`syntax-tree/mdast-comment-marker`](https://github.com/syntax-tree/mdast-comment-marker)
     — Parse a comment marker;
-*   [`wooorm/mdast-util-compact`](https://github.com/wooorm/mdast-util-compact)
+*   [`syntax-tree/mdast-util-compact`](https://github.com/syntax-tree/mdast-util-compact)
     — Make an MDAST tree compact;
-*   [`wooorm/mdast-util-definitions`](https://github.com/wooorm/mdast-util-definitions)
+*   [`syntax-tree/mdast-util-definitions`](https://github.com/syntax-tree/mdast-util-definitions)
     — Find definition nodes;
-*   [`wooorm/mdast-util-heading-range`](https://github.com/wooorm/mdast-util-heading-range)
+*   [`syntax-tree/mdast-util-heading-range`](https://github.com/syntax-tree/mdast-util-heading-range)
     — Markdown heading as ranges;
-*   [`wooorm/mdast-util-heading-style`](https://github.com/wooorm/mdast-util-heading-style)
+*   [`syntax-tree/mdast-util-heading-style`](https://github.com/syntax-tree/mdast-util-heading-style)
     — Get the style of a heading node;
 *   [`anandthakker/mdast-util-inject`](https://github.com/anandthakker/mdast-util-inject)
     — Inject a tree into another at a given heading;
-*   [`wooorm/mdast-util-to-string`](https://github.com/wooorm/mdast-util-to-string)
+*   [`syntax-tree/mdast-util-to-string`](https://github.com/syntax-tree/mdast-util-to-string)
     — Get the plain text content of a node;
 *   [`eush77/mdast-normalize-headings`](https://github.com/eush77/mdast-normalize-headings)
     — Ensure at most one top-level heading is in the document;
@@ -931,11 +931,11 @@ Yields:
     — Remove empty paragraphs;
 *   [`BarryThePenguin/mdast-util-toc`](https://github.com/BarryThePenguin/mdast-util-toc)
     — Generate a Table of Contents from a tree;
-*   [`wooorm/mdast-util-to-hast`](https://github.com/wooorm/mdast-util-to-hast)
+*   [`syntax-tree/mdast-util-to-hast`](https://github.com/syntax-tree/mdast-util-to-hast)
     — Transform MDAST to HAST;
-*   [`wooorm/mdast-util-to-nlcst`](https://github.com/wooorm/mdast-util-to-nlcst)
+*   [`syntax-tree/mdast-util-to-nlcst`](https://github.com/syntax-tree/mdast-util-to-nlcst)
     — Transform MDAST to NLCST;
-*   [`wooorm/mdast-zone`](https://github.com/wooorm/mdast-zone)
+*   [`syntax-tree/mdast-zone`](https://github.com/syntax-tree/mdast-zone)
     — HTML comments as ranges or markers.
 
 ## Related
@@ -957,7 +957,7 @@ MIT © [Titus Wormer](http://wooorm.com)
 
 [remark]: https://github.com/wooorm/remark
 
-[nlcst]: https://github.com/wooorm/nlcst
+[nlcst]: https://github.com/syntax-tree/nlcst
 
 [vfile]: https://github.com/vfile/vfile
 
