@@ -910,33 +910,33 @@ Yields:
 <!--lint disable list-item-spacing-->
 
 *   [`mdast-util-assert`](https://github.com/syntax-tree/mdast-util-assert)
-    — Assert MDAST nodes;
+    — Assert MDAST nodes
 *   [`mdast-comment-marker`](https://github.com/syntax-tree/mdast-comment-marker)
-    — Parse a comment marker;
+    — Parse a comment marker
 *   [`mdast-util-compact`](https://github.com/syntax-tree/mdast-util-compact)
-    — Make an MDAST tree compact;
+    — Make an MDAST tree compact
 *   [`mdast-util-definitions`](https://github.com/syntax-tree/mdast-util-definitions)
-    — Find definition nodes;
+    — Find definition nodes
 *   [`mdast-util-heading-range`](https://github.com/syntax-tree/mdast-util-heading-range)
-    — Markdown heading as ranges;
+    — Markdown heading as ranges
 *   [`mdast-util-heading-style`](https://github.com/syntax-tree/mdast-util-heading-style)
-    — Get the style of a heading node;
+    — Get the style of a heading node
 *   [`mdast-util-inject`](https://github.com/anandthakker/mdast-util-inject)
-    — Inject a tree into another at a given heading;
+    — Inject a tree into another at a given heading
 *   [`mdast-util-to-string`](https://github.com/syntax-tree/mdast-util-to-string)
-    — Get the plain text content of a node;
+    — Get the plain text content of a node
 *   [`mdast-normalize-headings`](https://github.com/eush77/mdast-normalize-headings)
-    — Ensure at most one top-level heading is in the document;
+    — Ensure at most one top-level heading is in the document
 *   [`mdast-squeeze-paragraphs`](https://github.com/eush77/mdast-squeeze-paragraphs)
-    — Remove empty paragraphs;
+    — Remove empty paragraphs
 *   [`mdast-util-toc`](https://github.com/BarryThePenguin/mdast-util-toc)
-    — Generate a Table of Contents from a tree;
+    — Generate a Table of Contents from a tree
 *   [`mdast-util-to-hast`](https://github.com/syntax-tree/mdast-util-to-hast)
-    — Transform MDAST to HAST;
+    — Transform MDAST to HAST
 *   [`mdast-util-to-nlcst`](https://github.com/syntax-tree/mdast-util-to-nlcst)
-    — Transform MDAST to NLCST;
+    — Transform MDAST to NLCST
 *   [`mdast-zone`](https://github.com/syntax-tree/mdast-zone)
-    — HTML comments as ranges or markers.
+    — HTML comments as ranges or markers
 
 ## Related
 
