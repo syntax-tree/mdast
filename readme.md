@@ -17,7 +17,6 @@ This document describes version 2.0.0 of **MDAST**. [Changelog »][changelog].
 ## Table of Contents
 
 *   [AST](#ast)
-
     *   [Root](#root)
     *   [Paragraph](#paragraph)
     *   [Blockquote](#blockquote)
@@ -45,11 +44,8 @@ This document describes version 2.0.0 of **MDAST**. [Changelog »][changelog].
     *   [Definition](#definition)
     *   [FootnoteDefinition](#footnotedefinition)
     *   [TextNode](#textnode)
-
 *   [List of Utilities](#list-of-utilities)
-
 *   [Related](#related)
-
 *   [License](#license)
 
 ## AST
