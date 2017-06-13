@@ -12,7 +12,7 @@ re-created.
 
 **MDAST** is a subset of [unist][], and implemented by [remark][].
 
-This document describes version 2.0.0 of **MDAST**. [Changelog »][changelog].
+This document describes version 2.1.0 of **MDAST**. [Changelog »][changelog].
 
 ## Table of Contents
 
