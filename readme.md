@@ -46,7 +46,6 @@ This document describes version 2.0.0 of **MDAST**. [Changelog »][changelog].
     *   [TextNode](#textnode)
 *   [List of Utilities](#list-of-utilities)
 *   [Related](#related)
-*   [License](#license)
 
 ## AST
 
@@ -940,10 +939,6 @@ Yields:
 *   [unist][]
 *   [nlcst][]
 *   [vfile][]
-
-## License
-
-MIT © [Titus Wormer](http://wooorm.com)
 
 <!-- Definitions -->
 
