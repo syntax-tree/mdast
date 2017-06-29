@@ -261,7 +261,8 @@ Yields:
 
 ### `List`
 
-`List` ([`Parent`][parent]) contains [`ListItem`s][listitem].
+`List` ([`Parent`][parent]) contains [`ListItem`s][listitem].  No other nodes
+may occur in lists.
 
 The `start` property contains the starting number of the list when
 `ordered: true`; `null` otherwise.
