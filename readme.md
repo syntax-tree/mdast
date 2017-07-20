@@ -217,6 +217,11 @@ interface YAML <: Text {
 }
 ```
 
+> **Note**: YAML used to be available through the core of remark and thus
+> is specified here.  Support for it now moved to
+> [`remark-frontmatter`][frontmatter], and the definition here may be removed
+> in the future.
+
 For example, the following markdown:
 
 ```md
@@ -988,3 +993,5 @@ Yields:
 [footnotereference]: #footnotereference
 
 [footnotedefinition]: #footnotedefinition
+
+[frontmatter]: https://github.com/wooorm/remark-frontmatter
