@@ -12,7 +12,8 @@ re-created.
 
 **MDAST** is a subset of [unist][], and implemented by [remark][].
 
-This document describes version 2.1.0 of **MDAST**. [Changelog »][changelog].
+This document may not be released. See [releases][] for released
+documents. The latest released version is [`2.1.0`][latest].
 
 ## Table of Contents
 
@@ -958,7 +959,9 @@ Yields:
 
 [vfile]: https://github.com/vfile/vfile
 
-[changelog]: https://github.com/syntax-tree/mdast/releases
+[releases]: https://github.com/syntax-tree/mdast/releases
+
+[latest]: https://github.com/syntax-tree/mdast/releases/tag/2.1.0
 
 [node]: https://github.com/syntax-tree/unist#node
 
