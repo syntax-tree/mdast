@@ -949,7 +949,7 @@ Yields:
 
 <!-- Definitions -->
 
-[logo]: https://cdn.rawgit.com/syntax-tree/mdast/39a0f3b/logo.svg
+[logo]: https://cdn.rawgit.com/syntax-tree/mdast/6205835/logo.svg
 
 [unist]: https://github.com/syntax-tree/unist
 
