@@ -47,6 +47,7 @@ documents. The latest released version is [`2.1.0`][latest].
     *   [TextNode](#textnode)
 *   [List of Utilities](#list-of-utilities)
 *   [Related](#related)
+*   [Contribute](#contribute)
 
 ## AST
 
@@ -947,6 +948,20 @@ Yields:
 *   [nlcst][]
 *   [vfile][]
 
+## Contribute
+
+**mdast** is built by people just like you!  Check out
+[`contribute.md`][contribute] for ways to get started.
+
+This project has a [Code of Conduct][coc].  By interacting with this repository,
+organisation, or community you agree to abide by its terms.
+
+Want to chat with the community and contributors?  Join us in [Gitter][chat]!
+
+Have an idea for a cool new utility or tool?  That’s great!  If you want
+feedback, help, or just to share it with the world you can do so by creating
+an issue in the [`syntax-tree/ideas`][ideas] repository!
+
 <!-- Definitions -->
 
 [logo]: https://cdn.rawgit.com/syntax-tree/mdast/6205835/logo.svg
@@ -998,3 +1013,11 @@ Yields:
 [footnotedefinition]: #footnotedefinition
 
 [frontmatter]: https://github.com/wooorm/remark-frontmatter
+
+[contribute]: contributing.md
+
+[coc]: code-of-conduct.md
+
+[ideas]: https://github.com/syntax-tree/ideas
+
+[chat]: https://gitter.im/wooorm/remark
