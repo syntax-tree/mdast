@@ -916,6 +916,8 @@ Yields:
 
 *   [`mdast-util-assert`](https://github.com/syntax-tree/mdast-util-assert)
     — Assert MDAST nodes
+*   [`mdast-add-list-metadata`](https://gitlab.com/staltz/mdast-add-list-metadata)
+    — Enhances the metadata of list and listItem nodes
 *   [`mdast-comment-marker`](https://github.com/syntax-tree/mdast-comment-marker)
     — Parse a comment marker
 *   [`mdast-util-compact`](https://github.com/syntax-tree/mdast-util-compact)
