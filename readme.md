@@ -924,6 +924,8 @@ Yields:
     — Make an MDAST tree compact
 *   [`mdast-util-definitions`](https://github.com/syntax-tree/mdast-util-definitions)
     — Find definition nodes
+*   [`mdast-flatten-nested-lists`](https://gitlab.com/staltz/mdast-flatten-nested-lists)
+    — Transforms an MDAST tree to avoid lists inside lists
 *   [`mdast-util-heading-range`](https://github.com/syntax-tree/mdast-util-heading-range)
     — Markdown heading as ranges
 *   [`mdast-util-heading-style`](https://github.com/syntax-tree/mdast-util-heading-style)
