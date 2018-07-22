@@ -916,6 +916,8 @@ Yields:
 
 *   [`mdast-util-assert`](https://github.com/syntax-tree/mdast-util-assert)
     — Assert MDAST nodes
+*   [`mdast-add-list-metadata`](https://gitlab.com/staltz/mdast-add-list-metadata)
+    — Enhances the metadata of list and listItem nodes
 *   [`mdast-comment-marker`](https://github.com/syntax-tree/mdast-comment-marker)
     — Parse a comment marker
 *   [`mdast-util-compact`](https://github.com/syntax-tree/mdast-util-compact)
@@ -924,6 +926,8 @@ Yields:
     — Find definition nodes
 *   [`mdast-flatten-listitem-paragraphs`](https://gitlab.com/staltz/mdast-flatten-listitem-paragraphs)
     — Flatten listItem and (nested) paragraph into one listItem node 
+*   [`mdast-flatten-nested-lists`](https://gitlab.com/staltz/mdast-flatten-nested-lists)
+    — Transforms an MDAST tree to avoid lists inside lists
 *   [`mdast-util-heading-range`](https://github.com/syntax-tree/mdast-util-heading-range)
     — Markdown heading as ranges
 *   [`mdast-util-heading-style`](https://github.com/syntax-tree/mdast-util-heading-style)
@@ -932,6 +936,8 @@ Yields:
     — Inject a tree into another at a given heading
 *   [`mdast-util-to-string`](https://github.com/syntax-tree/mdast-util-to-string)
     — Get the plain text content of a node
+*   [`mdast-flatten-image-paragraphs`](https://gitlab.com/staltz/mdast-flatten-image-paragraphs)
+    — Flatten paragraph and image into one image node 
 *   [`mdast-normalize-headings`](https://github.com/eush77/mdast-normalize-headings)
     — Ensure at most one top-level heading is in the document
 *   [`mdast-squeeze-paragraphs`](https://github.com/eush77/mdast-squeeze-paragraphs)
