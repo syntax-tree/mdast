@@ -922,6 +922,8 @@ Yields:
     — Make an MDAST tree compact
 *   [`mdast-util-definitions`](https://github.com/syntax-tree/mdast-util-definitions)
     — Find definition nodes
+*   [`mdast-flatten-listitem-paragraphs`](https://gitlab.com/staltz/mdast-flatten-listitem-paragraphs)
+    — Flatten listItem and (nested) paragraph into one listItem node 
 *   [`mdast-util-heading-range`](https://github.com/syntax-tree/mdast-util-heading-range)
     — Markdown heading as ranges
 *   [`mdast-util-heading-style`](https://github.com/syntax-tree/mdast-util-heading-style)
