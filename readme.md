@@ -934,6 +934,8 @@ Yields:
     — Inject a tree into another at a given heading
 *   [`mdast-util-to-string`](https://github.com/syntax-tree/mdast-util-to-string)
     — Get the plain text content of a node
+*   [`mdast-flatten-image-paragraphs`](https://gitlab.com/staltz/mdast-flatten-image-paragraphs)
+    — Flatten paragraph and image into one image node 
 *   [`mdast-normalize-headings`](https://github.com/eush77/mdast-normalize-headings)
     — Ensure at most one top-level heading is in the document
 *   [`mdast-squeeze-paragraphs`](https://github.com/eush77/mdast-squeeze-paragraphs)
