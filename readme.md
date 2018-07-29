@@ -167,7 +167,7 @@ line is stored as the info string, both are null if missing)
 interface Code <: Text {
   type: "code";
   lang: string | null;
-  infoString: string | null;
+  info: string | null;
 }
 ```
 
@@ -183,7 +183,7 @@ Yields:
 {
   "type": "code",
   "lang": null,
-  "infoString": null,
+  "info": null,
   "value": "foo()"
 }
 ```
