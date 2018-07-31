@@ -938,6 +938,8 @@ Yields:
     — Get the plain text content of a node
 *   [`mdast-flatten-image-paragraphs`](https://gitlab.com/staltz/mdast-flatten-image-paragraphs)
     — Flatten paragraph and image into one image node 
+*   [`mdast-move-images-to-root`](https://gitlab.com/staltz/mdast-move-images-to-root)
+    — Moves image nodes up the tree until they are strict children of the root
 *   [`mdast-normalize-headings`](https://github.com/eush77/mdast-normalize-headings)
     — Ensure at most one top-level heading is in the document
 *   [`mdast-squeeze-paragraphs`](https://github.com/eush77/mdast-squeeze-paragraphs)
