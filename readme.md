@@ -723,10 +723,16 @@ its `url` and `title` defined somewhere else in the document by a
 `referenceType` is needed to detect if a reference was meant as a
 reference (`[foo][]`) or just unescaped brackets (`[foo]`).
 
+`reference` provides the original raw reference, if the `referenceType` is
+`full` and the reference differs from the `identifier`.  This enables
+compilers and transformers to accurately reconstruct the original input
+as a fallback for unresolved references.
+
 ```idl
 interface LinkReference <: Parent {
   type: "linkReference";
   identifier: string;
+  reference: string;
   referenceType: referenceType;
 }
 ```
@@ -740,7 +746,7 @@ enum referenceType {
 For example, the following markdown:
 
 ```md
-[alpha][bravo]
+[alpha][Bravo]
 ```
 
 Yields:
@@ -749,6 +755,7 @@ Yields:
 {
   "type": "linkReference",
   "identifier": "bravo",
+  "reference": "Bravo",
   "referenceType": "full",
   "children": [{
     "type": "text",
@@ -767,10 +774,14 @@ its `url` and `title` defined somewhere else in the document by a
 reference (`![foo][]`) or just unescaped brackets (`![foo]`).
 See [`LinkReference`][linkreference] for the definition of `referenceType`.
 
+`reference` provides the original raw reference.
+See [`LinkReference`][linkreference] for the definition of `reference`.
+
 ```idl
 interface ImageReference <: Node {
   type: "imageReference";
   identifier: string;
+  reference: string;
   referenceType: referenceType;
   alt: string | null;
 }
@@ -779,7 +790,7 @@ interface ImageReference <: Node {
 For example, the following markdown:
 
 ```md
-![alpha][bravo]
+![alpha][Bravo]
 ```
 
 Yields:
@@ -788,6 +799,7 @@ Yields:
 {
   "type": "imageReference",
   "identifier": "bravo",
+  "reference": "Bravo",
   "referenceType": "full",
   "alt": "alpha"
 }
