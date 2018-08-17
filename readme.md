@@ -723,10 +723,15 @@ its `url` and `title` defined somewhere else in the document by a
 `referenceType` is needed to detect if a reference was meant as a
 reference (`[foo][]`) or just unescaped brackets (`[foo]`).
 
+`reference` provides the original raw reference, if the `reference` differs
+from the `identifier`.  This enables compilers, transformers, and linters to
+accurately reconstruct the original input.
+
 ```idl
 interface LinkReference <: Parent {
   type: "linkReference";
   identifier: string;
+  reference: string;
   referenceType: referenceType;
 }
 ```
@@ -740,7 +745,7 @@ enum referenceType {
 For example, the following markdown:
 
 ```md
-[alpha][bravo]
+[alpha][Bravo]
 ```
 
 Yields:
@@ -749,6 +754,7 @@ Yields:
 {
   "type": "linkReference",
   "identifier": "bravo",
+  "reference": "Bravo",
   "referenceType": "full",
   "children": [{
     "type": "text",
@@ -767,10 +773,14 @@ its `url` and `title` defined somewhere else in the document by a
 reference (`![foo][]`) or just unescaped brackets (`![foo]`).
 See [`LinkReference`][linkreference] for the definition of `referenceType`.
 
+`reference` provides the original raw reference.
+See [`LinkReference`][linkreference] for the definition of `reference`.
+
 ```idl
 interface ImageReference <: Node {
   type: "imageReference";
   identifier: string;
+  reference: string;
   referenceType: referenceType;
   alt: string | null;
 }
@@ -779,7 +789,7 @@ interface ImageReference <: Node {
 For example, the following markdown:
 
 ```md
-![alpha][bravo]
+![alpha][Bravo]
 ```
 
 Yields:
@@ -788,6 +798,7 @@ Yields:
 {
   "type": "imageReference",
   "identifier": "bravo",
+  "reference": "Bravo",
   "referenceType": "full",
   "alt": "alpha"
 }
@@ -803,13 +814,14 @@ but its content is already outside the documents flow: placed in a
 interface FootnoteReference <: Node {
   type: "footnoteReference";
   identifier: string;
+  reference: string;
 }
 ```
 
 For example, the following markdown:
 
 ```md
-[^alpha]
+[^Alpha]
 ```
 
 Yields:
@@ -817,7 +829,8 @@ Yields:
 ```json
 {
   "type": "footnoteReference",
-  "identifier": "alpha"
+  "identifier": "Alpha"
+  "reference": "alpha"
 }
 ```
 
@@ -827,10 +840,15 @@ Yields:
 and title) of a [`LinkReference`][linkreference] or an
 [`ImageReference`][imagereference].
 
+`definition` provides the original raw definition, if the `definition` differs
+from the `identifier`.  This enables compilers, transformers, and linters to
+accurately reconstruct the original input.
+
 ```idl
 interface Definition <: Node {
   type: "definition";
   identifier: string;
+  definition: string;
   title: string | null;
   url: string;
 }
@@ -839,7 +857,7 @@ interface Definition <: Node {
 For example, the following markdown:
 
 ```md
-[alpha]: http://example.com
+[Alpha]: http://example.com
 ```
 
 Yields:
@@ -848,6 +866,7 @@ Yields:
 {
   "type": "definition",
   "identifier": "alpha",
+  "definition": "Alpha",
   "title": null,
   "url": "http://example.com"
 }
@@ -857,6 +876,10 @@ Yields:
 
 `FootnoteDefinition` ([`Parent`][parent]) represents the definition
 (i.e., content) of a [`FootnoteReference`][footnotereference].
+
+`definition` provides the original raw definition.
+See [`Definition`][definition] for the definition of `definition`.
+
 
 ```idl
 interface FootnoteDefinition <: Parent {
