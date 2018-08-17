@@ -723,10 +723,9 @@ its `url` and `title` defined somewhere else in the document by a
 `referenceType` is needed to detect if a reference was meant as a
 reference (`[foo][]`) or just unescaped brackets (`[foo]`).
 
-`reference` provides the original raw reference, if the `referenceType` is
-`full` and the reference differs from the `identifier`.  This enables
-compilers and transformers to accurately reconstruct the original input
-as a fallback for unresolved references.
+`reference` provides the original raw reference, if the `reference` differs
+from the `identifier`.  This enables compilers, transformers, and linters to
+accurately reconstruct the original input.
 
 ```idl
 interface LinkReference <: Parent {
@@ -815,13 +814,14 @@ but its content is already outside the documents flow: placed in a
 interface FootnoteReference <: Node {
   type: "footnoteReference";
   identifier: string;
+  reference: string;
 }
 ```
 
 For example, the following markdown:
 
 ```md
-[^alpha]
+[^Alpha]
 ```
 
 Yields:
@@ -829,7 +829,8 @@ Yields:
 ```json
 {
   "type": "footnoteReference",
-  "identifier": "alpha"
+  "identifier": "Alpha"
+  "reference": "alpha"
 }
 ```
 
@@ -839,10 +840,15 @@ Yields:
 and title) of a [`LinkReference`][linkreference] or an
 [`ImageReference`][imagereference].
 
+`definition` provides the original raw definition, if the `definition` differs
+from the `identifier`.  This enables compilers, transformers, and linters to
+accurately reconstruct the original input.
+
 ```idl
 interface Definition <: Node {
   type: "definition";
   identifier: string;
+  definition: string;
   title: string | null;
   url: string;
 }
@@ -851,7 +857,7 @@ interface Definition <: Node {
 For example, the following markdown:
 
 ```md
-[alpha]: http://example.com
+[Alpha]: http://example.com
 ```
 
 Yields:
@@ -860,6 +866,7 @@ Yields:
 {
   "type": "definition",
   "identifier": "alpha",
+  "definition": "Alpha",
   "title": null,
   "url": "http://example.com"
 }
@@ -869,6 +876,10 @@ Yields:
 
 `FootnoteDefinition` ([`Parent`][parent]) represents the definition
 (i.e., content) of a [`FootnoteReference`][footnotereference].
+
+`definition` provides the original raw definition.
+See [`Definition`][definition] for the definition of `definition`.
+
 
 ```idl
 interface FootnoteDefinition <: Parent {
