@@ -649,8 +649,8 @@ Yields:
 ```idl
 interface Link <: Parent {
   type: "link";
-  title: string | null;
   url: string;
+  title: string | null;
 }
 ```
 
@@ -665,8 +665,8 @@ Yields:
 ```json
 {
   "type": "link",
-  "title": "bravo",
   "url": "http://example.com",
+  "title": "bravo",
   "children": [{
     "type": "text",
     "value": "alpha"
@@ -681,9 +681,9 @@ Yields:
 ```idl
 interface Image <: Node {
   type: "image";
+  url: string;
   title: string | null;
   alt: string | null;
-  url: string;
 }
 ```
 
@@ -698,8 +698,8 @@ Yields:
 ```json
 {
   "type": "image",
-  "title": "bravo",
   "url": "http://example.com",
+  "title": "bravo",
   "alt": "alpha"
 }
 ```
@@ -850,8 +850,8 @@ and title) of a [`LinkReference`][linkreference] or an
 interface Definition <: Node {
   type: "definition";
   identifier: string;
-  title: string | null;
   url: string;
+  title: string | null;
 }
 ```
 
@@ -867,8 +867,8 @@ Yields:
 {
   "type": "definition",
   "identifier": "alpha",
-  "title": null,
-  "url": "http://example.com"
+  "url": "http://example.com",
+  "title": null
 }
 ```
 
