@@ -327,8 +327,8 @@ Yields:
   "loose": false,
   "children": [{
     "type": "listItem",
-    "loose": false,
     "checked": true,
+    "loose": false,
     "children": [{
       "type": "paragraph",
       "children": [{
@@ -353,8 +353,8 @@ See [Task Lists on GitHub][task-list] for information.
 ```idl
 interface ListItem <: Parent {
   type: "listItem";
-  loose: true | false;
   checked: true | false | null;
+  loose: true | false;
 }
 ```
 
