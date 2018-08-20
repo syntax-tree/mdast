@@ -4,16 +4,17 @@
 
 * * *
 
-**MDAST** discloses markdown as an abstract syntax tree.  _Abstract_
-means not all information is stored in this tree and an exact replica
-of the original document cannot be re-created.  _Syntax Tree_ means syntax
-**is** present in the tree, thus an exact syntactic document can be
-re-created.
+**MDAST** discloses markdown as an abstract syntax tree.
+_Abstract_ means not all information is stored in this tree and an exact
+replica of the original document cannot be re-created.
+_Syntax Tree_ means syntax **is** present in the tree, thus an exact syntactic
+document can be re-created.
 
 **MDAST** is a subset of [unist][], and implemented by [remark][].
 
-This document may not be released. See [releases][] for released
-documents. The latest released version is [`2.2.0`][latest].
+This document may not be released.
+See [releases][] for released documents.
+The latest released version is [`2.2.0`][latest].
 
 ## Table of Contents
 
@@ -65,8 +66,8 @@ interface Root <: Parent {
 
 ### `Paragraph`
 
-`Paragraph` ([`Parent`][parent]) represents a unit of discourse dealing
-with a particular point or idea.
+`Paragraph` ([`Parent`][parent]) represents a unit of discourse dealing with a
+particular point or idea.
 
 ```idl
 interface Paragraph <: Parent {
@@ -82,13 +83,10 @@ Alpha bravo charlie.
 
 Yields:
 
-```json
+```js
 {
-  "type": "paragraph",
-  "children": [{
-    "type": "text",
-    "value": "Alpha bravo charlie."
-  }]
+  type: 'paragraph',
+  children: [{type: 'text', value: 'Alpha bravo charlie.'}]
 }
 ```
 
@@ -110,23 +108,20 @@ For example, the following markdown:
 
 Yields:
 
-```json
+```js
 {
-  "type": "blockquote",
-  "children": [{
-    "type": "paragraph",
-    "children": [{
-      "type": "text",
-      "value": "Alpha bravo charlie."
-    }]
+  type: 'blockquote',
+  children: [{
+    type: 'paragraph',
+    children: [{type: 'text', value: 'Alpha bravo charlie.'}]
   }]
 }
 ```
 
 ### `Heading`
 
-`Heading` ([`Parent`][parent]), just like with HTML, with a level greater
-than or equal to 1, lower than or equal to 6.
+`Heading` ([`Parent`][parent]), just like with HTML, with a level greater than
+or equal to 1, lower than or equal to 6.
 
 ```idl
 interface Heading <: Parent {
@@ -143,23 +138,20 @@ For example, the following markdown:
 
 Yields:
 
-```json
+```js
 {
-  "type": "heading",
-  "depth": 1,
-  "children": [{
-    "type": "text",
-    "value": "Alpha"
-  }]
+  type: 'heading',
+  depth: 1,
+  children: [{type: 'text', value: 'Alpha'}]
 }
 ```
 
 ### `Code`
 
-`Code` ([`Text`][text]) occurs at block level (see
-[`InlineCode`][inlinecode] for code spans).  The value after the opening
-of fenced code can be followed by a language tag, and then optionally
-white-space followed by the meta value.
+`Code` ([`Text`][text]) occurs at block level (see [`InlineCode`][inlinecode]
+for code spans).
+The value after the opening of fenced code can be followed by a language tag,
+and then optionally white-space followed by the meta value.
 
 ```idl
 interface Code <: Text {
@@ -177,12 +169,12 @@ For example, the following markdown:
 
 Yields:
 
-```json
+```js
 {
-  "type": "code",
-  "lang": null,
-  "meta": null,
-  "value": "foo()"
+  type: 'code',
+  lang: null,
+  meta: null,
+  value: 'foo()'
 }
 ```
 
@@ -198,19 +190,19 @@ baz()
 
 Yields:
 
-```json
+```js
 {
-  "type": "code",
-  "lang": "js",
-  "meta": "highlight-line=\"2\"",
-  "value": "foo()\bbar()\nbaz()"
+  type: 'code',
+  lang: 'js',
+  meta: 'highlight-line="2"',
+  value: 'foo()\nbar()\nbaz()'
 }
 ```
 
 ### `InlineCode`
 
-`InlineCode` ([`Text`][text]) occurs inline (see [`Code`][code] for
-blocks). Inline code does not sport a `lang` attribute.
+`InlineCode` ([`Text`][text]) occurs inline (see [`Code`][code] for blocks).
+Inline code does not sport `lang` or `meta` properties.
 
 ```idl
 interface InlineCode <: Text {
@@ -226,17 +218,14 @@ For example, the following markdown:
 
 Yields:
 
-```json
-{
-  "type": "inlineCode",
-  "value": "foo()"
-}
+```js
+{type: 'inlineCode', value: 'foo()'}
 ```
 
 ### `YAML`
 
-`YAML` ([`Text`][text]) can occur at the start of a document, and
-contains embedded YAML data.
+`YAML` ([`Text`][text]) can occur at the start of a document, and contains
+embedded YAML data.
 
 ```idl
 interface YAML <: Text {
@@ -259,11 +248,8 @@ foo: bar
 
 Yields:
 
-```json
-{
-  "type": "yaml",
-  "value": "foo: bar"
-}
+```js
+{type: 'yaml', value: 'foo: bar'}
 ```
 
 ### `HTML`
@@ -284,17 +270,14 @@ For example, the following markdown:
 
 Yields:
 
-```json
-{
-  "type": "html",
-  "value": "<div>"
-}
+```js
+{type: 'html', value: '<div>'}
 ```
 
 ### `List`
 
-`List` ([`Parent`][parent]) contains [`ListItem`s][listitem].  No other nodes
-may occur in lists.
+`List` ([`Parent`][parent]) contains [`ListItem`s][listitem].
+No other nodes may occur in lists.
 
 The `start` property contains the starting number of the list when
 `ordered: true`; `null` otherwise.
@@ -319,22 +302,19 @@ For example, the following markdown:
 
 Yields:
 
-```json
+```js
 {
-  "type": "list",
-  "ordered": true,
-  "start": 1,
-  "loose": false,
-  "children": [{
-    "type": "listItem",
-    "checked": true,
-    "loose": false,
-    "children": [{
-      "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "foo",
-      }]
+  type: 'list',
+  ordered: true,
+  start: 1,
+  loose: false,
+  children: [{
+    type: 'listItem',
+    checked: true,
+    loose: false,
+    children: [{
+      type: 'paragraph',
+      children: [{type: 'text', value: 'foo'}]
     }]
   }]
 }
@@ -346,8 +326,8 @@ Yields:
 
 Loose `ListItem`s often contain more than one block-level elements.
 
-A checked property exists on `ListItem`s, set to `true` (when checked),
-`false` (when unchecked), or `null` (when not containing a checkbox).
+A checked property exists on `ListItem`s, set to `true` (when checked), `false`
+(when unchecked), or `null` (when not containing a checkbox).
 See [Task Lists on GitHub][task-list] for information.
 
 ```idl
@@ -363,8 +343,8 @@ For an example, see the definition of [`List`][list].
 ### `Table`
 
 `Table` ([`Parent`][parent]) represents tabular data, with alignment.
-Its children are [`TableRow`][tablerow]s, the first of which acts as
-a table header row.
+Its children are [`TableRow`][tablerow]s, the first of which acts as a table
+header row.
 
 `table.align` represents the alignment of columns.
 
@@ -391,46 +371,34 @@ For example, the following markdown:
 
 Yields:
 
-```json
+```js
 {
-  "type": "table",
-  "align": ["left", "center"],
-  "children": [
+  type: 'table',
+  align: ['left', 'center'],
+  children: [
     {
-      "type": "tableRow",
-      "children": [
+      type: 'tableRow',
+      children: [
         {
-          "type": "tableCell",
-          "children": [{
-            "type": "text",
-            "value": "foo"
-          }]
+          type: 'tableCell',
+          children: [{type: 'text', value: 'foo'}]
         },
         {
-          "type": "tableCell",
-          "children": [{
-            "type": "text",
-            "value": "bar"
-          }]
+          type: 'tableCell',
+          children: [{type: 'text', value: 'bar'}]
         }
       ]
     },
     {
-      "type": "tableRow",
-      "children": [
+      type: 'tableRow',
+      children: [
         {
-          "type": "tableCell",
-          "children": [{
-            "type": "text",
-            "value": "baz"
-          }]
+          type: 'tableCell',
+          children: [{type: 'text', value: 'baz'}]
         },
         {
-          "type": "tableCell",
-          "children": [{
-            "type": "text",
-            "value": "qux"
-          }]
+          type: 'tableCell',
+          children: [{type: 'text', value: 'qux'}]
         }
       ]
     }
@@ -440,8 +408,8 @@ Yields:
 
 ### `TableRow`
 
-`TableRow` ([`Parent`][parent]).  Its children are always
-[`TableCell`][tablecell].
+`TableRow` ([`Parent`][parent]).
+Its children are always [`TableCell`][tablecell].
 
 ```idl
 interface TableRow <: Parent {
@@ -453,7 +421,8 @@ For an example, see the definition of `Table`.
 
 ### `TableCell`
 
-`TableCell` ([`Parent`][parent]).  Contains a single tabular field.
+`TableCell` ([`Parent`][parent]).
+Contains a single tabular field.
 
 ```idl
 interface TableCell <: Parent {
@@ -465,8 +434,8 @@ For an example, see the definition of [`Table`][table].
 
 ### `ThematicBreak`
 
-A `ThematicBreak` ([`Node`][node]) represents a break in content,
-often shown as a horizontal rule, or by two HTML section elements.
+A `ThematicBreak` ([`Node`][node]) represents a break in content, often shown
+as a horizontal rule, or by two HTML section elements.
 
 ```idl
 interface ThematicBreak <: Node {
@@ -482,10 +451,8 @@ For example, the following markdown:
 
 Yields:
 
-```json
-{
-  "type": "thematicBreak"
-}
+```js
+{type: 'thematicBreak'}
 ```
 
 ### `Break`
@@ -507,21 +474,13 @@ bar
 
 Yields:
 
-```json
+```js
 {
-  "type": "paragraph",
-  "children": [
-    {
-      "type": "text",
-      "value": "foo"
-    },
-    {
-      "type": "break"
-    },
-    {
-      "type": "text",
-      "value": "bar"
-    }
+  type: 'paragraph',
+  children: [
+    {type: 'text', value: 'foo'},
+    {type: 'break'},
+    {type: 'text', value: 'bar'}
   ]
 }
 ```
@@ -544,27 +503,18 @@ For example, the following markdown:
 
 Yields:
 
-```json
+```js
 {
-  "type": "paragraph",
-  "children": [
+  type: 'paragraph',
+  children: [
     {
-      "type": "emphasis",
-      "children": [{
-        "type": "text",
-        "value": "alpha"
-      }]
+      type: 'emphasis',
+      children: [{type: 'text', value: 'alpha'}]
     },
+    {type: 'text', value: ' '},
     {
-      "type": "text",
-      "value": " "
-    },
-    {
-      "type": "emphasis",
-      "children": [{
-        "type": "text",
-        "value": "bravo"
-      }]
+      type: 'emphasis',
+      children: [{type: 'text', value: 'bravo'}]
     }
   ]
 }
@@ -588,27 +538,18 @@ For example, the following markdown:
 
 Yields:
 
-```json
+```js
 {
-  "type": "paragraph",
-  "children": [
+  type: 'paragraph',
+  children: [
     {
-      "type": "strong",
-      "children": [{
-        "type": "text",
-        "value": "alpha"
-      }]
+      type: 'strong',
+      children: [{type: 'text', value: 'alpha'}]
     },
+    {type: 'text', value: ' '},
     {
-      "type": "text",
-      "value": " "
-    },
-    {
-      "type": "strong",
-      "children": [{
-        "type": "text",
-        "value": "bravo"
-      }]
+      type: 'strong',
+      children: [{type: 'text', value: 'bravo'}]
     }
   ]
 }
@@ -632,13 +573,10 @@ For example, the following markdown:
 
 Yields:
 
-```json
+```js
 {
-  "type": "delete",
-  "children": [{
-    "type": "text",
-    "value": "alpha"
-  }]
+  type: 'delete',
+  children: [{type: 'text', value: 'alpha'}]
 }
 ```
 
@@ -662,15 +600,12 @@ For example, the following markdown:
 
 Yields:
 
-```json
+```js
 {
-  "type": "link",
-  "url": "http://example.com",
-  "title": "bravo",
-  "children": [{
-    "type": "text",
-    "value": "alpha"
-  }]
+  type: 'link',
+  url: 'http://example.com',
+  title: 'bravo',
+  children: [{type: 'text', value: 'alpha'}]
 }
 ```
 
@@ -695,19 +630,19 @@ For example, the following markdown:
 
 Yields:
 
-```json
+```js
 {
-  "type": "image",
-  "url": "http://example.com",
-  "title": "bravo",
-  "alt": "alpha"
+  type: 'image',
+  url: 'http://example.com',
+  title: 'bravo',
+  alt: 'alpha'
 }
 ```
 
 ### `Footnote`
 
-`Footnote` ([`Parent`][parent]) represents an inline marker, whose
-content relates to the document but is outside its flow.
+`Footnote` ([`Parent`][parent]) represents an inline marker, whose content
+relates to the document but is outside its flow.
 
 ```idl
 interface Footnote <: Parent {
@@ -723,24 +658,21 @@ For example, the following markdown:
 
 Yields:
 
-```json
+```js
 {
-  "type": "footnote",
-  "children": [{
-    "type": "text",
-    "value": "alpha bravo"
-  }]
+  type: 'footnote',
+  children: [{type: 'text', value: 'alpha bravo'}]
 }
 ```
 
 ### `LinkReference`
 
-`LinkReference` ([`Parent`][parent]) represents a humble hyperlink,
-its `url` and `title` defined somewhere else in the document by a
+`LinkReference` ([`Parent`][parent]) represents a humble hyperlink, its `url`
+and `title` defined somewhere else in the document by a
 [`Definition`][definition].
 
-`referenceType` is needed to detect if a reference was meant as a
-reference (`[foo][]`) or just unescaped brackets (`[foo]`).
+`referenceType` is needed to detect if a reference was meant as a reference
+(`[foo][]`) or just unescaped brackets (`[foo]`).
 
 ```idl
 interface LinkReference <: Parent {
@@ -764,26 +696,22 @@ For example, the following markdown:
 
 Yields:
 
-```json
+```js
 {
-  "type": "linkReference",
-  "identifier": "bravo",
-  "referenceType": "full",
-  "children": [{
-    "type": "text",
-    "value": "alpha"
-  }]
+  type: 'linkReference',
+  identifier: 'bravo',
+  referenceType: 'full',
+  children: [{type: 'text', value: 'alpha'}]
 }
 ```
 
 ### `ImageReference`
 
-`ImageReference` ([`Node`][node]) represents a figurative figure,
-its `url` and `title` defined somewhere else in the document by a
-[`Definition`][definition].
+`ImageReference` ([`Node`][node]) represents a figurative figure, its `url` and
+`title` defined somewhere else in the document by a [`Definition`][definition].
 
-`referenceType` is needed to detect if a reference was meant as a
-reference (`![foo][]`) or just unescaped brackets (`![foo]`).
+`referenceType` is needed to detect if a reference was meant as a reference
+(`![foo][]`) or just unescaped brackets (`![foo]`).
 See [`LinkReference`][linkreference] for the definition of `referenceType`.
 
 ```idl
@@ -803,19 +731,19 @@ For example, the following markdown:
 
 Yields:
 
-```json
+```js
 {
-  "type": "imageReference",
-  "identifier": "bravo",
-  "referenceType": "full",
-  "alt": "alpha"
+  type: 'imageReference',
+  identifier: 'bravo',
+  referenceType: 'full',
+  alt: 'alpha'
 }
 ```
 
 ### `FootnoteReference`
 
-`FootnoteReference` ([`Node`][node]) is like [`Footnote`][footnote],
-but its content is already outside the documents flow: placed in a
+`FootnoteReference` ([`Node`][node]) is like [`Footnote`][footnote], but its
+content is already outside the documents flow: placed in a
 [`FootnoteDefinition`][footnotedefinition].
 
 ```idl
@@ -833,17 +761,17 @@ For example, the following markdown:
 
 Yields:
 
-```json
+```js
 {
-  "type": "footnoteReference",
-  "identifier": "alpha"
+  type: 'footnoteReference',
+  identifier: 'alpha'
 }
 ```
 
 ### `Definition`
 
-`Definition` ([`Node`][node]) represents the definition (i.e., location
-and title) of a [`LinkReference`][linkreference] or an
+`Definition` ([`Node`][node]) represents the definition (as in, location and
+title) of a [`LinkReference`][linkreference] or an
 [`ImageReference`][imagereference].
 
 ```idl
@@ -863,19 +791,19 @@ For example, the following markdown:
 
 Yields:
 
-```json
+```js
 {
-  "type": "definition",
-  "identifier": "alpha",
-  "url": "http://example.com",
-  "title": null
+  type: 'definition',
+  identifier: 'alpha',
+  url: 'http://example.com',
+  title: null
 }
 ```
 
 ### `FootnoteDefinition`
 
-`FootnoteDefinition` ([`Parent`][parent]) represents the definition
-(i.e., content) of a [`FootnoteReference`][footnotereference].
+`FootnoteDefinition` ([`Parent`][parent]) represents the definition (as in,
+content) of a [`FootnoteReference`][footnotereference].
 
 ```idl
 interface FootnoteDefinition <: Parent {
@@ -892,16 +820,13 @@ For example, the following markdown:
 
 Yields:
 
-```json
+```js
 {
-  "type": "footnoteDefinition",
-  "identifier": "alpha",
-  "children": [{
-    "type": "paragraph",
-    "children": [{
-      "type": "text",
-      "value": "bravo and charlie."
-    }]
+  type: 'footnoteDefinition',
+  identifier: 'alpha',
+  children: [{
+    type: 'paragraph',
+    children: [{type: 'text', value: 'bravo and charlie.'}]
   }]
 }
 ```
@@ -926,11 +851,8 @@ Alpha bravo charlie.
 
 Yields:
 
-```json
-{
-  "type": "text",
-  "value": "Alpha bravo charlie."
-}
+```js
+{type: 'text', value: 'Alpha bravo charlie.'}
 ```
 
 ## List of Utilities
