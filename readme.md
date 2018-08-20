@@ -157,17 +157,15 @@ Yields:
 ### `Code`
 
 `Code` ([`Text`][text]) occurs at block level (see
-[`InlineCode`][inlinecode] for code spans).  `Code` supports an
-info string and a language tag (when the line with the opening fence
-contains some text, it is stored as the info string, the first word
-following the fence is stored as the language tag, the rest of the
-line is stored as the info string, both are null if missing)
+[`InlineCode`][inlinecode] for code spans).  The value after the opening
+of fenced code can be followed by a language tag, and then optionally
+white-space followed by the meta value.
 
 ```idl
 interface Code <: Text {
   type: "code";
   lang: string | null;
-  info: string | null;
+  meta: string | null;
 }
 ```
 
@@ -183,8 +181,29 @@ Yields:
 {
   "type": "code",
   "lang": null,
-  "info": null,
+  "meta": null,
   "value": "foo()"
+}
+```
+
+And the following markdown:
+
+````md
+```js highlight-line="2"
+foo()
+bar()
+baz()
+```
+````
+
+Yields:
+
+```json
+{
+  "type": "code",
+  "lang": "js",
+  "meta": "highlight-line=\"2\"",
+  "value": "foo()\bbar()\nbaz()"
 }
 ```
 
