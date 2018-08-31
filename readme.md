@@ -608,7 +608,7 @@ It has no content model.
 For example, the following markdown:
 
 ```markdown
-[alpha]: http://example.com
+[Alpha]: http://example.com
 ```
 
 Yields:
@@ -617,6 +617,7 @@ Yields:
 {
   type: 'definition',
   identifier: 'alpha',
+  label: 'Alpha',
   url: 'http://example.com',
   title: null
 }
@@ -658,6 +659,7 @@ Yields:
 {
   type: 'footnoteDefinition',
   identifier: 'alpha',
+  label: 'alpha',
   children: [{
     type: 'paragraph',
     children: [{type: 'text', value: 'bravo and charlie.'}]
@@ -967,7 +969,7 @@ Its content model is [**static phrasing**][dfn-static-phrasing-content] content.
 For example, the following markdown:
 
 ```markdown
-[alpha][bravo]
+[alpha][Bravo]
 ```
 
 Yields:
@@ -976,6 +978,7 @@ Yields:
 {
   type: 'linkReference',
   identifier: 'bravo',
+  label: 'Bravo',
   referenceType: 'full',
   children: [{type: 'text', value: 'alpha'}]
 }
@@ -1016,6 +1019,7 @@ Yields:
 {
   type: 'imageReference',
   identifier: 'bravo',
+  label: 'bravo',
   referenceType: 'full',
   alt: 'alpha'
 }
@@ -1085,7 +1089,8 @@ Yields:
 ```javascript
 {
   type: 'footnoteReference',
-  identifier: 'alpha'
+  identifier: 'alpha',
+  label: 'alpha'
 }
 ```
 
@@ -1114,6 +1119,7 @@ appropriate for a tooltip.
 ```idl
 interface mixin Association {
   identifier: string;
+  label: string?;
 }
 ```
 
@@ -1121,6 +1127,9 @@ interface mixin Association {
 
 An `identifier` field must be present.
 It can match an `identifier` field on another node.
+
+A `label` field can be present.
+It represents the original value of the normalised `identifier` field.
 
 Whether the value of `identifier` is expected to be a unique identifier or not
 depends on the type of node including the **Association**.
