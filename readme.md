@@ -23,31 +23,31 @@ The latest released version is [`2.2.0`][latest].
     *   [Literal](#literal)
     *   [Root](#root)
     *   [Paragraph](#paragraph)
-    *   [Blockquote](#blockquote)
     *   [Heading](#heading)
-    *   [Code](#code)
-    *   [InlineCode](#inlinecode)
-    *   [YAML](#yaml)
-    *   [HTML](#html)
+    *   [ThematicBreak](#thematicbreak)
+    *   [Blockquote](#blockquote)
     *   [List](#list)
     *   [ListItem](#listitem)
     *   [Table](#table)
     *   [TableRow](#tablerow)
     *   [TableCell](#tablecell)
-    *   [ThematicBreak](#thematicbreak)
-    *   [Break](#break)
-    *   [Emphasis](#emphasis)
-    *   [Strong](#strong)
-    *   [Delete](#delete)
-    *   [Link](#link)
-    *   [Image](#image)
-    *   [Footnote](#footnote)
-    *   [LinkReference](#linkreference)
-    *   [ImageReference](#imagereference)
-    *   [FootnoteReference](#footnotereference)
+    *   [HTML](#html)
+    *   [Code](#code)
+    *   [YAML](#yaml)
     *   [Definition](#definition)
     *   [FootnoteDefinition](#footnotedefinition)
     *   [Text](#text)
+    *   [Emphasis](#emphasis)
+    *   [Strong](#strong)
+    *   [Delete](#delete)
+    *   [InlineCode](#inlinecode)
+    *   [Break](#break)
+    *   [Link](#link)
+    *   [Image](#image)
+    *   [LinkReference](#linkreference)
+    *   [ImageReference](#imagereference)
+    *   [Footnote](#footnote)
+    *   [FootnoteReference](#footnotereference)
 *   [Mixin](#mixin)
     *   [Resource](#resource)
     *   [Association](#association)
@@ -170,40 +170,6 @@ Yields:
 }
 ```
 
-### `Blockquote`
-
-```idl
-interface Blockquote <: Parent {
-  type: "blockquote";
-  children: [BlockContent]
-}
-```
-
-**Blockquote** ([**Parent**][dfn-parent]) represents a section quoted from
-somewhere else.
-
-**Blockquote** can be used where [**block**][dfn-block-content] content is
-expected.
-Its content model is also [**block**][dfn-block-content] content.
-
-For example, the following markdown:
-
-```markdown
-> Alpha bravo charlie.
-```
-
-Yields:
-
-```javascript
-{
-  type: 'blockquote',
-  children: [{
-    type: 'paragraph',
-    children: [{type: 'text', value: 'Alpha bravo charlie.'}]
-  }]
-}
-```
-
 ### `Heading`
 
 ```idl
@@ -239,152 +205,65 @@ Yields:
 }
 ```
 
-### `Code`
+### `ThematicBreak`
 
 ```idl
-interface Code <: Literal {
-  type: "code";
-  lang: string?;
-  meta: string?;
+interface ThematicBreak <: Node {
+  type: "thematicBreak";
 }
 ```
 
-**Code** ([**Literal**][dfn-literal]) represents a block of preformatted text,
-such as ASCII art or computer code.
+**ThematicBreak** ([**Node**][dfn-node]) represents a thematic break, such as a
+scene change in a story, a transition to another topic, or a new document.
 
-**Code** can be used where [**block**][dfn-block-content] content is expected.
-Its content is represented by its `value` field.
-
-This node relates to the [**phrasing**][dfn-phrasing-content] content concept
-[**InlineCode**][dfn-inline-code].
-
-A `lang` field can be present.
-It represents the language of computer code being marked up.
-
-If the `lang` field is present, a `meta` field can be present.
-It represents custom information relating to the node.
-
-For example, the following markdown:
-
-```markdown
-    foo()
-```
-
-Yields:
-
-```javascript
-{
-  type: 'code',
-  lang: null,
-  meta: null,
-  value: 'foo()'
-}
-```
-
-And the following markdown:
-
-````markdown
-```javascript highlight-line="2"
-foo()
-bar()
-baz()
-```
-````
-
-Yields:
-
-```javascript
-{
-  type: 'code',
-  lang: 'javascript',
-  meta: 'highlight-line="2"',
-  value: 'foo()\nbar()\nbaz()'
-}
-```
-
-### `InlineCode`
-
-```idl
-interface InlineCode <: Literal {
-  type: "inlineCode";
-}
-```
-
-**InlineCode** ([**Literal**][dfn-literal]) represents a fragment of computer
-code, such as a file name, computer program, or anything a computer could parse.
-
-**InlineCode** can be used where [**phrasing**][dfn-phrasing-content] content
-is expected.
-Its content is represented by its `value` field.
-
-This node relates to the [**block**][dfn-block-content] content concept
-[**Code**][dfn-code].
-
-For example, the following markdown:
-
-```markdown
-`foo()`
-```
-
-Yields:
-
-```javascript
-{type: 'inlineCode', value: 'foo()'}
-```
-
-### `YAML`
-
-```idl
-interface YAML <: Literal {
-  type: "yaml";
-}
-```
-
-**YAML** ([**Literal**][dfn-literal]) represents a collection of metadata for
-the document in the [YAML][] data serialisation language.
-
-**YAML** can be used where [**frontmatter**][dfn-frontmatter-content] content is
+**ThematicBreak** can be used where [**block**][dfn-block-content] content is
 expected.
-Its content is represented by its `value` field.
+It has no content model.
 
 For example, the following markdown:
 
 ```markdown
----
-foo: bar
----
+***
 ```
 
 Yields:
 
 ```javascript
-{type: 'yaml', value: 'foo: bar'}
+{type: 'thematicBreak'}
 ```
 
-### `HTML`
+### `Blockquote`
 
 ```idl
-interface HTML <: Literal {
-  type: "html";
+interface Blockquote <: Parent {
+  type: "blockquote";
+  children: [BlockContent]
 }
 ```
 
-**HTML** ([**Literal**][dfn-literal]) represents a fragment of raw [HTML][].
+**Blockquote** ([**Parent**][dfn-parent]) represents a section quoted from
+somewhere else.
 
-**HTML** can be used where [**block**][dfn-block-content] or
-[**phrasing**][dfn-phrasing-content] content is expected.
-Its content is represented by its `value` field.
+**Blockquote** can be used where [**block**][dfn-block-content] content is
+expected.
+Its content model is also [**block**][dfn-block-content] content.
 
 For example, the following markdown:
 
 ```markdown
-<div>
+> Alpha bravo charlie.
 ```
 
 Yields:
 
 ```javascript
-{type: 'html', value: '<div>'}
+{
+  type: 'blockquote',
+  children: [{
+    type: 'paragraph',
+    children: [{type: 'text', value: 'Alpha bravo charlie.'}]
+  }]
+}
 ```
 
 ### `List`
@@ -584,66 +463,232 @@ Its content model is [**phrasing**][dfn-phrasing-content] content.
 
 For an example, see [**Table**][dfn-table].
 
-### `ThematicBreak`
+### `HTML`
 
 ```idl
-interface ThematicBreak <: Node {
-  type: "thematicBreak";
+interface HTML <: Literal {
+  type: "html";
 }
 ```
 
-**ThematicBreak** ([**Node**][dfn-node]) represents a thematic break, such as a
-scene change in a story, a transition to another topic, or a new document.
+**HTML** ([**Literal**][dfn-literal]) represents a fragment of raw [HTML][].
 
-**ThematicBreak** can be used where [**block**][dfn-block-content] content is
-expected.
-It has no content model.
+**HTML** can be used where [**block**][dfn-block-content] or
+[**phrasing**][dfn-phrasing-content] content is expected.
+Its content is represented by its `value` field.
 
 For example, the following markdown:
 
 ```markdown
-***
+<div>
 ```
 
 Yields:
 
 ```javascript
-{type: 'thematicBreak'}
+{type: 'html', value: '<div>'}
 ```
 
-### `Break`
+### `Code`
 
 ```idl
-interface Break <: Node {
-  type: "break";
+interface Code <: Literal {
+  type: "code";
+  lang: string?;
+  meta: string?;
 }
 ```
 
-**Break** ([**Node**][dfn-node]) represents a line break, such as in poems or
-addresses.
+**Code** ([**Literal**][dfn-literal]) represents a block of preformatted text,
+such as ASCII art or computer code.
 
-**Break** can be used where [**phrasing**][dfn-phrasing-content] content is
-expected.
-It has no content model.
+**Code** can be used where [**block**][dfn-block-content] content is expected.
+Its content is represented by its `value` field.
+
+This node relates to the [**phrasing**][dfn-phrasing-content] content concept
+[**InlineCode**][dfn-inline-code].
+
+A `lang` field can be present.
+It represents the language of computer code being marked up.
+
+If the `lang` field is present, a `meta` field can be present.
+It represents custom information relating to the node.
 
 For example, the following markdown:
 
 ```markdown
-foo··
-bar
+    foo()
 ```
 
 Yields:
 
 ```javascript
 {
-  type: 'paragraph',
-  children: [
-    {type: 'text', value: 'foo'},
-    {type: 'break'},
-    {type: 'text', value: 'bar'}
-  ]
+  type: 'code',
+  lang: null,
+  meta: null,
+  value: 'foo()'
 }
+```
+
+And the following markdown:
+
+````markdown
+```javascript highlight-line="2"
+foo()
+bar()
+baz()
+```
+````
+
+Yields:
+
+```javascript
+{
+  type: 'code',
+  lang: 'javascript',
+  meta: 'highlight-line="2"',
+  value: 'foo()\nbar()\nbaz()'
+}
+```
+
+### `YAML`
+
+```idl
+interface YAML <: Literal {
+  type: "yaml";
+}
+```
+
+**YAML** ([**Literal**][dfn-literal]) represents a collection of metadata for
+the document in the [YAML][] data serialisation language.
+
+**YAML** can be used where [**frontmatter**][dfn-frontmatter-content] content is
+expected.
+Its content is represented by its `value` field.
+
+For example, the following markdown:
+
+```markdown
+---
+foo: bar
+---
+```
+
+Yields:
+
+```javascript
+{type: 'yaml', value: 'foo: bar'}
+```
+
+### `Definition`
+
+```idl
+interface Definition <: Node {
+  type: "definition";
+}
+
+Definition includes Association;
+Definition includes Resource;
+```
+
+**Definition** ([**Node**][dfn-node]) represents a resource.
+
+**Definition** can be used where [**definition**][dfn-definition-content]
+content is expected.
+It has no content model.
+
+**Definition** includes the mixins [**Association**][dfn-mxn-association] and
+[**Resource**][dfn-mxn-resource].
+
+**Definition** should be associated with
+[**LinkReferences**][dfn-link-reference] and
+[**ImageReferences**][dfn-image-reference].
+
+For example, the following markdown:
+
+```markdown
+[alpha]: http://example.com
+```
+
+Yields:
+
+```javascript
+{
+  type: 'definition',
+  identifier: 'alpha',
+  url: 'http://example.com',
+  title: null
+}
+```
+
+### `FootnoteDefinition`
+
+```idl
+interface FootnoteDefinition <: Parent {
+  type: "footnoteDefinition";
+  children: [BlockContent];
+}
+
+FootnoteDefinition includes Association;
+```
+
+**FootnoteDefinition** ([**Parent**][dfn-parent]) represents content relating
+to the document that is outside its flow.
+
+**FootnoteDefinition** can be used where
+[**definition**][dfn-definition-content] content is expected.
+Its content model is [**block**][dfn-block-content] content.
+
+**FootnoteDefinition** includes the mixin
+[**Association**][dfn-mxn-association].
+
+**FootnoteDefinition** should be associated with
+[**FootnoteReferences**][dfn-footnote-reference].
+
+For example, the following markdown:
+
+```markdown
+[^alpha]: bravo and charlie.
+```
+
+Yields:
+
+```javascript
+{
+  type: 'footnoteDefinition',
+  identifier: 'alpha',
+  children: [{
+    type: 'paragraph',
+    children: [{type: 'text', value: 'bravo and charlie.'}]
+  }]
+}
+```
+
+### `Text`
+
+```idl
+interface Text <: Literal {
+  type: "text";
+}
+```
+
+**Text** ([**Literal**][dfn-literal]) represents everything that is just text.
+
+**Text** can be used where [**phrasing**][dfn-phrasing-content] content is
+expected.
+Its content is represented by its `value` field.
+
+For example, the following markdown:
+
+```markdown
+Alpha bravo charlie.
+```
+
+Yields:
+
+```javascript
+{type: 'text', value: 'Alpha bravo charlie.'}
 ```
 
 ### `Emphasis`
@@ -759,6 +804,71 @@ Yields:
 }
 ```
 
+### `InlineCode`
+
+```idl
+interface InlineCode <: Literal {
+  type: "inlineCode";
+}
+```
+
+**InlineCode** ([**Literal**][dfn-literal]) represents a fragment of computer
+code, such as a file name, computer program, or anything a computer could parse.
+
+**InlineCode** can be used where [**phrasing**][dfn-phrasing-content] content
+is expected.
+Its content is represented by its `value` field.
+
+This node relates to the [**block**][dfn-block-content] content concept
+[**Code**][dfn-code].
+
+For example, the following markdown:
+
+```markdown
+`foo()`
+```
+
+Yields:
+
+```javascript
+{type: 'inlineCode', value: 'foo()'}
+```
+
+### `Break`
+
+```idl
+interface Break <: Node {
+  type: "break";
+}
+```
+
+**Break** ([**Node**][dfn-node]) represents a line break, such as in poems or
+addresses.
+
+**Break** can be used where [**phrasing**][dfn-phrasing-content] content is
+expected.
+It has no content model.
+
+For example, the following markdown:
+
+```markdown
+foo··
+bar
+```
+
+Yields:
+
+```javascript
+{
+  type: 'paragraph',
+  children: [
+    {type: 'text', value: 'foo'},
+    {type: 'break'},
+    {type: 'text', value: 'bar'}
+  ]
+}
+```
+
 ### `Link`
 
 ```idl
@@ -829,37 +939,6 @@ Yields:
   url: 'http://example.com',
   title: 'bravo',
   alt: 'alpha'
-}
-```
-
-### `Footnote`
-
-```idl
-interface Footnote <: Parent {
-  type: "footnote";
-  children: [PhrasingContent];
-}
-```
-
-**Footnote** ([**Parent**][dfn-parent]) represents content relating to the
-document that is outside its flow.
-
-**Footnote** can be used where [**phrasing**][dfn-phrasing-content] content is
-expected.
-Its content model is also [**phrasing**][dfn-phrasing-content] content.
-
-For example, the following markdown:
-
-```markdown
-[^alpha bravo]
-```
-
-Yields:
-
-```javascript
-{
-  type: 'footnote',
-  children: [{type: 'text', value: 'alpha bravo'}]
 }
 ```
 
@@ -942,6 +1021,37 @@ Yields:
 }
 ```
 
+### `Footnote`
+
+```idl
+interface Footnote <: Parent {
+  type: "footnote";
+  children: [PhrasingContent];
+}
+```
+
+**Footnote** ([**Parent**][dfn-parent]) represents content relating to the
+document that is outside its flow.
+
+**Footnote** can be used where [**phrasing**][dfn-phrasing-content] content is
+expected.
+Its content model is also [**phrasing**][dfn-phrasing-content] content.
+
+For example, the following markdown:
+
+```markdown
+[^alpha bravo]
+```
+
+Yields:
+
+```javascript
+{
+  type: 'footnote',
+  children: [{type: 'text', value: 'alpha bravo'}]
+}
+```
+
 ### `FootnoteReference`
 
 ```idl
@@ -977,116 +1087,6 @@ Yields:
   type: 'footnoteReference',
   identifier: 'alpha'
 }
-```
-
-### `Definition`
-
-```idl
-interface Definition <: Node {
-  type: "definition";
-}
-
-Definition includes Association;
-Definition includes Resource;
-```
-
-**Definition** ([**Node**][dfn-node]) represents a resource.
-
-**Definition** can be used where [**definition**][dfn-definition-content]
-content is expected.
-It has no content model.
-
-**Definition** includes the mixins [**Association**][dfn-mxn-association] and
-[**Resource**][dfn-mxn-resource].
-
-**Definition** should be associated with
-[**LinkReferences**][dfn-link-reference] and
-[**ImageReferences**][dfn-image-reference].
-
-For example, the following markdown:
-
-```markdown
-[alpha]: http://example.com
-```
-
-Yields:
-
-```javascript
-{
-  type: 'definition',
-  identifier: 'alpha',
-  url: 'http://example.com',
-  title: null
-}
-```
-
-### `FootnoteDefinition`
-
-```idl
-interface FootnoteDefinition <: Parent {
-  type: "footnoteDefinition";
-  children: [BlockContent];
-}
-
-FootnoteDefinition includes Association;
-```
-
-**FootnoteDefinition** ([**Parent**][dfn-parent]) represents content relating
-to the document that is outside its flow.
-
-**FootnoteDefinition** can be used where
-[**definition**][dfn-definition-content] content is expected.
-Its content model is [**block**][dfn-block-content] content.
-
-**FootnoteDefinition** includes the mixin
-[**Association**][dfn-mxn-association].
-
-**FootnoteDefinition** should be associated with
-[**FootnoteReferences**][dfn-footnote-reference].
-
-For example, the following markdown:
-
-```markdown
-[^alpha]: bravo and charlie.
-```
-
-Yields:
-
-```javascript
-{
-  type: 'footnoteDefinition',
-  identifier: 'alpha',
-  children: [{
-    type: 'paragraph',
-    children: [{type: 'text', value: 'bravo and charlie.'}]
-  }]
-}
-```
-
-### `Text`
-
-```idl
-interface Text <: Literal {
-  type: "text";
-}
-```
-
-**Text** ([**Literal**][dfn-literal]) represents everything that is just text.
-
-**Text** can be used where [**phrasing**][dfn-phrasing-content] content is
-expected.
-Its content is represented by its `value` field.
-
-For example, the following markdown:
-
-```markdown
-Alpha bravo charlie.
-```
-
-Yields:
-
-```javascript
-{type: 'text', value: 'Alpha bravo charlie.'}
 ```
 
 ## Mixin
@@ -1199,7 +1199,7 @@ enum referenceType {
 
 ```idl
 type Content =
-  TopLevelContent | PhrasingContent | TableContent | RowContent | ListContent;
+  TopLevelContent | ListContent | TableContent | RowContent | PhrasingContent;
 ```
 
 Each node in mdast falls into one or more categories of **Content** that group
@@ -1218,7 +1218,7 @@ and metadata such as frontmatter and definitions.
 
 ```idl
 type BlockContent =
-  HTML | Blockquote | Paragraph | Heading | Code | List | Table | ThematicBreak;
+  Paragraph | Heading | ThematicBreak | Blockquote | List | Table | HTML | Code;
 ```
 
 **Block** content represent the sections of document.
@@ -1279,8 +1279,8 @@ type PhrasingContent = StaticPhrasingContent | Link | LinkReference;
 
 ```idl
 type StaticPhrasingContent =
-  HTML | InlineCode | Break | Emphasis | Strong | Delete | Image |
-  ImageReference | Footnote | FootnoteReference | Text;
+  Text | Emphasis | Strong | Delete | HTML | InlineCode | Break | Image |
+  ImageReference | Footnote | FootnoteReference;
 ```
 
 **StaticPhrasing** content represent the text in a document, and its
