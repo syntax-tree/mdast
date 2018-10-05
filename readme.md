@@ -938,7 +938,7 @@ Yields:
 ```javascript
 {
   type: 'image',
-  url: 'http://example.com',
+  url: 'http://example.com/favicon.ico',
   title: 'bravo',
   alt: 'alpha'
 }
