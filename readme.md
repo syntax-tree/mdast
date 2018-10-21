@@ -1436,7 +1436,7 @@ projects!
 
 [author]: http://wooorm.com
 
-[logo]: https://cdn.rawgit.com/syntax-tree/mdast/6205835/logo.svg
+[logo]: https://raw.githubusercontent.com/syntax-tree/mdast/79672c0/logo.svg?sanitize=true
 
 [ideas]: https://github.com/syntax-tree/ideas
 
