@@ -273,7 +273,7 @@ interface List <: Parent {
   type: "list";
   ordered: boolean?;
   start: number?;
-  loose: boolean?;
+  spread: boolean?;
   children: [ListContent];
 }
 ```
@@ -290,10 +290,9 @@ that the order of items is not important (when `false` or not present).
 If the `ordered` field is `true`, a `start` field can be present.
 It represents the starting number of the node.
 
-A `loose` field can be present.
+A `spread` field can be present.
 It represents that any of its items is separated by a blank line from its
-[siblings][term-sibling] or contains two or more [_children_][term-child]
-(when `true`), or not (when `false` or not present).
+[siblings][term-sibling] (when `true`), or not (when `false` or not present).
 
 For example, the following markdown:
 
@@ -308,10 +307,11 @@ Yields:
   type: 'list',
   ordered: true,
   start: 1,
-  loose: false,
+  spread: false,
   children: [{
     type: 'listItem',
     checked: true,
+    spread: false,
     children: [{
       type: 'paragraph',
       children: [{type: 'text', value: 'foo'}]
@@ -326,6 +326,7 @@ Yields:
 interface ListItem <: Parent {
   type: "listItem";
   checked: boolean?;
+  spread: boolean?;
   children: [BlockContent];
 }
 ```
@@ -340,6 +341,10 @@ A `checked` field can be present.
 It represents whether the item is done (when `true`), not done (when `false`),
 or indeterminate or not applicable (when `null` or not present).
 
+A `spread` field can be present.
+It represents that the item contains two or more [_children_][term-child]
+separated by a blank line (when `true`), or not (when `false` or not present).
+
 For example, the following markdown:
 
 ```markdown
@@ -352,6 +357,7 @@ Yields:
 {
   type: 'listItem',
   checked: true,
+  spread: false,
   children: [{
     type: 'paragraph',
     children: [{type: 'text', value: 'bar'}]
