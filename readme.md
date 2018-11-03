@@ -1393,7 +1393,7 @@ By interacting with this repository, organisation, or community you agree to
 abide by its terms.
 
 Want to chat with the community and contributors?
-Join us in [Gitter][chat]!
+Join us in [spectrum][chat]!
 
 Have an idea for a cool new utility or tool?
 That’s great!
@@ -1440,7 +1440,7 @@ projects!
 
 [ideas]: https://github.com/syntax-tree/ideas
 
-[chat]: https://gitter.im/remarkjs/remark
+[chat]: https://spectrum.chat/unified/remark
 
 [releases]: https://github.com/syntax-tree/mdast/releases
 
