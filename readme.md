@@ -101,7 +101,7 @@ trees are used throughout their ecosystems.
 
 ```idl
 interface Parent <: UnistParent {
-  children: [Content];
+  children: [Content]
 }
 ```
 
@@ -114,7 +114,7 @@ Its content is limited to only other mdast [**content**][dfn-content].
 
 ```idl
 interface Literal <: UnistLiteral {
-  value: string;
+  value: string
 }
 ```
 
@@ -127,7 +127,7 @@ Its `value` field is a `string`.
 
 ```idl
 interface Root <: Parent {
-  type: "root";
+  type: "root"
 }
 ```
 
@@ -143,7 +143,7 @@ that all content must be of the same category.
 
 ```idl
 interface Paragraph <: Parent {
-  type: "paragraph";
+  type: "paragraph"
   children: [PhrasingContent]
 }
 ```
@@ -174,9 +174,9 @@ Yields:
 
 ```idl
 interface Heading <: Parent {
-  type: "heading";
-  depth: 1 <= number <= 6;
-  children: [PhrasingContent];
+  type: "heading"
+  depth: 1 <= number <= 6
+  children: [PhrasingContent]
 }
 ```
 
@@ -209,7 +209,7 @@ Yields:
 
 ```idl
 interface ThematicBreak <: Node {
-  type: "thematicBreak";
+  type: "thematicBreak"
 }
 ```
 
@@ -236,7 +236,7 @@ Yields:
 
 ```idl
 interface Blockquote <: Parent {
-  type: "blockquote";
+  type: "blockquote"
   children: [BlockContent]
 }
 ```
@@ -270,11 +270,11 @@ Yields:
 
 ```idl
 interface List <: Parent {
-  type: "list";
-  ordered: boolean?;
-  start: number?;
-  spread: boolean?;
-  children: [ListContent];
+  type: "list"
+  ordered: boolean?
+  start: number?
+  spread: boolean?
+  children: [ListContent]
 }
 ```
 
@@ -324,10 +324,10 @@ Yields:
 
 ```idl
 interface ListItem <: Parent {
-  type: "listItem";
-  checked: boolean?;
-  spread: boolean?;
-  children: [BlockContent];
+  type: "listItem"
+  checked: boolean?
+  spread: boolean?
+  children: [BlockContent]
 }
 ```
 
@@ -369,9 +369,9 @@ Yields:
 
 ```idl
 interface Table <: Parent {
-  type: "table";
-  align: [alignType]?;
-  children: [TableContent];
+  type: "table"
+  align: [alignType]?
+  children: [TableContent]
 }
 ```
 
@@ -435,8 +435,8 @@ Yields:
 
 ```idl
 interface TableRow <: Parent {
-  type: "tableRow";
-  children: [RowContent];
+  type: "tableRow"
+  children: [RowContent]
 }
 ```
 
@@ -455,8 +455,8 @@ For an example, see [**Table**][dfn-table].
 
 ```idl
 interface TableCell <: Parent {
-  type: "tableCell";
-  children: [PhrasingContent];
+  type: "tableCell"
+  children: [PhrasingContent]
 }
 ```
 
@@ -473,7 +473,7 @@ For an example, see [**Table**][dfn-table].
 
 ```idl
 interface HTML <: Literal {
-  type: "html";
+  type: "html"
 }
 ```
 
@@ -499,9 +499,9 @@ Yields:
 
 ```idl
 interface Code <: Literal {
-  type: "code";
-  lang: string?;
-  meta: string?;
+  type: "code"
+  lang: string?
+  meta: string?
 }
 ```
 
@@ -562,7 +562,7 @@ Yields:
 
 ```idl
 interface YAML <: Literal {
-  type: "yaml";
+  type: "yaml"
 }
 ```
 
@@ -591,11 +591,11 @@ Yields:
 
 ```idl
 interface Definition <: Node {
-  type: "definition";
+  type: "definition"
 }
 
-Definition includes Association;
-Definition includes Resource;
+Definition includes Association
+Definition includes Resource
 ```
 
 **Definition** ([**Node**][dfn-node]) represents a resource.
@@ -633,11 +633,11 @@ Yields:
 
 ```idl
 interface FootnoteDefinition <: Parent {
-  type: "footnoteDefinition";
-  children: [BlockContent];
+  type: "footnoteDefinition"
+  children: [BlockContent]
 }
 
-FootnoteDefinition includes Association;
+FootnoteDefinition includes Association
 ```
 
 **FootnoteDefinition** ([**Parent**][dfn-parent]) represents content relating
@@ -677,7 +677,7 @@ Yields:
 
 ```idl
 interface Text <: Literal {
-  type: "text";
+  type: "text"
 }
 ```
 
@@ -703,8 +703,8 @@ Yields:
 
 ```idl
 interface Emphasis <: Parent {
-  type: "emphasis";
-  children: [PhrasingContent];
+  type: "emphasis"
+  children: [PhrasingContent]
 }
 ```
 
@@ -744,8 +744,8 @@ Yields:
 
 ```idl
 interface Strong <: Parent {
-  type: "strong";
-  children: [PhrasingContent];
+  type: "strong"
+  children: [PhrasingContent]
 }
 ```
 
@@ -785,8 +785,8 @@ Yields:
 
 ```idl
 interface Delete <: Parent {
-  type: "delete";
-  children: [PhrasingContent];
+  type: "delete"
+  children: [PhrasingContent]
 }
 ```
 
@@ -816,7 +816,7 @@ Yields:
 
 ```idl
 interface InlineCode <: Literal {
-  type: "inlineCode";
+  type: "inlineCode"
 }
 ```
 
@@ -846,7 +846,7 @@ Yields:
 
 ```idl
 interface Break <: Node {
-  type: "break";
+  type: "break"
 }
 ```
 
@@ -881,11 +881,11 @@ Yields:
 
 ```idl
 interface Link <: Parent {
-  type: "link";
-  children: [StaticPhrasingContent];
+  type: "link"
+  children: [StaticPhrasingContent]
 }
 
-Link includes Resource;
+Link includes Resource
 ```
 
 **Link** ([**Parent**][dfn-parent]) represents a hyperlink.
@@ -917,11 +917,11 @@ Yields:
 
 ```idl
 interface Image <: Node {
-  type: "image";
+  type: "image"
 }
 
-Image includes Resource;
-Image includes Alternative;
+Image includes Resource
+Image includes Alternative
 ```
 
 **Image** ([**Node**][dfn-node]) represents an image.
@@ -954,11 +954,11 @@ Yields:
 
 ```idl
 interface LinkReference <: Parent {
-  type: "linkReference";
-  children: [StaticPhrasingContent];
+  type: "linkReference"
+  children: [StaticPhrasingContent]
 }
 
-LinkReference includes Reference;
+LinkReference includes Reference
 ```
 
 **LinkReference** ([**Parent**][dfn-parent]) represents a hyperlink through
@@ -994,11 +994,11 @@ Yields:
 
 ```idl
 interface ImageReference <: Node {
-  type: "imageReference";
+  type: "imageReference"
 }
 
-ImageReference includes Reference;
-ImageReference includes Alternative;
+ImageReference includes Reference
+ImageReference includes Alternative
 ```
 
 **ImageReference** ([**Node**][dfn-node]) represents an image through
@@ -1035,8 +1035,8 @@ Yields:
 
 ```idl
 interface Footnote <: Parent {
-  type: "footnote";
-  children: [PhrasingContent];
+  type: "footnote"
+  children: [PhrasingContent]
 }
 ```
 
@@ -1066,10 +1066,10 @@ Yields:
 
 ```idl
 interface FootnoteReference <: Node {
-  type: "footnoteReference";
+  type: "footnoteReference"
 }
 
-FootnoteReference includes Association;
+FootnoteReference includes Association
 ```
 
 **FootnoteReference** ([**Node**][dfn-node]) represents a marker through
@@ -1106,8 +1106,8 @@ Yields:
 
 ```idl
 interface mixin Resource {
-  url: string;
-  title: string?;
+  url: string
+  title: string?
 }
 ```
 
@@ -1124,8 +1124,8 @@ appropriate for a tooltip.
 
 ```idl
 interface mixin Association {
-  identifier: string;
-  label: string?;
+  identifier: string
+  label: string?
 }
 ```
 
@@ -1148,10 +1148,10 @@ associated with one definition.
 
 ```idl
 interface mixin Reference {
-  referenceType: string;
+  referenceType: string
 }
 
-Reference includes Association;
+Reference includes Association
 ```
 
 **Reference** represents a marker that is [**associated**][dfn-mxn-association]
@@ -1165,7 +1165,7 @@ It represents the explicitness of the reference.
 
 ```idl
 interface mixin Alternative {
-  alt: string?;
+  alt: string?
 }
 ```
 
@@ -1181,7 +1181,7 @@ node as intended.
 
 ```idl
 enum alignType {
-  "left" | "right" | "center" | null;
+  "left" | "right" | "center" | null
 }
 ```
 
@@ -1198,7 +1198,7 @@ enum alignType {
 
 ```idl
 enum referenceType {
-  "shortcut" | "collapsed" | "full";
+  "shortcut" | "collapsed" | "full"
 }
 ```
 
@@ -1214,7 +1214,7 @@ enum referenceType {
 
 ```idl
 type Content =
-  TopLevelContent | ListContent | TableContent | RowContent | PhrasingContent;
+  TopLevelContent | ListContent | TableContent | RowContent | PhrasingContent
 ```
 
 Each node in mdast falls into one or more categories of **Content** that group
@@ -1223,7 +1223,7 @@ nodes with similar characteristics together.
 ### `TopLevelContent`
 
 ```idl
-type TopLevelContent = BlockContent | FrontmatterContent | DefinitionContent;
+type TopLevelContent = BlockContent | FrontmatterContent | DefinitionContent
 ```
 
 **Top-level** content represent the sections of document (**block** content),
@@ -1233,7 +1233,7 @@ and metadata such as frontmatter and definitions.
 
 ```idl
 type BlockContent =
-  Paragraph | Heading | ThematicBreak | Blockquote | List | Table | HTML | Code;
+  Paragraph | Heading | ThematicBreak | Blockquote | List | Table | HTML | Code
 ```
 
 **Block** content represent the sections of document.
@@ -1241,7 +1241,7 @@ type BlockContent =
 ### `FrontmatterContent`
 
 ```idl
-type FrontmatterContent = YAML;
+type FrontmatterContent = YAML
 ```
 
 **Frontmatter** content represent out-of-band information about the document.
@@ -1252,7 +1252,7 @@ If frontmatter is present, it must be limited to one node in the
 ### `DefinitionContent`
 
 ```idl
-type DefinitionContent = Definition | FootnoteDefinition;
+type DefinitionContent = Definition | FootnoteDefinition
 ```
 
 **Definition** content represents out-of-band information that typically
@@ -1261,7 +1261,7 @@ affects the document through [**Association**][dfn-mxn-association].
 ### `ListContent`
 
 ```idl
-type ListContent = ListItem;
+type ListContent = ListItem
 ```
 
 **List** content represent the items in a list.
@@ -1269,7 +1269,7 @@ type ListContent = ListItem;
 ### `TableContent`
 
 ```idl
-type TableContent = TableRow;
+type TableContent = TableRow
 ```
 
 **Table** content represent the rows in a table.
@@ -1277,7 +1277,7 @@ type TableContent = TableRow;
 ### `RowContent`
 
 ```idl
-type RowContent = TableCell;
+type RowContent = TableCell
 ```
 
 **Row** content represent the cells in a row.
@@ -1285,7 +1285,7 @@ type RowContent = TableCell;
 ### `PhrasingContent`
 
 ```idl
-type PhrasingContent = StaticPhrasingContent | Link | LinkReference;
+type PhrasingContent = StaticPhrasingContent | Link | LinkReference
 ```
 
 **Phrasing** content represent the text in a document, and its markup.
@@ -1295,7 +1295,7 @@ type PhrasingContent = StaticPhrasingContent | Link | LinkReference;
 ```idl
 type StaticPhrasingContent =
   Text | Emphasis | Strong | Delete | HTML | InlineCode | Break | Image |
-  ImageReference | Footnote | FootnoteReference;
+  ImageReference | Footnote | FootnoteReference
 ```
 
 **StaticPhrasing** content represent the text in a document, and its
