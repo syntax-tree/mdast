@@ -1331,6 +1331,8 @@ See the [unist list of utilities][utilities] for more utilities.
     — Get the style of a heading node
 *   [`mdast-util-inject`](https://github.com/anandthakker/mdast-util-inject)
     — Inject a tree into another at a given heading
+*   [`mdast-util-phrasing`](https://github.com/syntax-tree/mdast-util-phrasing)
+    — Check if a node is phrasing content
 *   [`mdast-util-to-string`](https://github.com/syntax-tree/mdast-util-to-string)
     — Get the plain text content of a node
 *   [`mdast-flatten-image-paragraphs`](https://gitlab.com/staltz/mdast-flatten-image-paragraphs)
