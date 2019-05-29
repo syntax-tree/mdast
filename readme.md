@@ -106,7 +106,7 @@ interface Parent <: UnistParent {
 ```
 
 **Parent** ([**UnistParent**][dfn-unist-parent]) represents a node in mdast
-containing other nodes (said to be [_children_][term-child]).
+containing other nodes (said to be [*children*][term-child]).
 
 Its content is limited to only other mdast [**content**][dfn-content].
 
@@ -133,8 +133,8 @@ interface Root <: Parent {
 
 **Root** ([**Parent**][dfn-parent]) represents a document.
 
-**Root** can be used as the [_root_][term-root] of a [_tree_][term-tree], never
-as a [_child_][term-child].
+**Root** can be used as the [*root*][term-root] of a [*tree*][term-tree], never
+as a [*child*][term-child].
 Its content model is not limited to [**top-level**][dfn-top-level-content]
 content, but can contain any [**content**][dfn-content] with the restriction
 that all content must be of the same category.
@@ -342,7 +342,7 @@ It represents whether the item is done (when `true`), not done (when `false`),
 or indeterminate or not applicable (when `null` or not present).
 
 A `spread` field can be present.
-It represents that the item contains two or more [_children_][term-child]
+It represents that the item contains two or more [*children*][term-child]
 separated by a blank line (when `true`), or not (when `false` or not present).
 
 For example, the following markdown:
@@ -380,7 +380,7 @@ interface Table <: Parent {
 **Table** can be used where [**block**][dfn-block-content] content is expected.
 Its content model is [**table**][dfn-table-content] content.
 
-The [_head_][term-head] of the node represents the labels of the columns.
+The [*head*][term-head] of the node represents the labels of the columns.
 
 An `align` field can be present.
 If present, it must be a list of [**alignType**s][dfn-enum-align-type].
@@ -446,7 +446,7 @@ interface TableRow <: Parent {
 expected.
 Its content model is [**row**][dfn-row-content] content.
 
-If the node is a [_head_][term-head], it represents the labels of the columns
+If the node is a [*head*][term-head], it represents the labels of the columns
 for its parent [**Table**][dfn-table].
 
 For an example, see [**Table**][dfn-table].
@@ -461,7 +461,7 @@ interface TableCell <: Parent {
 ```
 
 **TableCell** ([**Parent**][dfn-parent]) represents a header cell in a
-[**Table**][dfn-table], if its parent is a [_head_][term-head], or a data
+[**Table**][dfn-table], if its parent is a [*head*][term-head], or a data
 cell otherwise.
 
 **TableCell** can be used where [**row**][dfn-row-content] content is expected.
@@ -1247,7 +1247,7 @@ type FrontmatterContent = YAML
 **Frontmatter** content represent out-of-band information about the document.
 
 If frontmatter is present, it must be limited to one node in the
-[_tree_][term-tree], and can only exist as a [_head_][term-head].
+[*tree*][term-tree], and can only exist as a [*head*][term-head].
 
 ### `DefinitionContent`
 
