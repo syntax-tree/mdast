@@ -1351,6 +1351,8 @@ See the [unist list of utilities][utilities] for more utilities.
     — Transform to NLCST
 *   [`mdast-zone`](https://github.com/syntax-tree/mdast-zone)
     — HTML comments as ranges or markers
+*   [`mdast-builder`](https://github.com/mike-north/mdast-builder)
+    — Build mdast structures with composable functions
 
 ## References
 
