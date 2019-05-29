@@ -4,8 +4,8 @@
 
 * * *
 
-**mdast** is a specification for representing markdown in a
-[syntax tree][syntax-tree].
+**mdast** is a specification for representing Markdown in a [syntax
+tree][syntax-tree].
 It implements the [**unist**][unist] spec.
 It can represent several flavours of [Markdown][], such as [CommonMark][],
 and [GitHub Flavored Markdown][gfm] extensions.
@@ -75,8 +75,8 @@ The latest released version is [`3.0.0`][latest].
 
 ## Introduction
 
-This document defines a format for representing [Markdown][] as an
-[abstract syntax tree][syntax-tree].
+This document defines a format for representing [Markdown][] as an [abstract
+syntax tree][syntax-tree].
 Development of mdast started in July 2014, in [**remark**][remark], before
 [unist][] existed.
 This specification is written in a [Web IDL][webidl]-like grammar.
@@ -89,8 +89,8 @@ mdast extends [unist][], a format for syntax trees, to benefit from its
 mdast relates to [JavaScript][] in that it has a rich [ecosystem of
 utilities][list-of-utilities] for working with compliant syntax trees in
 JavaScript.
-However, mdast is not limited to JavaScript and can be used in other
-programming languages.
+However, mdast is not limited to JavaScript and can be used in other programming
+languages.
 
 mdast relates to the [unified][] and [remark][] projects in that mdast syntax
 trees are used throughout their ecosystems.
@@ -155,7 +155,7 @@ with a particular point or idea.
 expected.
 Its content model is [**phrasing**][dfn-phrasing-content] content.
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 Alpha bravo charlie.
@@ -163,7 +163,7 @@ Alpha bravo charlie.
 
 Yields:
 
-```javascript
+```js
 {
   type: 'paragraph',
   children: [{type: 'text', value: 'Alpha bravo charlie.'}]
@@ -189,7 +189,7 @@ Its content model is [**phrasing**][dfn-phrasing-content] content.
 A `depth` field must be present.
 A value of `1` is said to be the highest rank and `6` the lowest.
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 # Alpha
@@ -197,7 +197,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {
   type: 'heading',
   depth: 1,
@@ -220,7 +220,7 @@ scene change in a story, a transition to another topic, or a new document.
 expected.
 It has no content model.
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 ***
@@ -228,7 +228,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {type: 'thematicBreak'}
 ```
 
@@ -248,7 +248,7 @@ somewhere else.
 expected.
 Its content model is also [**block**][dfn-block-content] content.
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 > Alpha bravo charlie.
@@ -256,7 +256,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {
   type: 'blockquote',
   children: [{
@@ -294,7 +294,7 @@ A `spread` field can be present.
 It represents that any of its items is separated by a blank line from its
 [siblings][term-sibling] (when `true`), or not (when `false` or not present).
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 1. [x] foo
@@ -302,7 +302,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {
   type: 'list',
   ordered: true,
@@ -345,7 +345,7 @@ A `spread` field can be present.
 It represents that the item contains two or more [*children*][term-child]
 separated by a blank line (when `true`), or not (when `false` or not present).
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 * [x] bar
@@ -353,7 +353,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {
   type: 'listItem',
   checked: true,
@@ -386,7 +386,7 @@ An `align` field can be present.
 If present, it must be a list of [**alignType**s][dfn-enum-align-type].
 It represents how cells in columns are aligned.
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 | foo | bar |
@@ -396,7 +396,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {
   type: 'table',
   align: ['left', 'center'],
@@ -483,7 +483,7 @@ interface HTML <: Literal {
 [**phrasing**][dfn-phrasing-content] content is expected.
 Its content is represented by its `value` field.
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 <div>
@@ -491,7 +491,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {type: 'html', value: '<div>'}
 ```
 
@@ -520,7 +520,7 @@ It represents the language of computer code being marked up.
 If the `lang` field is present, a `meta` field can be present.
 It represents custom information relating to the node.
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
     foo()
@@ -528,7 +528,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {
   type: 'code',
   lang: null,
@@ -537,10 +537,10 @@ Yields:
 }
 ```
 
-And the following markdown:
+And the following Markdown:
 
 ````markdown
-```javascript highlight-line="2"
+```js highlight-line="2"
 foo()
 bar()
 baz()
@@ -549,7 +549,7 @@ baz()
 
 Yields:
 
-```javascript
+```js
 {
   type: 'code',
   lang: 'javascript',
@@ -573,7 +573,7 @@ the document in the [YAML][] data serialisation language.
 expected.
 Its content is represented by its `value` field.
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 ---
@@ -583,7 +583,7 @@ foo: bar
 
 Yields:
 
-```javascript
+```js
 {type: 'yaml', value: 'foo: bar'}
 ```
 
@@ -611,20 +611,20 @@ It has no content model.
 [**LinkReferences**][dfn-link-reference] and
 [**ImageReferences**][dfn-image-reference].
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
-[Alpha]: http://example.com
+[Alpha]: https://example.com
 ```
 
 Yields:
 
-```javascript
+```js
 {
   type: 'definition',
   identifier: 'alpha',
   label: 'Alpha',
-  url: 'http://example.com',
+  url: 'https://example.com',
   title: null
 }
 ```
@@ -653,7 +653,7 @@ Its content model is [**block**][dfn-block-content] content.
 **FootnoteDefinition** should be associated with
 [**FootnoteReferences**][dfn-footnote-reference].
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 [^alpha]: bravo and charlie.
@@ -661,7 +661,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {
   type: 'footnoteDefinition',
   identifier: 'alpha',
@@ -687,7 +687,7 @@ interface Text <: Literal {
 expected.
 Its content is represented by its `value` field.
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 Alpha bravo charlie.
@@ -695,7 +695,7 @@ Alpha bravo charlie.
 
 Yields:
 
-```javascript
+```js
 {type: 'text', value: 'Alpha bravo charlie.'}
 ```
 
@@ -715,7 +715,7 @@ contents.
 expected.
 Its content model is also [**phrasing**][dfn-phrasing-content] content.
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 *alpha* _bravo_
@@ -723,7 +723,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {
   type: 'paragraph',
   children: [
@@ -756,7 +756,7 @@ or urgency for its contents.
 expected.
 Its content model is also [**phrasing**][dfn-phrasing-content] content.
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 **alpha** __bravo__
@@ -764,7 +764,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {
   type: 'paragraph',
   children: [
@@ -797,7 +797,7 @@ accurate or no longer relevant.
 expected.
 Its content model is also [**phrasing**][dfn-phrasing-content] content.
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 ~~alpha~~
@@ -805,7 +805,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {
   type: 'delete',
   children: [{type: 'text', value: 'alpha'}]
@@ -830,7 +830,7 @@ Its content is represented by its `value` field.
 This node relates to the [**block**][dfn-block-content] content concept
 [**Code**][dfn-code].
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 `foo()`
@@ -838,7 +838,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {type: 'inlineCode', value: 'foo()'}
 ```
 
@@ -857,7 +857,7 @@ addresses.
 expected.
 It has no content model.
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 foo··
@@ -866,7 +866,7 @@ bar
 
 Yields:
 
-```javascript
+```js
 {
   type: 'paragraph',
   children: [
@@ -896,18 +896,18 @@ Its content model is [**static phrasing**][dfn-static-phrasing-content] content.
 
 **Link** includes the mixin [**Resource**][dfn-mxn-resource].
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
-[alpha](http://example.com "bravo")
+[alpha](https://example.com "bravo")
 ```
 
 Yields:
 
-```javascript
+```js
 {
   type: 'link',
-  url: 'http://example.com',
+  url: 'https://example.com',
   title: 'bravo',
   children: [{type: 'text', value: 'alpha'}]
 }
@@ -933,18 +933,18 @@ It has no content model, but is described by its `alt` field.
 **Image** includes the mixins [**Resource**][dfn-mxn-resource] and
 [**Alternative**][dfn-mxn-alternative].
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
-![alpha](http://example.com/favicon.ico "bravo")
+![alpha](https://example.com/favicon.ico "bravo")
 ```
 
 Yields:
 
-```javascript
+```js
 {
   type: 'image',
-  url: 'http://example.com/favicon.ico',
+  url: 'https://example.com/favicon.ico',
   title: 'bravo',
   alt: 'alpha'
 }
@@ -972,7 +972,7 @@ Its content model is [**static phrasing**][dfn-static-phrasing-content] content.
 
 **LinkReferences** should be associated with a [**Definition**][dfn-definition].
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 [alpha][Bravo]
@@ -980,7 +980,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {
   type: 'linkReference',
   identifier: 'bravo',
@@ -1013,7 +1013,7 @@ It has no content model, but is described by its `alt` field.
 
 **ImageReference** should be associated with a [**Definition**][dfn-definition].
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 ![alpha][bravo]
@@ -1021,7 +1021,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {
   type: 'imageReference',
   identifier: 'bravo',
@@ -1047,7 +1047,7 @@ document that is outside its flow.
 expected.
 Its content model is also [**phrasing**][dfn-phrasing-content] content.
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 [^alpha bravo]
@@ -1055,7 +1055,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {
   type: 'footnote',
   children: [{type: 'text', value: 'alpha bravo'}]
@@ -1084,7 +1084,7 @@ It has no content model.
 **FootnoteReference** should be associated with a
 [**FootnoteDefinition**][dfn-footnote-definition].
 
-For example, the following markdown:
+For example, the following Markdown:
 
 ```markdown
 [^alpha]
@@ -1092,7 +1092,7 @@ For example, the following markdown:
 
 Yields:
 
-```javascript
+```js
 {
   type: 'footnoteReference',
   identifier: 'alpha',
@@ -1376,7 +1376,7 @@ See the [unist list of utilities][utilities] for more utilities.
     [CSS Text][css-text],
     CSS Text, E. Etemad, K. Ishii.
     W3C.
-*   **JavaScript**
+*   **JavaScript**:
     [ECMAScript Language Specification][javascript].
     Ecma International.
 *   **YAML**:
@@ -1443,7 +1443,7 @@ projects!
 
 [license]: https://creativecommons.org/licenses/by/4.0/
 
-[author]: http://wooorm.com
+[author]: https://wooorm.com
 
 [logo]: https://raw.githubusercontent.com/syntax-tree/mdast/79672c0/logo.svg?sanitize=true
 
@@ -1527,7 +1527,7 @@ projects!
 
 [syntax-tree]: https://github.com/syntax-tree/unist#syntax-tree
 
-[yaml]: http://yaml.org
+[yaml]: https://yaml.org
 
 [html]: https://html.spec.whatwg.org/multipage/
 
