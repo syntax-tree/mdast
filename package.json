@@ -1,5 +1,4 @@
 {
-  "name": "mdast",
   "private": true,
   "version": "0.0.0",
   "description": "markdown abstract syntax tree",
