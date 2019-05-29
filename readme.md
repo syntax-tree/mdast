@@ -1324,7 +1324,7 @@ See the [unist list of utilities][utilities] for more utilities.
 *   [`mdast-util-definitions`](https://github.com/syntax-tree/mdast-util-definitions)
     — Find definition nodes
 *   [`mdast-flatten-listitem-paragraphs`](https://gitlab.com/staltz/mdast-flatten-listitem-paragraphs)
-    — Flatten listItem and (nested) paragraph into one listItem node 
+    — Flatten listItem and (nested) paragraph into one listItem node
 *   [`mdast-flatten-nested-lists`](https://gitlab.com/staltz/mdast-flatten-nested-lists)
     — Transforms a tree to avoid lists inside lists
 *   [`mdast-util-heading-range`](https://github.com/syntax-tree/mdast-util-heading-range)
@@ -1338,7 +1338,7 @@ See the [unist list of utilities][utilities] for more utilities.
 *   [`mdast-util-to-string`](https://github.com/syntax-tree/mdast-util-to-string)
     — Get the plain text content of a node
 *   [`mdast-flatten-image-paragraphs`](https://gitlab.com/staltz/mdast-flatten-image-paragraphs)
-    — Flatten paragraph and image into one image node 
+    — Flatten paragraph and image into one image node
 *   [`mdast-move-images-to-root`](https://gitlab.com/staltz/mdast-move-images-to-root)
     — Moves image nodes up the tree until they are strict children of the root
 *   [`mdast-normalize-headings`](https://github.com/syntax-tree/mdast-normalize-headings)
@@ -1389,20 +1389,17 @@ See the [unist list of utilities][utilities] for more utilities.
 
 ## Contribute
 
-**mdast** is built by people just like you!
-Check out [`contributing.md`][contributing] for ways to get started.
+See [`contributing.md`][contributing] in [`syntax-tree/.github`][health] for
+ways to get started.
+See [`support.md`][support] for ways to get help.
+Ideas for new utilities and tools can be posted in [`syntax-tree/ideas`][ideas].
+
+A curated list of awesome syntax-tree, unist, hast, mdast, and nlcst resources
+can be found in [awesome syntax-tree][awesome].
 
 This project has a [Code of Conduct][coc].
 By interacting with this repository, organisation, or community you agree to
 abide by its terms.
-
-Want to chat with the community and contributors?
-Join us in [spectrum][chat]!
-
-Have an idea for a cool new utility or tool?
-That’s great!
-If you want feedback, help, or just to share it with the world you can do so by
-creating an issue in the [`syntax-tree/ideas`][ideas] repository!
 
 ## Acknowledgments
 
@@ -1432,19 +1429,23 @@ projects!
 
 <!-- Definitions -->
 
-[contributing]: contributing.md
+[health]: https://github.com/syntax-tree/.github
 
-[coc]: code-of-conduct.md
+[contributing]: https://github.com/syntax-tree/.github/blob/master/contributing.md
+
+[support]: https://github.com/syntax-tree/.github/blob/master/support.md
+
+[coc]: https://github.com/syntax-tree/.github/blob/master/code-of-conduct.md
+
+[awesome]: https://github.com/syntax-tree/awesome-syntax-tree
+
+[ideas]: https://github.com/syntax-tree/ideas
 
 [license]: https://creativecommons.org/licenses/by/4.0/
 
 [author]: http://wooorm.com
 
 [logo]: https://raw.githubusercontent.com/syntax-tree/mdast/79672c0/logo.svg?sanitize=true
-
-[ideas]: https://github.com/syntax-tree/ideas
-
-[chat]: https://spectrum.chat/unified/remark
 
 [releases]: https://github.com/syntax-tree/mdast/releases
 
