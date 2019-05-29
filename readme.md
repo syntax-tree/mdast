@@ -1315,6 +1315,8 @@ See the [unist list of utilities][utilities] for more utilities.
     — Assert nodes
 *   [`mdast-add-list-metadata`](https://gitlab.com/staltz/mdast-add-list-metadata)
     — Enhances the metadata of list and listItem nodes
+*   [`mdast-builder`](https://github.com/mike-north/mdast-builder)
+    — Build mdast structures with composable functions
 *   [`mdast-comment-marker`](https://github.com/syntax-tree/mdast-comment-marker)
     — Parse a comment marker
 *   [`mdast-util-compact`](https://github.com/syntax-tree/mdast-util-compact)
