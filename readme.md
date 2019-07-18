@@ -69,6 +69,7 @@ The latest released version is [`3.0.0`][latest].
 *   [Glossary](#glossary)
 *   [List of Utilities](#list-of-utilities)
 *   [References](#references)
+*   [Security](#security)
 *   [Contribute](#contribute)
 *   [Acknowledgments](#acknowledgments)
 *   [License](#license)
@@ -1387,6 +1388,15 @@ See the [unist list of utilities][utilities] for more utilities.
     C. McCormack.
     W3C.
 
+## Security
+
+As mdast can contain HTML and be used to represent HTML, and improper use of
+HTML can open you up to a [cross-site scripting (XSS)][xss] attack, improper use
+of mdast is also unsafe.
+When transforming to HTML (typically through [**hast**][hast]), always be
+careful with user input and use [`hast-util-santize`][sanitize] to make the hast
+tree safe.
+
 ## Contribute
 
 See [`contributing.md`][contributing] in [`syntax-tree/.github`][health] for
@@ -1580,3 +1590,9 @@ projects!
 [unified]: https://github.com/unifiedjs/unified
 
 [remark]: https://github.com/remarkjs/remark
+
+[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
+
+[hast]: https://github.com/syntax-tree/hast
+
+[sanitize]: https://github.com/syntax-tree/hast-util-sanitize
