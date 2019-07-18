@@ -1345,12 +1345,12 @@ See the [unist list of utilities][utilities] for more utilities.
     — Ensure at most one top-level heading is in the document
 *   [`mdast-squeeze-paragraphs`](https://github.com/syntax-tree/mdast-squeeze-paragraphs)
     — Remove empty paragraphs
-*   [`mdast-util-toc`](https://github.com/BarryThePenguin/mdast-util-toc)
+*   [`mdast-util-toc`](https://github.com/syntax-tree/mdast-util-toc)
     — Generate a Table of Contents from a tree
 *   [`mdast-util-to-hast`](https://github.com/syntax-tree/mdast-util-to-hast)
-    — Transform to HAST
+    — Transform to hast
 *   [`mdast-util-to-nlcst`](https://github.com/syntax-tree/mdast-util-to-nlcst)
-    — Transform to NLCST
+    — Transform to nlcst
 *   [`mdast-zone`](https://github.com/syntax-tree/mdast-zone)
     — HTML comments as ranges or markers
 
@@ -1411,16 +1411,40 @@ ideas, and incredibly valuable feedback!
 
 Thanks to
 [**@anandthakker**](https://github.com/anandthakker),
+[**@arobase-che**](https://github.com/arobase-che),
 [**@BarryThePenguin**](https://github.com/BarryThePenguin),
+[**@chinesedfan**](https://github.com/chinesedfan),
+[**@ChristianMurphy**](https://github.com/ChristianMurphy),
+[**@craftzdog**](https://github.com/craftzdog),
+[**@d4rekanguok**](https://github.com/d4rekanguok),
+[**@detj**](https://github.com/detj),
+[**@dominictarr**](https://github.com/dominictarr),
+[**@gkatsev**](https://github.com/gkatsev),
+[**@Hamms**](https://github.com/Hamms),
+[**@Hypercubed**](https://github.com/Hypercubed),
+[**@ikatyang**](https://github.com/ikatyang),
 [**@izumin5210**](https://github.com/izumin5210),
 [**@jasonLaster**](https://github.com/jasonLaster),
+[**@Justineo**](https://github.com/Justineo),
 [**@justjake**](https://github.com/justjake),
 [**@KyleAMathews**](https://github.com/KyleAMathews),
+[**@laysent**](https://github.com/laysent),
+[**@macklinu**](https://github.com/macklinu),
+[**@mike-north**](https://github.com/mike-north),
+[**@Murderlon**](https://github.com/Murderlon),
+[**@nevik**](https://github.com/nevik),
 [**@Rokt33r**](https://github.com/Rokt33r),
 [**@rhysd**](https://github.com/rhysd),
+[**@rubys**](https://github.com/rubys),
 [**@Sarah-Seo**](https://github.com/Sarah-Seo),
-[**@sethvincent**](https://github.com/sethvincent), and
-[**@simov**](https://github.com/simov) for contributing to mdast and related
+[**@sethvincent**](https://github.com/sethvincent),
+[**@silvenon**](https://github.com/silvenon),
+[**@simov**](https://github.com/simov),
+[**@staltz**](https://github.com/staltz),
+[**@stefanprobst**](https://github.com/stefanprobst),
+[**@tmcw**](https://github.com/tmcw),
+and [**@vhf**](https://github.com/vhf)
+for contributing to mdast and related
 projects!
 
 ## License
