@@ -14,7 +14,7 @@ This document may not be released.
 See [releases][] for released documents.
 The latest released version is [`3.0.0`][latest].
 
-## Table of Contents
+## Contents
 
 *   [Introduction](#introduction)
     *   [Where this specification fits](#where-this-specification-fits)
@@ -67,7 +67,7 @@ The latest released version is [`3.0.0`][latest].
     *   [`PhrasingContent`](#phrasingcontent)
     *   [`StaticPhrasingContent`](#staticphrasingcontent)
 *   [Glossary](#glossary)
-*   [List of Utilities](#list-of-utilities)
+*   [List of utilities](#list-of-utilities)
 *   [References](#references)
 *   [Security](#security)
 *   [Contribute](#contribute)
@@ -285,15 +285,17 @@ interface List <: Parent {
 Its content model is [**list**][dfn-list-content] content.
 
 An `ordered` field can be present.
-It represents that the items have been intentionally ordered (when true), or
+It represents that the items have been intentionally ordered (when `true`), or
 that the order of items is not important (when `false` or not present).
 
-If the `ordered` field is `true`, a `start` field can be present.
-It represents the starting number of the node.
+A `start` field can be present.
+It represents, when the `ordered` field is `true`, the starting number of the
+list.
 
 A `spread` field can be present.
-It represents that any of its items is separated by a blank line from its
-[siblings][term-sibling] (when `true`), or not (when `false` or not present).
+It represents that one or more of its children are separated with a blank line
+from its [siblings][term-sibling] (when `true`), or not (when `false` or not
+present).
 
 For example, the following Markdown:
 
@@ -466,7 +468,8 @@ interface TableCell <: Parent {
 cell otherwise.
 
 **TableCell** can be used where [**row**][dfn-row-content] content is expected.
-Its content model is [**phrasing**][dfn-phrasing-content] content.
+Its content model is [**phrasing**][dfn-phrasing-content] content excluding
+[**Break**][dfn-break] nodes.
 
 For an example, see [**Table**][dfn-table].
 
@@ -483,6 +486,9 @@ interface HTML <: Literal {
 **HTML** can be used where [**block**][dfn-block-content] or
 [**phrasing**][dfn-phrasing-content] content is expected.
 Its content is represented by its `value` field.
+
+HTML nodes do not have the restriction of being valid or complete HTML
+([\[HTML\]][html]) constructs.
 
 For example, the following Markdown:
 
@@ -568,7 +574,7 @@ interface YAML <: Literal {
 ```
 
 **YAML** ([**Literal**][dfn-literal]) represents a collection of metadata for
-the document in the [YAML][] data serialisation language.
+the document in the YAML ([\[YAML\]][yaml]) data serialisation language.
 
 **YAML** can be used where [**frontmatter**][dfn-frontmatter-content] content is
 expected.
@@ -1186,14 +1192,16 @@ enum alignType {
 }
 ```
 
-**alignType** represents how phrasing content is aligned.
+**alignType** represents how phrasing content is aligned
+([\[CSSTEXT\]][css-text]).
 
-*   **left**: See the [`left`][css-left] value of the `text-align` CSS property
-*   **right**: See the [`right`][css-right] value of the `text-align` CSS
+*   **`'left'`**: See the [`left`][css-left] value of the `text-align` CSS
     property
-*   **center**: See the [`center`][css-center] value of the `text-align` CSS
-    property
-*   **null**: phrasing content is aligned as defined by the host environment
+*   **`'right'`**: See the [`right`][css-right] value of the `text-align`
+    CSS property
+*   **`'center'`**: See the [`center`][css-center] value of the `text-align`
+    CSS property
+*   **`null`**: phrasing content is aligned as defined by the host environment
 
 ### `referenceType`
 
@@ -1306,7 +1314,7 @@ markup, that is not intended for user interaction.
 
 See the [unist glossary][glossary].
 
-## List of Utilities
+## List of utilities
 
 See the [unist list of utilities][utilities] for more utilities.
 
@@ -1404,11 +1412,11 @@ ways to get started.
 See [`support.md`][support] for ways to get help.
 Ideas for new utilities and tools can be posted in [`syntax-tree/ideas`][ideas].
 
-A curated list of awesome syntax-tree, unist, hast, mdast, and nlcst resources
-can be found in [awesome syntax-tree][awesome].
+A curated list of awesome syntax-tree, unist, mdast, hast, xast, and nlcst
+resources can be found in [awesome syntax-tree][awesome].
 
-This project has a [Code of Conduct][coc].
-By interacting with this repository, organisation, or community you agree to
+This project has a [code of conduct][coc].
+By interacting with this repository, organization, or community you agree to
 abide by its terms.
 
 ## Acknowledgments
@@ -1502,6 +1510,8 @@ projects!
 [dfn-list]: #list
 
 [dfn-table]: #table
+
+[dfn-break]: #break
 
 [dfn-link-reference]: #linkreference
 
