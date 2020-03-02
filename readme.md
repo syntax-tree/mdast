@@ -1320,10 +1320,10 @@ See the [unist list of utilities][utilities] for more utilities.
 
 <!--lint disable list-item-spacing-->
 
-*   [`mdast-util-assert`](https://github.com/syntax-tree/mdast-util-assert)
-    — Assert nodes
 *   [`mdast-add-list-metadata`](https://gitlab.com/staltz/mdast-add-list-metadata)
     — Enhances the metadata of list and listItem nodes
+*   [`mdast-util-assert`](https://github.com/syntax-tree/mdast-util-assert)
+    — Assert nodes
 *   [`mdast-builder`](https://github.com/mike-north/mdast-builder)
     — Build mdast structures with composable functions
 *   [`mdast-comment-marker`](https://github.com/syntax-tree/mdast-comment-marker)
@@ -1332,6 +1332,8 @@ See the [unist list of utilities][utilities] for more utilities.
     — Make a tree compact
 *   [`mdast-util-definitions`](https://github.com/syntax-tree/mdast-util-definitions)
     — Find definition nodes
+*   [`mdast-flatten-image-paragraphs`](https://gitlab.com/staltz/mdast-flatten-image-paragraphs)
+    — Flatten paragraph and image into one image node
 *   [`mdast-flatten-listitem-paragraphs`](https://gitlab.com/staltz/mdast-flatten-listitem-paragraphs)
     — Flatten listItem and (nested) paragraph into one listItem node
 *   [`mdast-flatten-nested-lists`](https://gitlab.com/staltz/mdast-flatten-nested-lists)
@@ -1342,16 +1344,12 @@ See the [unist list of utilities][utilities] for more utilities.
     — Get the style of a heading node
 *   [`mdast-util-inject`](https://github.com/anandthakker/mdast-util-inject)
     — Inject a tree into another at a given heading
-*   [`mdast-util-phrasing`](https://github.com/syntax-tree/mdast-util-phrasing)
-    — Check if a node is phrasing content
-*   [`mdast-util-to-string`](https://github.com/syntax-tree/mdast-util-to-string)
-    — Get the plain text content of a node
-*   [`mdast-flatten-image-paragraphs`](https://gitlab.com/staltz/mdast-flatten-image-paragraphs)
-    — Flatten paragraph and image into one image node
 *   [`mdast-move-images-to-root`](https://gitlab.com/staltz/mdast-move-images-to-root)
     — Moves image nodes up the tree until they are strict children of the root
 *   [`mdast-normalize-headings`](https://github.com/syntax-tree/mdast-normalize-headings)
     — Ensure at most one top-level heading is in the document
+*   [`mdast-util-phrasing`](https://github.com/syntax-tree/mdast-util-phrasing)
+    — Check if a node is phrasing content
 *   [`mdast-squeeze-paragraphs`](https://github.com/syntax-tree/mdast-squeeze-paragraphs)
     — Remove empty paragraphs
 *   [`mdast-util-toc`](https://github.com/syntax-tree/mdast-util-toc)
@@ -1360,6 +1358,8 @@ See the [unist list of utilities][utilities] for more utilities.
     — Transform to hast
 *   [`mdast-util-to-nlcst`](https://github.com/syntax-tree/mdast-util-to-nlcst)
     — Transform to nlcst
+*   [`mdast-util-to-string`](https://github.com/syntax-tree/mdast-util-to-string)
+    — Get the plain text content of a node
 *   [`mdast-zone`](https://github.com/syntax-tree/mdast-zone)
     — HTML comments as ranges or markers
 
