@@ -70,6 +70,7 @@ The latest released version is [`3.0.0`][latest].
 *   [List of utilities](#list-of-utilities)
 *   [References](#references)
 *   [Security](#security)
+*   [Related](#related)
 *   [Contribute](#contribute)
 *   [Acknowledgments](#acknowledgments)
 *   [License](#license)
@@ -1406,6 +1407,15 @@ of mdast is also unsafe.
 When transforming to HTML (typically through [**hast**][hast]), always be
 careful with user input and use [`hast-util-santize`][sanitize] to make the hast
 tree safe.
+
+## Related
+
+*   [hast](https://github.com/syntax-tree/hast)
+    — Hypertext Abstract Syntax Tree format
+*   [nlcst](https://github.com/syntax-tree/nlcst)
+    — Natural Language Concrete Syntax Tree format
+*   [xast](https://github.com/syntax-tree/xast)
+    — Extensible Abstract Syntax Tree
 
 ## Contribute
 
