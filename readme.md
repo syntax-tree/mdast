@@ -1332,6 +1332,8 @@ See the [unist list of utilities][utilities] for more utilities.
     — Make a tree compact
 *   [`mdast-util-definitions`](https://github.com/syntax-tree/mdast-util-definitions)
     — Find definition nodes
+*   [`mdast-util-from-quill-delta`](https://github.com/syntax-tree/mdast-util-from-quill-delta)
+    — Transform Quill delta to mdast
 *   [`mdast-flatten-image-paragraphs`](https://gitlab.com/staltz/mdast-flatten-image-paragraphs)
     — Flatten paragraph and image into one image node
 *   [`mdast-flatten-listitem-paragraphs`](https://gitlab.com/staltz/mdast-flatten-listitem-paragraphs)
