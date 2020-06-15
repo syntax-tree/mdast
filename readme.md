@@ -2,7 +2,7 @@
 
 **M**ark**d**own **A**bstract **S**yntax **T**ree.
 
-* * *
+***
 
 **mdast** is a specification for representing Markdown in a [syntax
 tree][syntax-tree].
@@ -1565,7 +1565,7 @@ projects!
 
 [dfn-frontmatter-content]: #frontmattercontent
 
-[dfn-definition-content]: #frontmattercontent
+[dfn-definition-content]: #definitioncontent
 
 [dfn-list-content]: #listcontent
 
