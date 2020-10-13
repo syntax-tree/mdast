@@ -7,8 +7,8 @@
 **mdast** is a specification for representing Markdown in a [syntax
 tree][syntax-tree].
 It implements the [**unist**][unist] spec.
-It can represent several flavours of [Markdown][], such as [CommonMark][],
-and [GitHub Flavored Markdown][gfm] extensions.
+It can represent several flavours of [Markdown][], such as [CommonMark][]
+and [GitHub Flavored Markdown][gfm].
 
 This document may not be released.
 See [releases][] for released documents.
@@ -918,7 +918,7 @@ nodes with similar characteristics together.
 
 ```idl
 type FlowContent =
-  Blockquote | Code | Content | Heading | HTML | List | ThematicBreak
+  Blockquote | Code | Heading | HTML | List | ThematicBreak | Content
 ```
 
 **Flow** content represent the sections of document.
@@ -930,9 +930,6 @@ type Content = Definition | Paragraph
 ```
 
 **Content** represents runs of text that form definitions and paragraphs.
-
-If a paragraph is present, it must be limited to one node and can only exist as
-a [*tail*][term-tail].
 
 ### `ListContent`
 
@@ -954,8 +951,7 @@ type PhrasingContent = Link | LinkReference | StaticPhrasingContent
 
 ```idl
 type StaticPhrasingContent =
-  Text | Emphasis | Strong | HTML | InlineCode | Break | Image |
-  ImageReference
+  Break | Emphasis | HTML | Image | ImageReference | InlineCode | Strong | Text
 ```
 
 **StaticPhrasing** content represent the text in a document, and its
@@ -963,8 +959,8 @@ markup, that is not intended for user interaction.
 
 ### `TransparentContent`
 
-The content model of a transparent node is derived from its [parent][dfn-parent]
-node.
+The **transparent** content model is derived from the content model of its
+[parent][dfn-parent].
 Effectively, this is used to prohibit nested links (and link references).
 
 ## Extensions
@@ -1108,7 +1104,7 @@ accurate or no longer relevant.
 
 **Delete** can be used where [**phrasing**][dfn-phrasing-content] content is
 expected.
-Its content model is also [**transparent**][dfn-transparent-content] content.
+Its content model is [**transparent**][dfn-transparent-content] content.
 
 For example, the following Markdown:
 
@@ -1593,8 +1589,6 @@ projects!
 [term-root]: https://github.com/syntax-tree/unist#root
 
 [term-head]: https://github.com/syntax-tree/unist#head
-
-[term-tail]: https://github.com/syntax-tree/unist#tail
 
 [dfn-mxn-resource]: #resource
 
