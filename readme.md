@@ -47,13 +47,13 @@ The latest released version is [`3.0.0`][latest].
     *   [`Alternative`](#alternative)
 *   [Enumeration](#enumeration)
     *   [`referenceType`](#referencetype)
-*   [`Content`](#content)
-    *   [`TopLevelContent`](#toplevelcontent)
-    *   [`BlockContent`](#blockcontent)
-    *   [`DefinitionContent`](#definitioncontent)
+*   [Content model](#content-model)
+    *   [`FlowContent`](#flowcontent)
+    *   [`Content`](#content)
     *   [`ListContent`](#listcontent)
     *   [`PhrasingContent`](#phrasingcontent)
     *   [`StaticPhrasingContent`](#staticphrasingcontent)
+    *   [`TransparentContent`](#transparentcontent)
 *   [Extensions](#extensions)
     *   [GFM](#gfm)
     *   [Frontmatter](#frontmatter)
@@ -95,14 +95,14 @@ trees are used throughout their ecosystems.
 
 ```idl
 interface Parent <: UnistParent {
-  children: [Content]
+  children: [MdastContent]
 }
 ```
 
 **Parent** ([**UnistParent**][dfn-unist-parent]) represents a node in mdast
 containing other nodes (said to be [*children*][term-child]).
 
-Its content is limited to only other mdast [**content**][dfn-content].
+Its content is limited to only other [**mdast content**][dfn-mdast-content].
 
 ### `Literal`
 
@@ -129,9 +129,9 @@ interface Root <: Parent {
 
 **Root** can be used as the [*root*][term-root] of a [*tree*][term-tree], never
 as a [*child*][term-child].
-Its content model is not limited to [**top-level**][dfn-top-level-content]
-content, but can contain any [**content**][dfn-content] with the restriction
-that all content must be of the same category.
+Its content model is not limited to [**flow**][dfn-flow-content] content, but
+can contain any [**mdast content**][dfn-mdast-content] with the restriction that
+all content must be of the same category.
 
 ### `Paragraph`
 
@@ -145,8 +145,7 @@ interface Paragraph <: Parent {
 **Paragraph** ([**Parent**][dfn-parent]) represents a unit of discourse dealing
 with a particular point or idea.
 
-**Paragraph** can be used where [**block**][dfn-block-content] content is
-expected.
+**Paragraph** can be used where [**content**][dfn-content] is expected.
 Its content model is [**phrasing**][dfn-phrasing-content] content.
 
 For example, the following Markdown:
@@ -176,8 +175,7 @@ interface Heading <: Parent {
 
 **Heading** ([**Parent**][dfn-parent]) represents a heading of a section.
 
-**Heading** can be used where [**block**][dfn-block-content] content is
-expected.
+**Heading** can be used where [**flow**][dfn-flow-content] content is expected.
 Its content model is [**phrasing**][dfn-phrasing-content] content.
 
 A `depth` field must be present.
@@ -210,7 +208,7 @@ interface ThematicBreak <: Node {
 **ThematicBreak** ([**Node**][dfn-node]) represents a thematic break, such as a
 scene change in a story, a transition to another topic, or a new document.
 
-**ThematicBreak** can be used where [**block**][dfn-block-content] content is
+**ThematicBreak** can be used where [**flow**][dfn-flow-content] content is
 expected.
 It has no content model.
 
@@ -231,16 +229,16 @@ Yields:
 ```idl
 interface Blockquote <: Parent {
   type: "blockquote"
-  children: [BlockContent]
+  children: [FlowContent]
 }
 ```
 
 **Blockquote** ([**Parent**][dfn-parent]) represents a section quoted from
 somewhere else.
 
-**Blockquote** can be used where [**block**][dfn-block-content] content is
+**Blockquote** can be used where [**flow**][dfn-flow-content] content is
 expected.
-Its content model is also [**block**][dfn-block-content] content.
+Its content model is also [**flow**][dfn-flow-content] content.
 
 For example, the following Markdown:
 
@@ -274,7 +272,7 @@ interface List <: Parent {
 
 **List** ([**Parent**][dfn-parent]) represents a list of items.
 
-**List** can be used where [**block**][dfn-block-content] content is expected.
+**List** can be used where [**flow**][dfn-flow-content] content is expected.
 Its content model is [**list**][dfn-list-content] content.
 
 An `ordered` field can be present.
@@ -321,7 +319,7 @@ Yields:
 interface ListItem <: Parent {
   type: "listItem"
   spread: boolean?
-  children: [BlockContent]
+  children: [FlowContent]
 }
 ```
 
@@ -329,7 +327,7 @@ interface ListItem <: Parent {
 [**List**][dfn-list].
 
 **ListItem** can be used where [**list**][dfn-list-content] content is expected.
-Its content model is [**block**][dfn-block-content] content.
+Its content model is [**flow**][dfn-flow-content] content.
 
 A `spread` field can be present.
 It represents that the item contains two or more [*children*][term-child]
@@ -364,7 +362,7 @@ interface HTML <: Literal {
 
 **HTML** ([**Literal**][dfn-literal]) represents a fragment of raw [HTML][].
 
-**HTML** can be used where [**block**][dfn-block-content] or
+**HTML** can be used where [**flow**][dfn-flow-content] or
 [**phrasing**][dfn-phrasing-content] content is expected.
 Its content is represented by its `value` field.
 
@@ -396,7 +394,7 @@ interface Code <: Literal {
 **Code** ([**Literal**][dfn-literal]) represents a block of preformatted text,
 such as ASCII art or computer code.
 
-**Code** can be used where [**block**][dfn-block-content] content is expected.
+**Code** can be used where [**flow**][dfn-flow-content] content is expected.
 Its content is represented by its `value` field.
 
 This node relates to the [**phrasing**][dfn-phrasing-content] content concept
@@ -459,8 +457,7 @@ Definition includes Resource
 
 **Definition** ([**Node**][dfn-node]) represents a resource.
 
-**Definition** can be used where [**definition**][dfn-definition-content]
-content is expected.
+**Definition** can be used where [**content**][dfn-content] is expected.
 It has no content model.
 
 **Definition** includes the mixins [**Association**][dfn-mxn-association] and
@@ -519,7 +516,7 @@ Yields:
 ```idl
 interface Emphasis <: Parent {
   type: "emphasis"
-  children: [PhrasingContent]
+  children: [TransparentContent]
 }
 ```
 
@@ -528,7 +525,7 @@ contents.
 
 **Emphasis** can be used where [**phrasing**][dfn-phrasing-content] content is
 expected.
-Its content model is also [**phrasing**][dfn-phrasing-content] content.
+Its content model is [**transparent**][dfn-transparent-content] content.
 
 For example, the following Markdown:
 
@@ -560,7 +557,7 @@ Yields:
 ```idl
 interface Strong <: Parent {
   type: "strong"
-  children: [PhrasingContent]
+  children: [TransparentContent]
 }
 ```
 
@@ -569,7 +566,7 @@ or urgency for its contents.
 
 **Strong** can be used where [**phrasing**][dfn-phrasing-content] content is
 expected.
-Its content model is also [**phrasing**][dfn-phrasing-content] content.
+Its content model is [**transparent**][dfn-transparent-content] content.
 
 For example, the following Markdown:
 
@@ -611,7 +608,7 @@ code, such as a file name, computer program, or anything a computer could parse.
 is expected.
 Its content is represented by its `value` field.
 
-This node relates to the [**block**][dfn-block-content] content concept
+This node relates to the [**flow**][dfn-flow-content] content concept
 [**Code**][dfn-code].
 
 For example, the following Markdown:
@@ -908,41 +905,34 @@ enum referenceType {
     content
 *   **full**: the reference is explicit, its identifier explicitly set
 
-## `Content`
+## Content model
 
 ```idl
-type Content = TopLevelContent | ListContent | PhrasingContent
+type MdastContent = FlowContent | ListContent | PhrasingContent
 ```
 
 Each node in mdast falls into one or more categories of **Content** that group
 nodes with similar characteristics together.
 
-### `TopLevelContent`
+### `FlowContent`
 
 ```idl
-type TopLevelContent = BlockContent | DefinitionContent
+type FlowContent =
+  Blockquote | Code | Content | Heading | HTML | List | ThematicBreak
 ```
 
-**Top-level** content represent the sections of document (**block** content),
-and metadata such definitions.
+**Flow** content represent the sections of document.
 
-### `BlockContent`
+### `Content`
 
 ```idl
-type BlockContent =
-  Paragraph | Heading | ThematicBreak | Blockquote | List | HTML | Code
+type Content = Definition | Paragraph
 ```
 
-**Block** content represent the sections of document.
+**Content** represents runs of text that form definitions and paragraphs.
 
-### `DefinitionContent`
-
-```idl
-type DefinitionContent = Definition
-```
-
-**Definition** content represents out-of-band information that typically
-affects the document through [**Association**][dfn-mxn-association].
+If a paragraph is present, it must be limited to one node and can only exist as
+a [*tail*][term-tail].
 
 ### `ListContent`
 
@@ -955,7 +945,7 @@ type ListContent = ListItem
 ### `PhrasingContent`
 
 ```idl
-type PhrasingContent = StaticPhrasingContent | Link | LinkReference
+type PhrasingContent = Link | LinkReference | StaticPhrasingContent
 ```
 
 **Phrasing** content represent the text in a document, and its markup.
@@ -970,6 +960,12 @@ type StaticPhrasingContent =
 
 **StaticPhrasing** content represent the text in a document, and its
 markup, that is not intended for user interaction.
+
+### `TransparentContent`
+
+The content model of a transparent node is derived from its [parent][dfn-parent]
+node.
+Effectively, this is used to prohibit nested links (and link references).
 
 ## Extensions
 
@@ -993,7 +989,7 @@ interface Table <: Parent {
 
 **Table** ([**Parent**][dfn-parent]) represents two-dimensional data.
 
-**Table** can be used where [**block**][dfn-block-content] content is expected.
+**Table** can be used where [**flow**][dfn-flow-content] content is expected.
 Its content model is [**table**][dfn-table-content] content.
 
 The [*head*][term-head] of the node represents the labels of the columns.
@@ -1047,35 +1043,6 @@ Yields:
 }
 ```
 
-#### `alignType`
-
-```idl
-enum alignType {
-  "left" | "right" | "center" | null
-}
-```
-
-**alignType** represents how phrasing content is aligned
-([\[CSSTEXT\]][css-text]).
-
-*   **`'left'`**: See the [`left`][css-left] value of the `text-align` CSS
-    property
-*   **`'right'`**: See the [`right`][css-right] value of the `text-align`
-    CSS property
-*   **`'center'`**: See the [`center`][css-center] value of the `text-align`
-    CSS property
-*   **`null`**: phrasing content is aligned as defined by the host environment
-
-#### `TableContent`
-
-```idl
-type TableContent = TableRow
-
-type ContentGfm = TableContent | Content
-```
-
-**Table** content represent the rows in a table.
-
 #### `TableRow`
 
 ```idl
@@ -1095,16 +1062,6 @@ If the node is a [*head*][term-head], it represents the labels of the columns
 for its parent [**Table**][dfn-table].
 
 For an example, see [**Table**][dfn-table].
-
-#### `RowContent`
-
-```idl
-type RowContent = TableCell
-
-type BlockContentGfm = RowContent | BlockContent
-```
-
-**Row** content represent the cells in a row.
 
 #### `TableCell`
 
@@ -1137,18 +1094,12 @@ In GFM, a `checked` field can be present.
 It represents whether the item is done (when `true`), not done (when `false`),
 or indeterminate or not applicable (when `null` or not present).
 
-#### `ListContent` (GFM)
-
-```idl
-type ListContentGfm = ListItemGfm
-```
-
 #### `Delete`
 
 ```idl
 interface Delete <: Parent {
   type: "delete"
-  children: [PhrasingContent]
+  children: [TransparentContent]
 }
 ```
 
@@ -1157,7 +1108,7 @@ accurate or no longer relevant.
 
 **Delete** can be used where [**phrasing**][dfn-phrasing-content] content is
 expected.
-Its content model is also [**phrasing**][dfn-phrasing-content] content.
+Its content model is also [**transparent**][dfn-transparent-content] content.
 
 For example, the following Markdown:
 
@@ -1172,6 +1123,53 @@ Yields:
   type: 'delete',
   children: [{type: 'text', value: 'alpha'}]
 }
+```
+
+#### `alignType`
+
+```idl
+enum alignType {
+  "left" | "right" | "center" | null
+}
+```
+
+**alignType** represents how phrasing content is aligned
+([\[CSSTEXT\]][css-text]).
+
+*   **`'left'`**: See the [`left`][css-left] value of the `text-align` CSS
+    property
+*   **`'right'`**: See the [`right`][css-right] value of the `text-align`
+    CSS property
+*   **`'center'`**: See the [`center`][css-center] value of the `text-align`
+    CSS property
+*   **`null`**: phrasing content is aligned as defined by the host environment
+
+#### `FlowContent` (GFM)
+
+```idl
+type FlowContentGfm = Table | FlowContent
+```
+
+#### `TableContent`
+
+```idl
+type TableContent = TableRow
+```
+
+**Table** content represent the rows in a table.
+
+#### `RowContent`
+
+```idl
+type RowContent = TableCell
+```
+
+**Row** content represent the cells in a row.
+
+#### `ListContent` (GFM)
+
+```idl
+type ListContentGfm = ListItemGfm
 ```
 
 #### `StaticPhrasingContent` (GFM)
@@ -1218,13 +1216,19 @@ Yields:
 ```idl
 type FrontmatterContent = YAML
 
-type TopLevelContentFrontmatter = FrontmatterContent | TopLevelContent
+type FlowContentFrontmatter = FrontmatterContent | FlowContent
 ```
 
 **Frontmatter** content represent out-of-band information about the document.
 
 If frontmatter is present, it must be limited to one node in the
 [*tree*][term-tree], and can only exist as a [*head*][term-head].
+
+#### `FlowContent` (frontmatter)
+
+```idl
+type FlowContentFrontmatter = FrontmatterContent | FlowContent
+```
 
 ### Footnotes
 
@@ -1235,7 +1239,7 @@ The following interfaces are found with footnotes.
 ```idl
 interface FootnoteDefinition <: Parent {
   type: "footnoteDefinition"
-  children: [BlockContent]
+  children: [FlowContent]
 }
 
 FootnoteDefinition includes Association
@@ -1244,9 +1248,9 @@ FootnoteDefinition includes Association
 **FootnoteDefinition** ([**Parent**][dfn-parent]) represents content relating
 to the document that is outside its flow.
 
-**FootnoteDefinition** can be used where
-[**definition**][dfn-definition-content] content is expected.
-Its content model is [**block**][dfn-block-content] content.
+**FootnoteDefinition** can be used where [**flow**][dfn-flow-content] content is
+expected.
+Its content model is also [**flow**][dfn-flow-content] content.
 
 **FootnoteDefinition** includes the mixin
 [**Association**][dfn-mxn-association].
@@ -1272,12 +1276,6 @@ Yields:
     children: [{type: 'text', value: 'bravo and charlie.'}]
   }]
 }
-```
-
-#### `DefinitionContent` (footnotes)
-
-```idl
-type DefinitionContentFootnotes = FootnoteDefinition | DefinitionContent
 ```
 
 #### `Footnote`
@@ -1347,6 +1345,12 @@ Yields:
   identifier: 'alpha',
   label: 'alpha'
 }
+```
+
+#### `FlowContent` (footnotes)
+
+```idl
+type FlowContentFootnotes = FootnoteDefinition | FlowContent
 ```
 
 #### `StaticPhrasingContent` (footnotes)
@@ -1590,6 +1594,8 @@ projects!
 
 [term-head]: https://github.com/syntax-tree/unist#head
 
+[term-tail]: https://github.com/syntax-tree/unist#tail
+
 [dfn-mxn-resource]: #resource
 
 [dfn-mxn-association]: #association
@@ -1602,15 +1608,13 @@ projects!
 
 [dfn-enum-reference-type]: #referencetype
 
-[dfn-content]: #content
+[dfn-mdast-content]: #content-model
 
-[dfn-top-level-content]: #toplevelcontent
-
-[dfn-block-content]: #blockcontent
+[dfn-flow-content]: #flowcontent
 
 [dfn-frontmatter-content]: #frontmattercontent
 
-[dfn-definition-content]: #definitioncontent
+[dfn-content]: #content
 
 [dfn-list-content]: #listcontent
 
@@ -1621,6 +1625,8 @@ projects!
 [dfn-phrasing-content]: #phrasingcontent
 
 [dfn-static-phrasing-content]: #staticphrasingcontent
+
+[dfn-transparent-content]: #transparentcontent
 
 [list-of-utilities]: #list-of-utilities
 
