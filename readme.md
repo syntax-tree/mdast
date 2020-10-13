@@ -28,44 +28,36 @@ The latest released version is [`3.0.0`][latest].
     *   [`Blockquote`](#blockquote)
     *   [`List`](#list)
     *   [`ListItem`](#listitem)
-    *   [`Table`](#table)
-    *   [`TableRow`](#tablerow)
-    *   [`TableCell`](#tablecell)
     *   [`HTML`](#html)
     *   [`Code`](#code)
-    *   [`YAML`](#yaml)
     *   [`Definition`](#definition)
-    *   [`FootnoteDefinition`](#footnotedefinition)
     *   [`Text`](#text)
     *   [`Emphasis`](#emphasis)
     *   [`Strong`](#strong)
-    *   [`Delete`](#delete)
     *   [`InlineCode`](#inlinecode)
     *   [`Break`](#break)
     *   [`Link`](#link)
     *   [`Image`](#image)
     *   [`LinkReference`](#linkreference)
     *   [`ImageReference`](#imagereference)
-    *   [`Footnote`](#footnote)
-    *   [`FootnoteReference`](#footnotereference)
 *   [Mixin](#mixin)
     *   [`Resource`](#resource)
     *   [`Association`](#association)
     *   [`Reference`](#reference)
     *   [`Alternative`](#alternative)
 *   [Enumeration](#enumeration)
-    *   [`alignType`](#aligntype)
     *   [`referenceType`](#referencetype)
 *   [`Content`](#content)
     *   [`TopLevelContent`](#toplevelcontent)
     *   [`BlockContent`](#blockcontent)
-    *   [`FrontmatterContent`](#frontmattercontent)
     *   [`DefinitionContent`](#definitioncontent)
     *   [`ListContent`](#listcontent)
-    *   [`TableContent`](#tablecontent)
-    *   [`RowContent`](#rowcontent)
     *   [`PhrasingContent`](#phrasingcontent)
     *   [`StaticPhrasingContent`](#staticphrasingcontent)
+*   [Extensions](#extensions)
+    *   [GFM](#gfm)
+    *   [Frontmatter](#frontmatter)
+    *   [Footnotes](#footnotes)
 *   [Glossary](#glossary)
 *   [List of utilities](#list-of-utilities)
 *   [References](#references)
@@ -301,7 +293,7 @@ present).
 For example, the following Markdown:
 
 ```markdown
-1. [x] foo
+1. foo
 ```
 
 Yields:
@@ -314,7 +306,6 @@ Yields:
   spread: false,
   children: [{
     type: 'listItem',
-    checked: true,
     spread: false,
     children: [{
       type: 'paragraph',
@@ -329,7 +320,6 @@ Yields:
 ```idl
 interface ListItem <: Parent {
   type: "listItem"
-  checked: boolean?
   spread: boolean?
   children: [BlockContent]
 }
@@ -341,10 +331,6 @@ interface ListItem <: Parent {
 **ListItem** can be used where [**list**][dfn-list-content] content is expected.
 Its content model is [**block**][dfn-block-content] content.
 
-A `checked` field can be present.
-It represents whether the item is done (when `true`), not done (when `false`),
-or indeterminate or not applicable (when `null` or not present).
-
 A `spread` field can be present.
 It represents that the item contains two or more [*children*][term-child]
 separated by a blank line (when `true`), or not (when `false` or not present).
@@ -352,7 +338,7 @@ separated by a blank line (when `true`), or not (when `false` or not present).
 For example, the following Markdown:
 
 ```markdown
-* [x] bar
+* bar
 ```
 
 Yields:
@@ -360,7 +346,6 @@ Yields:
 ```js
 {
   type: 'listItem',
-  checked: true,
   spread: false,
   children: [{
     type: 'paragraph',
@@ -368,111 +353,6 @@ Yields:
   }]
 }
 ```
-
-### `Table`
-
-```idl
-interface Table <: Parent {
-  type: "table"
-  align: [alignType]?
-  children: [TableContent]
-}
-```
-
-**Table** ([**Parent**][dfn-parent]) represents two-dimensional data.
-
-**Table** can be used where [**block**][dfn-block-content] content is expected.
-Its content model is [**table**][dfn-table-content] content.
-
-The [*head*][term-head] of the node represents the labels of the columns.
-
-An `align` field can be present.
-If present, it must be a list of [**alignType**s][dfn-enum-align-type].
-It represents how cells in columns are aligned.
-
-For example, the following Markdown:
-
-```markdown
-| foo | bar |
-| :-- | :-: |
-| baz | qux |
-```
-
-Yields:
-
-```js
-{
-  type: 'table',
-  align: ['left', 'center'],
-  children: [
-    {
-      type: 'tableRow',
-      children: [
-        {
-          type: 'tableCell',
-          children: [{type: 'text', value: 'foo'}]
-        },
-        {
-          type: 'tableCell',
-          children: [{type: 'text', value: 'bar'}]
-        }
-      ]
-    },
-    {
-      type: 'tableRow',
-      children: [
-        {
-          type: 'tableCell',
-          children: [{type: 'text', value: 'baz'}]
-        },
-        {
-          type: 'tableCell',
-          children: [{type: 'text', value: 'qux'}]
-        }
-      ]
-    }
-  ]
-}
-```
-
-### `TableRow`
-
-```idl
-interface TableRow <: Parent {
-  type: "tableRow"
-  children: [RowContent]
-}
-```
-
-**TableRow** ([**Parent**][dfn-parent]) represents a row of cells in a table.
-
-**TableRow** can be used where [**table**][dfn-table-content] content is
-expected.
-Its content model is [**row**][dfn-row-content] content.
-
-If the node is a [*head*][term-head], it represents the labels of the columns
-for its parent [**Table**][dfn-table].
-
-For an example, see [**Table**][dfn-table].
-
-### `TableCell`
-
-```idl
-interface TableCell <: Parent {
-  type: "tableCell"
-  children: [PhrasingContent]
-}
-```
-
-**TableCell** ([**Parent**][dfn-parent]) represents a header cell in a
-[**Table**][dfn-table], if its parent is a [*head*][term-head], or a data
-cell otherwise.
-
-**TableCell** can be used where [**row**][dfn-row-content] content is expected.
-Its content model is [**phrasing**][dfn-phrasing-content] content excluding
-[**Break**][dfn-break] nodes.
-
-For an example, see [**Table**][dfn-table].
 
 ### `HTML`
 
@@ -566,35 +446,6 @@ Yields:
 }
 ```
 
-### `YAML`
-
-```idl
-interface YAML <: Literal {
-  type: "yaml"
-}
-```
-
-**YAML** ([**Literal**][dfn-literal]) represents a collection of metadata for
-the document in the YAML ([\[YAML\]][yaml]) data serialisation language.
-
-**YAML** can be used where [**frontmatter**][dfn-frontmatter-content] content is
-expected.
-Its content is represented by its `value` field.
-
-For example, the following Markdown:
-
-```markdown
----
-foo: bar
----
-```
-
-Yields:
-
-```js
-{type: 'yaml', value: 'foo: bar'}
-```
-
 ### `Definition`
 
 ```idl
@@ -634,50 +485,6 @@ Yields:
   label: 'Alpha',
   url: 'https://example.com',
   title: null
-}
-```
-
-### `FootnoteDefinition`
-
-```idl
-interface FootnoteDefinition <: Parent {
-  type: "footnoteDefinition"
-  children: [BlockContent]
-}
-
-FootnoteDefinition includes Association
-```
-
-**FootnoteDefinition** ([**Parent**][dfn-parent]) represents content relating
-to the document that is outside its flow.
-
-**FootnoteDefinition** can be used where
-[**definition**][dfn-definition-content] content is expected.
-Its content model is [**block**][dfn-block-content] content.
-
-**FootnoteDefinition** includes the mixin
-[**Association**][dfn-mxn-association].
-
-**FootnoteDefinition** should be associated with
-[**FootnoteReferences**][dfn-footnote-reference].
-
-For example, the following Markdown:
-
-```markdown
-[^alpha]: bravo and charlie.
-```
-
-Yields:
-
-```js
-{
-  type: 'footnoteDefinition',
-  identifier: 'alpha',
-  label: 'alpha',
-  children: [{
-    type: 'paragraph',
-    children: [{type: 'text', value: 'bravo and charlie.'}]
-  }]
 }
 ```
 
@@ -786,37 +593,6 @@ Yields:
       children: [{type: 'text', value: 'bravo'}]
     }
   ]
-}
-```
-
-### `Delete`
-
-```idl
-interface Delete <: Parent {
-  type: "delete"
-  children: [PhrasingContent]
-}
-```
-
-**Delete** ([**Parent**][dfn-parent]) represents contents that are no longer
-accurate or no longer relevant.
-
-**Delete** can be used where [**phrasing**][dfn-phrasing-content] content is
-expected.
-Its content model is also [**phrasing**][dfn-phrasing-content] content.
-
-For example, the following Markdown:
-
-```markdown
-~~alpha~~
-```
-
-Yields:
-
-```js
-{
-  type: 'delete',
-  children: [{type: 'text', value: 'alpha'}]
 }
 ```
 
@@ -1039,75 +815,6 @@ Yields:
 }
 ```
 
-### `Footnote`
-
-```idl
-interface Footnote <: Parent {
-  type: "footnote"
-  children: [PhrasingContent]
-}
-```
-
-**Footnote** ([**Parent**][dfn-parent]) represents content relating to the
-document that is outside its flow.
-
-**Footnote** can be used where [**phrasing**][dfn-phrasing-content] content is
-expected.
-Its content model is also [**phrasing**][dfn-phrasing-content] content.
-
-For example, the following Markdown:
-
-```markdown
-[^alpha bravo]
-```
-
-Yields:
-
-```js
-{
-  type: 'footnote',
-  children: [{type: 'text', value: 'alpha bravo'}]
-}
-```
-
-### `FootnoteReference`
-
-```idl
-interface FootnoteReference <: Node {
-  type: "footnoteReference"
-}
-
-FootnoteReference includes Association
-```
-
-**FootnoteReference** ([**Node**][dfn-node]) represents a marker through
-association.
-
-**FootnoteReference** can be used where [**phrasing**][dfn-phrasing-content]
-content is expected.
-It has no content model.
-
-**FootnoteReference** includes the mixin [**Association**][dfn-mxn-association].
-
-**FootnoteReference** should be associated with a
-[**FootnoteDefinition**][dfn-footnote-definition].
-
-For example, the following Markdown:
-
-```markdown
-[^alpha]
-```
-
-Yields:
-
-```js
-{
-  type: 'footnoteReference',
-  identifier: 'alpha',
-  label: 'alpha'
-}
-```
-
 ## Mixin
 
 ### `Resource`
@@ -1185,25 +892,6 @@ node as intended.
 
 ## Enumeration
 
-### `alignType`
-
-```idl
-enum alignType {
-  "left" | "right" | "center" | null
-}
-```
-
-**alignType** represents how phrasing content is aligned
-([\[CSSTEXT\]][css-text]).
-
-*   **`'left'`**: See the [`left`][css-left] value of the `text-align` CSS
-    property
-*   **`'right'`**: See the [`right`][css-right] value of the `text-align`
-    CSS property
-*   **`'center'`**: See the [`center`][css-center] value of the `text-align`
-    CSS property
-*   **`null`**: phrasing content is aligned as defined by the host environment
-
 ### `referenceType`
 
 ```idl
@@ -1223,8 +911,7 @@ enum referenceType {
 ## `Content`
 
 ```idl
-type Content =
-  TopLevelContent | ListContent | TableContent | RowContent | PhrasingContent
+type Content = TopLevelContent | ListContent | PhrasingContent
 ```
 
 Each node in mdast falls into one or more categories of **Content** that group
@@ -1233,36 +920,25 @@ nodes with similar characteristics together.
 ### `TopLevelContent`
 
 ```idl
-type TopLevelContent = BlockContent | FrontmatterContent | DefinitionContent
+type TopLevelContent = BlockContent | DefinitionContent
 ```
 
 **Top-level** content represent the sections of document (**block** content),
-and metadata such as frontmatter and definitions.
+and metadata such definitions.
 
 ### `BlockContent`
 
 ```idl
 type BlockContent =
-  Paragraph | Heading | ThematicBreak | Blockquote | List | Table | HTML | Code
+  Paragraph | Heading | ThematicBreak | Blockquote | List | HTML | Code
 ```
 
 **Block** content represent the sections of document.
 
-### `FrontmatterContent`
-
-```idl
-type FrontmatterContent = YAML
-```
-
-**Frontmatter** content represent out-of-band information about the document.
-
-If frontmatter is present, it must be limited to one node in the
-[*tree*][term-tree], and can only exist as a [*head*][term-head].
-
 ### `DefinitionContent`
 
 ```idl
-type DefinitionContent = Definition | FootnoteDefinition
+type DefinitionContent = Definition
 ```
 
 **Definition** content represents out-of-band information that typically
@@ -1276,22 +952,6 @@ type ListContent = ListItem
 
 **List** content represent the items in a list.
 
-### `TableContent`
-
-```idl
-type TableContent = TableRow
-```
-
-**Table** content represent the rows in a table.
-
-### `RowContent`
-
-```idl
-type RowContent = TableCell
-```
-
-**Row** content represent the cells in a row.
-
 ### `PhrasingContent`
 
 ```idl
@@ -1304,12 +964,397 @@ type PhrasingContent = StaticPhrasingContent | Link | LinkReference
 
 ```idl
 type StaticPhrasingContent =
-  Text | Emphasis | Strong | Delete | HTML | InlineCode | Break | Image |
-  ImageReference | Footnote | FootnoteReference
+  Text | Emphasis | Strong | HTML | InlineCode | Break | Image |
+  ImageReference
 ```
 
 **StaticPhrasing** content represent the text in a document, and its
 markup, that is not intended for user interaction.
+
+## Extensions
+
+Markdown syntax is often extended.
+It is not a goal of this specification to list all possible extensions.
+However, a short list of frequently used extensions are shown below.
+
+### GFM
+
+The following interfaces are found in [GitHub Flavored Markdown][gfm].
+
+#### `Table`
+
+```idl
+interface Table <: Parent {
+  type: "table"
+  align: [alignType]?
+  children: [TableContent]
+}
+```
+
+**Table** ([**Parent**][dfn-parent]) represents two-dimensional data.
+
+**Table** can be used where [**block**][dfn-block-content] content is expected.
+Its content model is [**table**][dfn-table-content] content.
+
+The [*head*][term-head] of the node represents the labels of the columns.
+
+An `align` field can be present.
+If present, it must be a list of [**alignType**s][dfn-enum-align-type].
+It represents how cells in columns are aligned.
+
+For example, the following Markdown:
+
+```markdown
+| foo | bar |
+| :-- | :-: |
+| baz | qux |
+```
+
+Yields:
+
+```js
+{
+  type: 'table',
+  align: ['left', 'center'],
+  children: [
+    {
+      type: 'tableRow',
+      children: [
+        {
+          type: 'tableCell',
+          children: [{type: 'text', value: 'foo'}]
+        },
+        {
+          type: 'tableCell',
+          children: [{type: 'text', value: 'bar'}]
+        }
+      ]
+    },
+    {
+      type: 'tableRow',
+      children: [
+        {
+          type: 'tableCell',
+          children: [{type: 'text', value: 'baz'}]
+        },
+        {
+          type: 'tableCell',
+          children: [{type: 'text', value: 'qux'}]
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### `alignType`
+
+```idl
+enum alignType {
+  "left" | "right" | "center" | null
+}
+```
+
+**alignType** represents how phrasing content is aligned
+([\[CSSTEXT\]][css-text]).
+
+*   **`'left'`**: See the [`left`][css-left] value of the `text-align` CSS
+    property
+*   **`'right'`**: See the [`right`][css-right] value of the `text-align`
+    CSS property
+*   **`'center'`**: See the [`center`][css-center] value of the `text-align`
+    CSS property
+*   **`null`**: phrasing content is aligned as defined by the host environment
+
+#### `TableContent`
+
+```idl
+type TableContent = TableRow
+
+type ContentGfm = TableContent | Content
+```
+
+**Table** content represent the rows in a table.
+
+#### `TableRow`
+
+```idl
+interface TableRow <: Parent {
+  type: "tableRow"
+  children: [RowContent]
+}
+```
+
+**TableRow** ([**Parent**][dfn-parent]) represents a row of cells in a table.
+
+**TableRow** can be used where [**table**][dfn-table-content] content is
+expected.
+Its content model is [**row**][dfn-row-content] content.
+
+If the node is a [*head*][term-head], it represents the labels of the columns
+for its parent [**Table**][dfn-table].
+
+For an example, see [**Table**][dfn-table].
+
+#### `RowContent`
+
+```idl
+type RowContent = TableCell
+
+type BlockContentGfm = RowContent | BlockContent
+```
+
+**Row** content represent the cells in a row.
+
+#### `TableCell`
+
+```idl
+interface TableCell <: Parent {
+  type: "tableCell"
+  children: [PhrasingContent]
+}
+```
+
+**TableCell** ([**Parent**][dfn-parent]) represents a header cell in a
+[**Table**][dfn-table], if its parent is a [*head*][term-head], or a data
+cell otherwise.
+
+**TableCell** can be used where [**row**][dfn-row-content] content is expected.
+Its content model is [**phrasing**][dfn-phrasing-content] content excluding
+[**Break**][dfn-break] nodes.
+
+For an example, see [**Table**][dfn-table].
+
+#### `ListItem` (GFM)
+
+```idl
+interface ListItemGfm <: ListItem {
+  checked: boolean?
+}
+```
+
+In GFM, a `checked` field can be present.
+It represents whether the item is done (when `true`), not done (when `false`),
+or indeterminate or not applicable (when `null` or not present).
+
+#### `ListContent` (GFM)
+
+```idl
+type ListContentGfm = ListItemGfm
+```
+
+#### `Delete`
+
+```idl
+interface Delete <: Parent {
+  type: "delete"
+  children: [PhrasingContent]
+}
+```
+
+**Delete** ([**Parent**][dfn-parent]) represents contents that are no longer
+accurate or no longer relevant.
+
+**Delete** can be used where [**phrasing**][dfn-phrasing-content] content is
+expected.
+Its content model is also [**phrasing**][dfn-phrasing-content] content.
+
+For example, the following Markdown:
+
+```markdown
+~~alpha~~
+```
+
+Yields:
+
+```js
+{
+  type: 'delete',
+  children: [{type: 'text', value: 'alpha'}]
+}
+```
+
+#### `StaticPhrasingContent` (GFM)
+
+```idl
+type StaticPhrasingContentGfm = Delete | StaticPhrasingContent
+```
+
+### Frontmatter
+
+The following interfaces are found with YAML.
+
+#### `YAML`
+
+```idl
+interface YAML <: Literal {
+  type: "yaml"
+}
+```
+
+**YAML** ([**Literal**][dfn-literal]) represents a collection of metadata for
+the document in the YAML ([\[YAML\]][yaml]) data serialisation language.
+
+**YAML** can be used where [**frontmatter**][dfn-frontmatter-content] content is
+expected.
+Its content is represented by its `value` field.
+
+For example, the following Markdown:
+
+```markdown
+---
+foo: bar
+---
+```
+
+Yields:
+
+```js
+{type: 'yaml', value: 'foo: bar'}
+```
+
+#### `FrontmatterContent`
+
+```idl
+type FrontmatterContent = YAML
+
+type TopLevelContentFrontmatter = FrontmatterContent | TopLevelContent
+```
+
+**Frontmatter** content represent out-of-band information about the document.
+
+If frontmatter is present, it must be limited to one node in the
+[*tree*][term-tree], and can only exist as a [*head*][term-head].
+
+### Footnotes
+
+The following interfaces are found with footnotes.
+
+#### `FootnoteDefinition`
+
+```idl
+interface FootnoteDefinition <: Parent {
+  type: "footnoteDefinition"
+  children: [BlockContent]
+}
+
+FootnoteDefinition includes Association
+```
+
+**FootnoteDefinition** ([**Parent**][dfn-parent]) represents content relating
+to the document that is outside its flow.
+
+**FootnoteDefinition** can be used where
+[**definition**][dfn-definition-content] content is expected.
+Its content model is [**block**][dfn-block-content] content.
+
+**FootnoteDefinition** includes the mixin
+[**Association**][dfn-mxn-association].
+
+**FootnoteDefinition** should be associated with
+[**FootnoteReferences**][dfn-footnote-reference].
+
+For example, the following Markdown:
+
+```markdown
+[^alpha]: bravo and charlie.
+```
+
+Yields:
+
+```js
+{
+  type: 'footnoteDefinition',
+  identifier: 'alpha',
+  label: 'alpha',
+  children: [{
+    type: 'paragraph',
+    children: [{type: 'text', value: 'bravo and charlie.'}]
+  }]
+}
+```
+
+#### `DefinitionContent` (footnotes)
+
+```idl
+type DefinitionContentFootnotes = FootnoteDefinition | DefinitionContent
+```
+
+#### `Footnote`
+
+```idl
+interface Footnote <: Parent {
+  type: "footnote"
+  children: [PhrasingContent]
+}
+```
+
+**Footnote** ([**Parent**][dfn-parent]) represents content relating to the
+document that is outside its flow.
+
+**Footnote** can be used where [**phrasing**][dfn-phrasing-content] content is
+expected.
+Its content model is also [**phrasing**][dfn-phrasing-content] content.
+
+For example, the following Markdown:
+
+```markdown
+^[alpha bravo]
+```
+
+Yields:
+
+```js
+{
+  type: 'footnote',
+  children: [{type: 'text', value: 'alpha bravo'}]
+}
+```
+
+#### `FootnoteReference`
+
+```idl
+interface FootnoteReference <: Node {
+  type: "footnoteReference"
+}
+
+FootnoteReference includes Association
+```
+
+**FootnoteReference** ([**Node**][dfn-node]) represents a marker through
+association.
+
+**FootnoteReference** can be used where [**phrasing**][dfn-phrasing-content]
+content is expected.
+It has no content model.
+
+**FootnoteReference** includes the mixin [**Association**][dfn-mxn-association].
+
+**FootnoteReference** should be associated with a
+[**FootnoteDefinition**][dfn-footnote-definition].
+
+For example, the following Markdown:
+
+```markdown
+[^alpha]
+```
+
+Yields:
+
+```js
+{
+  type: 'footnoteReference',
+  identifier: 'alpha',
+  label: 'alpha'
+}
+```
+
+#### `StaticPhrasingContent` (footnotes)
+
+```idl
+type StaticPhrasingContentFootnotes =
+  Footnote | FootnoteReference | StaticPhrasingContent
+```
 
 ## Glossary
 
