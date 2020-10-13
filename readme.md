@@ -844,17 +844,25 @@ interface mixin Association {
 **Association** represents an internal relation from one node to another.
 
 An `identifier` field must be present.
-It can match an `identifier` field on another node.
+It can match another node.
+`identifier` is a source value: character escapes and character references are
+*not* parsed.
+Its value must be normalized.
 
 A `label` field can be present.
-It represents the original value of the normalised `identifier` field.
+`label` is a string value: it works just like `title` on a link or a `lang` on
+code: character escapes and character references are parsed.
 
-Whether the value of `identifier` is expected to be a unique identifier or not
-depends on the type of node including the **Association**.
-An example of this is that `identifier` on [**Definition**][dfn-definition]
-should be a unique identifier, whereas multiple
-[**LinkReference**][dfn-link-reference]s can have the same `identifier` and be
-associated with one definition.
+To normalize a value, collapse markdown whitespace (`[\t\n\r ]+`) to a space,
+trim the optional initial and/or final space, and perform case-folding.
+
+Whether the value of `identifier` (or normalized `label` if there is no
+`identifier`) is expected to be a unique identifier or not depends on the type
+of node including the **Association**.
+An example of this is that they should be unique on
+[**Definition**][dfn-definition], whereas multiple
+[**LinkReference**][dfn-link-reference]s can be non-unique to be associated with
+one definition.
 
 ### `Reference`
 
