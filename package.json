@@ -12,7 +12,7 @@
     "Eugene Sharygin <eush77@gmail.com>"
   ],
   "devDependencies": {
-    "remark-cli": "^9.0.0-alpha.1",
+    "remark-cli": "^9.0.0",
     "remark-preset-wooorm": "^8.0.0"
   },
   "scripts": {
