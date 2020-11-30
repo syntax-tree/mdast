@@ -1219,8 +1219,6 @@ Yields:
 
 ```idl
 type FrontmatterContent = YAML
-
-type FlowContentFrontmatter = FrontmatterContent | FlowContent
 ```
 
 **Frontmatter** content represent out-of-band information about the document.
