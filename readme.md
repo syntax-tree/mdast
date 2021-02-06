@@ -67,6 +67,7 @@ The latest released version is [`4.0.0`][latest].
 *   [Acknowledgments](#acknowledgments)
 *   [License](#license)
 
+
 ## Introduction
 
 This document defines a format for representing [Markdown][] as an [abstract
