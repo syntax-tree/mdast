@@ -1550,7 +1550,7 @@ projects!
 
 [author]: https://wooorm.com
 
-[logo]: https://raw.githubusercontent.com/syntax-tree/mdast/79672c0/logo.svg?sanitize=true
+[logo]: https://raw.githubusercontent.com/syntax-tree/mdast/e6b43aa/logo.svg?sanitize=true
 
 [releases]: https://github.com/syntax-tree/mdast/releases
 
