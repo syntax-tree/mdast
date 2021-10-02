@@ -981,6 +981,88 @@ However, a short list of frequently used extensions are shown below.
 
 The following interfaces are found in [GitHub Flavored Markdown][gfm].
 
+#### `FootnoteDefinition`
+
+```idl
+interface FootnoteDefinition <: Parent {
+  type: "footnoteDefinition"
+  children: [FlowContent]
+}
+
+FootnoteDefinition includes Association
+```
+
+**FootnoteDefinition** ([**Parent**][dfn-parent]) represents content relating
+to the document that is outside its flow.
+
+**FootnoteDefinition** can be used where [**flow**][dfn-flow-content] content is
+expected.
+Its content model is also [**flow**][dfn-flow-content] content.
+
+**FootnoteDefinition** includes the mixin
+[**Association**][dfn-mxn-association].
+
+**FootnoteDefinition** should be associated with
+[**FootnoteReferences**][dfn-footnote-reference].
+
+For example, the following Markdown:
+
+```markdown
+[^alpha]: bravo and charlie.
+```
+
+Yields:
+
+```js
+{
+  type: 'footnoteDefinition',
+  identifier: 'alpha',
+  label: 'alpha',
+  children: [{
+    type: 'paragraph',
+    children: [{type: 'text', value: 'bravo and charlie.'}]
+  }]
+}
+```
+
+#### `FootnoteReference`
+
+```idl
+interface FootnoteReference <: Node {
+  type: "footnoteReference"
+}
+
+FootnoteReference includes Association
+```
+
+**FootnoteReference** ([**Node**][dfn-node]) represents a marker through
+association.
+
+**FootnoteReference** can be used where [**phrasing**][dfn-phrasing-content]
+content is expected.
+It has no content model.
+
+**FootnoteReference** includes the mixin [**Association**][dfn-mxn-association].
+
+**FootnoteReference** should be associated with a
+[**FootnoteDefinition**][dfn-footnote-definition].
+
+For example, the following Markdown:
+
+```markdown
+[^alpha]
+```
+
+Yields:
+
+```js
+{
+  type: 'footnoteReference',
+  identifier: 'alpha',
+  label: 'alpha'
+}
+```
+
 #### `Table`
 
 ```idl
@@ -1151,7 +1233,7 @@ enum alignType {
 #### `FlowContent` (GFM)
 
 ```idl
-type FlowContentGfm = Table | FlowContent
+type FlowContentGfm = FootnoteDefinition | Table | FlowContent
 ```
 
 #### `TableContent`
@@ -1179,7 +1261,8 @@ type ListContentGfm = ListItemGfm
 #### `StaticPhrasingContent` (GFM)
 
 ```idl
-type StaticPhrasingContentGfm = Delete | StaticPhrasingContent
+type StaticPhrasingContentGfm =
+  FootnoteReference | Delete | StaticPhrasingContent
 ```
 
 ### Frontmatter
@@ -1234,51 +1317,11 @@ type FlowContentFrontmatter = FrontmatterContent | FlowContent
 
 ### Footnotes
 
-The following interfaces are found with footnotes.
-
-#### `FootnoteDefinition`
-
-```idl
-interface FootnoteDefinition <: Parent {
-  type: "footnoteDefinition"
-  children: [FlowContent]
-}
-
-FootnoteDefinition includes Association
-```
-
-**FootnoteDefinition** ([**Parent**][dfn-parent]) represents content relating
-to the document that is outside its flow.
-
-**FootnoteDefinition** can be used where [**flow**][dfn-flow-content] content is
-expected.
-Its content model is also [**flow**][dfn-flow-content] content.
-
-**FootnoteDefinition** includes the mixin
-[**Association**][dfn-mxn-association].
-
-**FootnoteDefinition** should be associated with
-[**FootnoteReferences**][dfn-footnote-reference].
-
-For example, the following Markdown:
-
-```markdown
-[^alpha]: bravo and charlie.
-```
-
-Yields:
-
-```js
-{
-  type: 'footnoteDefinition',
-  identifier: 'alpha',
-  label: 'alpha',
-  children: [{
-    type: 'paragraph',
-    children: [{type: 'text', value: 'bravo and charlie.'}]
-  }]
-}
-```
+The following interfaces are found with footnotes (pandoc).
+Note that pandoc also uses [**FootnoteReference**][dfn-footnote-reference]
+and [**FootnoteDefinition**][dfn-footnote-definition], but since
+[GFM now supports footnotes][gfm-footnote], their definitions were moved to the
+[GFM][gfm-section] section
 
 #### `Footnote`
 
@@ -1311,55 +1354,10 @@ Yields:
 }
 ```
 
-#### `FootnoteReference`
-
-```idl
-interface FootnoteReference <: Node {
-  type: "footnoteReference"
-}
-
-FootnoteReference includes Association
-```
-
-**FootnoteReference** ([**Node**][dfn-node]) represents a marker through
-association.
-
-**FootnoteReference** can be used where [**phrasing**][dfn-phrasing-content]
-content is expected.
-It has no content model.
-
-**FootnoteReference** includes the mixin [**Association**][dfn-mxn-association].
-
-**FootnoteReference** should be associated with a
-[**FootnoteDefinition**][dfn-footnote-definition].
-
-For example, the following Markdown:
-
-```markdown
-[^alpha]
-```
-
-Yields:
-
-```js
-{
-  type: 'footnoteReference',
-  identifier: 'alpha',
-  label: 'alpha'
-}
-```
-
-#### `FlowContent` (footnotes)
-
-```idl
-type FlowContentFootnotes = FootnoteDefinition | FlowContent
-```
-
 #### `StaticPhrasingContent` (footnotes)
 
 ```idl
-type StaticPhrasingContentFootnotes =
-  Footnote | FootnoteReference | StaticPhrasingContent
+type StaticPhrasingContentFootnotes = Footnote | StaticPhrasingContent
 ```
 
 ## Glossary
@@ -1627,6 +1625,10 @@ projects!
 [dfn-static-phrasing-content]: #staticphrasingcontent
 
 [dfn-transparent-content]: #transparentcontent
+
+[gfm-section]: #gfm
+
+[gfm-footnote]: https://github.blog/changelog/2021-09-30-footnotes-now-supported-in-markdown-fields/
 
 [list-of-utilities]: #list-of-utilities
 
