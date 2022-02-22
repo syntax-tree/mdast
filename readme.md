@@ -1390,6 +1390,8 @@ See the [unist list of utilities][utilities] for more utilities.
     — Flatten listItem and (nested) paragraph into one listItem node
 *   [`mdast-flatten-nested-lists`](https://gitlab.com/staltz/mdast-flatten-nested-lists)
     — Transforms a tree to avoid lists inside lists
+*   [`mdast-util-from-adf`](https://github.com/bitcrowd/mdast-util-from-adf)
+    — Build mdast sytax tree from Atlassian Document Format (ADF)
 *   [`mdast-util-heading-range`](https://github.com/syntax-tree/mdast-util-heading-range)
     — Markdown heading as ranges
 *   [`mdast-util-heading-style`](https://github.com/syntax-tree/mdast-util-heading-style)
