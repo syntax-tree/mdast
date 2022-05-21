@@ -4,10 +4,10 @@
 
 ***
 
-**mdast** is a specification for representing Markdown in a [syntax
+**mdast** is a specification for representing markdown in a [syntax
 tree][syntax-tree].
-It implements the [**unist**][unist] spec.
-It can represent several flavours of [Markdown][], such as [CommonMark][]
+It implements **[unist][]**.
+It can represent several flavours of [markdown][], such as [CommonMark][]
 and [GitHub Flavored Markdown][gfm].
 
 This document may not be released.
@@ -58,6 +58,7 @@ The latest released version is [`4.0.0`][latest].
     *   [GFM](#gfm)
     *   [Frontmatter](#frontmatter)
     *   [Footnotes](#footnotes)
+    *   [MDX](#mdx)
 *   [Glossary](#glossary)
 *   [List of utilities](#list-of-utilities)
 *   [References](#references)
@@ -69,10 +70,10 @@ The latest released version is [`4.0.0`][latest].
 
 ## Introduction
 
-This document defines a format for representing [Markdown][] as an [abstract
+This document defines a format for representing [markdown][] as an [abstract
 syntax tree][syntax-tree].
-Development of mdast started in July 2014, in [**remark**][remark], before
-[unist][] existed.
+Development of mdast started in July 2014, in **[remark][]**, before [unist][]
+existed.
 This specification is written in a [Web IDL][webidl]-like grammar.
 
 ### Where this specification fits
@@ -99,8 +100,8 @@ interface Parent <: UnistParent {
 }
 ```
 
-**Parent** ([**UnistParent**][dfn-unist-parent]) represents a node in mdast
-containing other nodes (said to be [*children*][term-child]).
+**Parent** ([**UnistParent**][dfn-unist-parent]) represents an abstract
+interface in mdast containing other nodes (said to be [*children*][term-child]).
 
 Its content is limited to only other [**mdast content**][dfn-mdast-content].
 
@@ -112,8 +113,8 @@ interface Literal <: UnistLiteral {
 }
 ```
 
-**Literal** ([**UnistLiteral**][dfn-unist-literal]) represents a node in mdast
-containing a value.
+**Literal** ([**UnistLiteral**][dfn-unist-literal]) represents an abstract
+interface in mdast containing a value.
 
 Its `value` field is a `string`.
 
@@ -129,9 +130,9 @@ interface Root <: Parent {
 
 **Root** can be used as the [*root*][term-root] of a [*tree*][term-tree], never
 as a [*child*][term-child].
-Its content model is not limited to [**flow**][dfn-flow-content] content, but
-can contain any [**mdast content**][dfn-mdast-content] with the restriction that
-all content must be of the same category.
+Its content model is **not** limited to [**flow**][dfn-flow-content] content,
+but instead can contain any [**mdast content**][dfn-mdast-content] with the
+restriction that all content must be of the same category.
 
 ### `Paragraph`
 
@@ -148,7 +149,7 @@ with a particular point or idea.
 **Paragraph** can be used where [**content**][dfn-content] is expected.
 Its content model is [**phrasing**][dfn-phrasing-content] content.
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 Alpha bravo charlie.
@@ -181,7 +182,7 @@ Its content model is [**phrasing**][dfn-phrasing-content] content.
 A `depth` field must be present.
 A value of `1` is said to be the highest rank and `6` the lowest.
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 # Alpha
@@ -212,7 +213,7 @@ scene change in a story, a transition to another topic, or a new document.
 expected.
 It has no content model.
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 ***
@@ -240,7 +241,7 @@ somewhere else.
 expected.
 Its content model is also [**flow**][dfn-flow-content] content.
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 > Alpha bravo charlie.
@@ -288,7 +289,7 @@ It represents that one or more of its children are separated with a blank line
 from its [siblings][term-sibling] (when `true`), or not (when `false` or not
 present).
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 1. foo
@@ -333,7 +334,7 @@ A `spread` field can be present.
 It represents that the item contains two or more [*children*][term-child]
 separated by a blank line (when `true`), or not (when `false` or not present).
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 * bar
@@ -369,7 +370,7 @@ Its content is represented by its `value` field.
 HTML nodes do not have the restriction of being valid or complete HTML
 ([\[HTML\]][html]) constructs.
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 <div>
@@ -406,7 +407,7 @@ It represents the language of computer code being marked up.
 If the `lang` field is present, a `meta` field can be present.
 It represents custom information relating to the node.
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
     foo()
@@ -423,7 +424,7 @@ Yields:
 }
 ```
 
-And the following Markdown:
+And the following markdown:
 
 ````markdown
 ```js highlight-line="2"
@@ -467,7 +468,7 @@ It has no content model.
 [**LinkReferences**][dfn-link-reference] and
 [**ImageReferences**][dfn-image-reference].
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 [Alpha]: https://example.com
@@ -499,7 +500,7 @@ interface Text <: Literal {
 expected.
 Its content is represented by its `value` field.
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 Alpha bravo charlie.
@@ -527,7 +528,7 @@ contents.
 expected.
 Its content model is [**transparent**][dfn-transparent-content] content.
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 *alpha* _bravo_
@@ -568,7 +569,7 @@ or urgency for its contents.
 expected.
 Its content model is [**transparent**][dfn-transparent-content] content.
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 **alpha** __bravo__
@@ -611,7 +612,7 @@ Its content is represented by its `value` field.
 This node relates to the [**flow**][dfn-flow-content] content concept
 [**Code**][dfn-code].
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 `foo()`
@@ -638,7 +639,7 @@ addresses.
 expected.
 It has no content model.
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 foo··
@@ -677,7 +678,7 @@ Its content model is [**static phrasing**][dfn-static-phrasing-content] content.
 
 **Link** includes the mixin [**Resource**][dfn-mxn-resource].
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 [alpha](https://example.com "bravo")
@@ -714,7 +715,7 @@ It has no content model, but is described by its `alt` field.
 **Image** includes the mixins [**Resource**][dfn-mxn-resource] and
 [**Alternative**][dfn-mxn-alternative].
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 ![alpha](https://example.com/favicon.ico "bravo")
@@ -753,7 +754,7 @@ Its content model is [**static phrasing**][dfn-static-phrasing-content] content.
 
 **LinkReferences** should be associated with a [**Definition**][dfn-definition].
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 [alpha][Bravo]
@@ -794,7 +795,7 @@ It has no content model, but is described by its `alt` field.
 
 **ImageReference** should be associated with a [**Definition**][dfn-definition].
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 ![alpha][bravo]
@@ -1005,7 +1006,7 @@ Its content model is also [**flow**][dfn-flow-content] content.
 **FootnoteDefinition** should be associated with
 [**FootnoteReferences**][dfn-footnote-reference].
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 [^alpha]: bravo and charlie.
@@ -1047,7 +1048,7 @@ It has no content model.
 **FootnoteReference** should be associated with a
 [**FootnoteDefinition**][dfn-footnote-definition].
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 [^alpha]
@@ -1084,7 +1085,7 @@ An `align` field can be present.
 If present, it must be a list of [**alignType**s][dfn-enum-align-type].
 It represents how cells in columns are aligned.
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 | foo | bar |
@@ -1196,7 +1197,7 @@ accurate or no longer relevant.
 expected.
 Its content model is [**transparent**][dfn-transparent-content] content.
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 ~~alpha~~
@@ -1284,7 +1285,7 @@ the document in the YAML ([\[YAML\]][yaml]) data serialisation language.
 expected.
 Its content is represented by its `value` field.
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 ---
@@ -1339,7 +1340,7 @@ document that is outside its flow.
 expected.
 Its content model is also [**phrasing**][dfn-phrasing-content] content.
 
-For example, the following Markdown:
+For example, the following markdown:
 
 ```markdown
 ^[alpha bravo]
@@ -1360,6 +1361,10 @@ Yields:
 type StaticPhrasingContentFootnotes = Footnote | StaticPhrasingContent
 ```
 
+### MDX
+
+See [`remark-mdx`](https://mdxjs.com/packages/remark-mdx/#syntax-tree).
+
 ## Glossary
 
 See the [unist glossary][glossary].
@@ -1371,49 +1376,49 @@ See the [unist list of utilities][utilities] for more utilities.
 <!--lint disable list-item-spacing-->
 
 *   [`mdast-add-list-metadata`](https://gitlab.com/staltz/mdast-add-list-metadata)
-    — Enhances the metadata of list and listItem nodes
+    — enhance the metadata of `list` and `listItem` nodes
 *   [`mdast-util-assert`](https://github.com/syntax-tree/mdast-util-assert)
-    — Assert nodes
+    — assert nodes
 *   [`mdast-builder`](https://github.com/mike-north/mdast-builder)
-    — Build mdast structures with composable functions
+    — build mdast structures with composable functions
 *   [`mdast-comment-marker`](https://github.com/syntax-tree/mdast-comment-marker)
-    — Parse a comment marker
+    — parse a comment marker
 *   [`mdast-util-compact`](https://github.com/syntax-tree/mdast-util-compact)
-    — Make a tree compact
+    — make a tree compact
 *   [`mdast-util-definitions`](https://github.com/syntax-tree/mdast-util-definitions)
-    — Find definition nodes
+    — find definition nodes
 *   [`mdast-util-from-quill-delta`](https://github.com/syntax-tree/mdast-util-from-quill-delta)
-    — Transform Quill delta to mdast
+    — transform Quill delta to mdast
 *   [`mdast-flatten-image-paragraphs`](https://gitlab.com/staltz/mdast-flatten-image-paragraphs)
-    — Flatten paragraph and image into one image node
+    — flatten `paragraph` and `image` into one `image` node
 *   [`mdast-flatten-listitem-paragraphs`](https://gitlab.com/staltz/mdast-flatten-listitem-paragraphs)
-    — Flatten listItem and (nested) paragraph into one listItem node
+    — flatten `listItem` and (nested) paragraph into one listItem node
 *   [`mdast-flatten-nested-lists`](https://gitlab.com/staltz/mdast-flatten-nested-lists)
-    — Transforms a tree to avoid lists inside lists
+    — transform a tree to avoid lists in lists
 *   [`mdast-util-from-adf`](https://github.com/bitcrowd/mdast-util-from-adf)
-    — Build mdast sytax tree from Atlassian Document Format (ADF)
+    — build mdast syntax tree from Atlassian Document Format (ADF)
 *   [`mdast-util-heading-range`](https://github.com/syntax-tree/mdast-util-heading-range)
-    — Markdown heading as ranges
+    — markdown heading as ranges
 *   [`mdast-util-heading-style`](https://github.com/syntax-tree/mdast-util-heading-style)
-    — Get the style of a heading node
+    — get the style of a heading node
 *   [`mdast-util-inject`](https://github.com/anandthakker/mdast-util-inject)
-    — Inject a tree into another at a given heading
+    — inject a tree into another at a given heading
 *   [`mdast-move-images-to-root`](https://gitlab.com/staltz/mdast-move-images-to-root)
-    — Moves image nodes up the tree until they are strict children of the root
+    — move image nodes up the tree until they are direct children of the root
 *   [`mdast-normalize-headings`](https://github.com/syntax-tree/mdast-normalize-headings)
-    — Ensure at most one top-level heading is in the document
+    — ensure at most one top-level heading is in the document
 *   [`mdast-util-phrasing`](https://github.com/syntax-tree/mdast-util-phrasing)
-    — Check if a node is phrasing content
+    — check if a node is phrasing content
 *   [`mdast-squeeze-paragraphs`](https://github.com/syntax-tree/mdast-squeeze-paragraphs)
-    — Remove empty paragraphs
+    — remove empty paragraphs
 *   [`mdast-util-toc`](https://github.com/syntax-tree/mdast-util-toc)
-    — Generate a Table of Contents from a tree
+    — generate a table of contents from a tree
 *   [`mdast-util-to-hast`](https://github.com/syntax-tree/mdast-util-to-hast)
-    — Transform to hast
+    — transform to hast
 *   [`mdast-util-to-nlcst`](https://github.com/syntax-tree/mdast-util-to-nlcst)
-    — Transform to nlcst
+    — transform to nlcst
 *   [`mdast-util-to-string`](https://github.com/syntax-tree/mdast-util-to-string)
-    — Get the plain text content of a node
+    — get the plain text content of a node
 *   [`mdast-zone`](https://github.com/syntax-tree/mdast-zone)
     — HTML comments as ranges or markers
 
