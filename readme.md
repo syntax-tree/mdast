@@ -1421,6 +1421,8 @@ See the [unist list of utilities][utilities] for more utilities.
     — get the plain text content of a node
 *   [`mdast-zone`](https://github.com/syntax-tree/mdast-zone)
     — HTML comments as ranges or markers
+*   [`mdast-util-hidden`](https://github.com/Xunnamius/unified-utils/tree/main/packages/mdast-util-hidden)
+    — prevent nodes from being seen by transformers.
 
 ## References
 
