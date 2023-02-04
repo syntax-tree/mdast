@@ -122,7 +122,7 @@ Its `value` field is a `string`.
 
 ```idl
 interface Root <: Parent {
-  type: "root"
+  type: 'root'
 }
 ```
 
@@ -138,7 +138,7 @@ restriction that all content must be of the same category.
 
 ```idl
 interface Paragraph <: Parent {
-  type: "paragraph"
+  type: 'paragraph'
   children: [PhrasingContent]
 }
 ```
@@ -168,7 +168,7 @@ Yields:
 
 ```idl
 interface Heading <: Parent {
-  type: "heading"
+  type: 'heading'
   depth: 1 <= number <= 6
   children: [PhrasingContent]
 }
@@ -202,7 +202,7 @@ Yields:
 
 ```idl
 interface ThematicBreak <: Node {
-  type: "thematicBreak"
+  type: 'thematicBreak'
 }
 ```
 
@@ -229,7 +229,7 @@ Yields:
 
 ```idl
 interface Blockquote <: Parent {
-  type: "blockquote"
+  type: 'blockquote'
   children: [FlowContent]
 }
 ```
@@ -263,7 +263,7 @@ Yields:
 
 ```idl
 interface List <: Parent {
-  type: "list"
+  type: 'list'
   ordered: boolean?
   start: number?
   spread: boolean?
@@ -318,7 +318,7 @@ Yields:
 
 ```idl
 interface ListItem <: Parent {
-  type: "listItem"
+  type: 'listItem'
   spread: boolean?
   children: [FlowContent]
 }
@@ -357,7 +357,7 @@ Yields:
 
 ```idl
 interface HTML <: Literal {
-  type: "html"
+  type: 'html'
 }
 ```
 
@@ -386,7 +386,7 @@ Yields:
 
 ```idl
 interface Code <: Literal {
-  type: "code"
+  type: 'code'
   lang: string?
   meta: string?
 }
@@ -449,7 +449,7 @@ Yields:
 
 ```idl
 interface Definition <: Node {
-  type: "definition"
+  type: 'definition'
 }
 
 Definition includes Association
@@ -490,7 +490,7 @@ Yields:
 
 ```idl
 interface Text <: Literal {
-  type: "text"
+  type: 'text'
 }
 ```
 
@@ -516,7 +516,7 @@ Yields:
 
 ```idl
 interface Emphasis <: Parent {
-  type: "emphasis"
+  type: 'emphasis'
   children: [TransparentContent]
 }
 ```
@@ -557,7 +557,7 @@ Yields:
 
 ```idl
 interface Strong <: Parent {
-  type: "strong"
+  type: 'strong'
   children: [TransparentContent]
 }
 ```
@@ -598,7 +598,7 @@ Yields:
 
 ```idl
 interface InlineCode <: Literal {
-  type: "inlineCode"
+  type: 'inlineCode'
 }
 ```
 
@@ -628,7 +628,7 @@ Yields:
 
 ```idl
 interface Break <: Node {
-  type: "break"
+  type: 'break'
 }
 ```
 
@@ -663,7 +663,7 @@ Yields:
 
 ```idl
 interface Link <: Parent {
-  type: "link"
+  type: 'link'
   children: [StaticPhrasingContent]
 }
 
@@ -699,7 +699,7 @@ Yields:
 
 ```idl
 interface Image <: Node {
-  type: "image"
+  type: 'image'
 }
 
 Image includes Resource
@@ -736,7 +736,7 @@ Yields:
 
 ```idl
 interface LinkReference <: Parent {
-  type: "linkReference"
+  type: 'linkReference'
   children: [StaticPhrasingContent]
 }
 
@@ -776,7 +776,7 @@ Yields:
 
 ```idl
 interface ImageReference <: Node {
-  type: "imageReference"
+  type: 'imageReference'
 }
 
 ImageReference includes Reference
@@ -902,7 +902,7 @@ node as intended.
 
 ```idl
 enum referenceType {
-  "shortcut" | "collapsed" | "full"
+  'shortcut' | 'collapsed' | 'full'
 }
 ```
 
@@ -986,7 +986,7 @@ The following interfaces are found in [GitHub Flavored Markdown][gfm].
 
 ```idl
 interface FootnoteDefinition <: Parent {
-  type: "footnoteDefinition"
+  type: 'footnoteDefinition'
   children: [FlowContent]
 }
 
@@ -1030,7 +1030,7 @@ Yields:
 
 ```idl
 interface FootnoteReference <: Node {
-  type: "footnoteReference"
+  type: 'footnoteReference'
 }
 
 FootnoteReference includes Association
@@ -1068,7 +1068,7 @@ Yields:
 
 ```idl
 interface Table <: Parent {
-  type: "table"
+  type: 'table'
   align: [alignType]?
   children: [TableContent]
 }
@@ -1134,7 +1134,7 @@ Yields:
 
 ```idl
 interface TableRow <: Parent {
-  type: "tableRow"
+  type: 'tableRow'
   children: [RowContent]
 }
 ```
@@ -1154,7 +1154,7 @@ For an example, see [**Table**][dfn-table].
 
 ```idl
 interface TableCell <: Parent {
-  type: "tableCell"
+  type: 'tableCell'
   children: [PhrasingContent]
 }
 ```
@@ -1185,7 +1185,7 @@ or indeterminate or not applicable (when `null` or not present).
 
 ```idl
 interface Delete <: Parent {
-  type: "delete"
+  type: 'delete'
   children: [TransparentContent]
 }
 ```
@@ -1216,7 +1216,7 @@ Yields:
 
 ```idl
 enum alignType {
-  "left" | "right" | "center" | null
+  'left' | 'right' | 'center' | null
 }
 ```
 
@@ -1274,7 +1274,7 @@ The following interfaces are found with YAML.
 
 ```idl
 interface YAML <: Literal {
-  type: "yaml"
+  type: 'yaml'
 }
 ```
 
@@ -1328,7 +1328,7 @@ and [**FootnoteDefinition**][dfn-footnote-definition], but since
 
 ```idl
 interface Footnote <: Parent {
-  type: "footnote"
+  type: 'footnote'
   children: [PhrasingContent]
 }
 ```
