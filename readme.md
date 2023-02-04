@@ -1387,8 +1387,10 @@ See the [unist list of utilities][utilities] for more utilities.
     — make a tree compact
 *   [`mdast-util-definitions`](https://github.com/syntax-tree/mdast-util-definitions)
     — find definition nodes
-*   [`mdast-util-from-quill-delta`](https://github.com/syntax-tree/mdast-util-from-quill-delta)
-    — transform Quill delta to mdast
+*   [`mdast-util-directive`](https://github.com/syntax-tree/mdast-util-directive)
+    — parse and serialize directives
+*   [`mdast-util-find-and-replace`](https://github.com/syntax-tree/mdast-util-find-and-replace)
+    — find and replace text
 *   [`mdast-flatten-image-paragraphs`](https://gitlab.com/staltz/mdast-flatten-image-paragraphs)
     — flatten `paragraph` and `image` into one `image` node
 *   [`mdast-flatten-listitem-paragraphs`](https://gitlab.com/staltz/mdast-flatten-listitem-paragraphs)
@@ -1397,12 +1399,40 @@ See the [unist list of utilities][utilities] for more utilities.
     — transform a tree to avoid lists in lists
 *   [`mdast-util-from-adf`](https://github.com/bitcrowd/mdast-util-from-adf)
     — build mdast syntax tree from Atlassian Document Format (ADF)
+*   [`mdast-util-from-markdown`](https://github.com/syntax-tree/mdast-util-from-markdown)
+    — parse markdown
+*   [`mdast-util-frontmatter`](https://github.com/syntax-tree/mdast-util-frontmatter)
+    — parse and serialize frontmatter
+*   [`mdast-util-gfm`](https://github.com/syntax-tree/mdast-util-gfm)
+    — parse and serialize GFM
+*   [`mdast-util-gfm-autolink-literal`](https://github.com/syntax-tree/mdast-util-gfm-autolink-literal)
+    — parse and serialize GFM autolink literals
+*   [`mdast-util-gfm-footnote`](https://github.com/syntax-tree/mdast-util-gfm-footnote)
+    — parse and serialize GFM footnotes
+*   [`mdast-util-gfm-strikethrough`](https://github.com/syntax-tree/mdast-util-gfm-strikethrough)
+    — parse and serialize GFM strikethrough
+*   [`mdast-util-gfm-table`](https://github.com/syntax-tree/mdast-util-gfm-table)
+    — parse and serialize GFM tables
+*   [`mdast-util-gfm-task-list-item`](https://github.com/syntax-tree/mdast-util-gfm-task-list-item)
+    — parse and serialize GFM task list items
+*   [`mdast-util-gridtables`](https://github.com/syntax-tree/mdast-util-gridtables)
+    — parse and serialize gridtables
 *   [`mdast-util-heading-range`](https://github.com/syntax-tree/mdast-util-heading-range)
     — markdown heading as ranges
 *   [`mdast-util-heading-style`](https://github.com/syntax-tree/mdast-util-heading-style)
     — get the style of a heading node
-*   [`mdast-util-inject`](https://github.com/anandthakker/mdast-util-inject)
-    — inject a tree into another at a given heading
+*   [`mdast-util-hidden`](https://github.com/Xunnamius/unified-utils/tree/main/packages/mdast-util-hidden)
+    — prevent nodes from being seen by transformers.
+*   [`mdast-util-math`](https://github.com/syntax-tree/mdast-util-math)
+    — parse and serialize math
+*   [`mdast-util-mdx`](https://github.com/syntax-tree/mdast-util-mdx)
+    — parse and serialize MDX
+*   [`mdast-util-mdx-expression`](https://github.com/syntax-tree/mdast-util-mdx-expression)
+    — parse and serialize MDX expressions
+*   [`mdast-util-mdx-jsx`](https://github.com/syntax-tree/mdast-util-mdx-jsx)
+    — parse and serialize MDX JSX
+*   [`mdast-util-mdxjs-esm`](https://github.com/syntax-tree/mdast-util-mdxjs-esm)
+    — parse and serialize MDX ESM
 *   [`mdast-move-images-to-root`](https://gitlab.com/staltz/mdast-move-images-to-root)
     — move image nodes up the tree until they are direct children of the root
 *   [`mdast-normalize-headings`](https://github.com/syntax-tree/mdast-normalize-headings)
@@ -1415,14 +1445,14 @@ See the [unist list of utilities][utilities] for more utilities.
     — generate a table of contents from a tree
 *   [`mdast-util-to-hast`](https://github.com/syntax-tree/mdast-util-to-hast)
     — transform to hast
+*   [`mdast-util-to-markdown`](https://github.com/syntax-tree/mdast-util-to-markdown)
+    — serialize markdown
 *   [`mdast-util-to-nlcst`](https://github.com/syntax-tree/mdast-util-to-nlcst)
     — transform to nlcst
 *   [`mdast-util-to-string`](https://github.com/syntax-tree/mdast-util-to-string)
     — get the plain text content of a node
 *   [`mdast-zone`](https://github.com/syntax-tree/mdast-zone)
     — HTML comments as ranges or markers
-*   [`mdast-util-hidden`](https://github.com/Xunnamius/unified-utils/tree/main/packages/mdast-util-hidden)
-    — prevent nodes from being seen by transformers.
 
 ## References
 
