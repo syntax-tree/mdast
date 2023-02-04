@@ -18,6 +18,7 @@ The latest released version is [`4.0.0`][latest].
 
 *   [Introduction](#introduction)
     *   [Where this specification fits](#where-this-specification-fits)
+*   [Types](#types)
 *   [Nodes](#nodes)
     *   [`Parent`](#parent)
     *   [`Literal`](#literal)
@@ -89,6 +90,15 @@ languages.
 
 mdast relates to the [unified][] and [remark][] projects in that mdast syntax
 trees are used throughout their ecosystems.
+
+## Types
+
+If you are using TypeScript, you can use the unist types by installing them
+with npm:
+
+```sh
+npm install @types/mdast
+```
 
 ## Nodes
 
