@@ -52,8 +52,6 @@ The latest released version is [`4.0.0`][latest].
     *   [`Content`](#content)
     *   [`ListContent`](#listcontent)
     *   [`PhrasingContent`](#phrasingcontent)
-    *   [`StaticPhrasingContent`](#staticphrasingcontent)
-    *   [`TransparentContent`](#transparentcontent)
 *   [Extensions](#extensions)
     *   [GFM](#gfm)
     *   [Frontmatter](#frontmatter)
@@ -517,7 +515,7 @@ Yields:
 ```idl
 interface Emphasis <: Parent {
   type: 'emphasis'
-  children: [TransparentContent]
+  children: [PhrasingContent]
 }
 ```
 
@@ -526,7 +524,7 @@ contents.
 
 **Emphasis** can be used where [**phrasing**][dfn-phrasing-content] content is
 expected.
-Its content model is [**transparent**][dfn-transparent-content] content.
+Its content model is [**phrasing**][dfn-phrasing-content] content.
 
 For example, the following markdown:
 
@@ -558,7 +556,7 @@ Yields:
 ```idl
 interface Strong <: Parent {
   type: 'strong'
-  children: [TransparentContent]
+  children: [PhrasingContent]
 }
 ```
 
@@ -567,7 +565,7 @@ or urgency for its contents.
 
 **Strong** can be used where [**phrasing**][dfn-phrasing-content] content is
 expected.
-Its content model is [**transparent**][dfn-transparent-content] content.
+Its content model is [**phrasing**][dfn-phrasing-content] content.
 
 For example, the following markdown:
 
@@ -664,7 +662,7 @@ Yields:
 ```idl
 interface Link <: Parent {
   type: 'link'
-  children: [StaticPhrasingContent]
+  children: [PhrasingContent]
 }
 
 Link includes Resource
@@ -674,7 +672,7 @@ Link includes Resource
 
 **Link** can be used where [**phrasing**][dfn-phrasing-content] content is
 expected.
-Its content model is [**static phrasing**][dfn-static-phrasing-content] content.
+Its content model is also [**phrasing**][dfn-phrasing-content] content.
 
 **Link** includes the mixin [**Resource**][dfn-mxn-resource].
 
@@ -737,7 +735,7 @@ Yields:
 ```idl
 interface LinkReference <: Parent {
   type: 'linkReference'
-  children: [StaticPhrasingContent]
+  children: [PhrasingContent]
 }
 
 LinkReference includes Reference
@@ -748,7 +746,7 @@ association, or its original source if there is no association.
 
 **LinkReference** can be used where [**phrasing**][dfn-phrasing-content] content
 is expected.
-Its content model is [**static phrasing**][dfn-static-phrasing-content] content.
+Its content model is also [**phrasing**][dfn-phrasing-content] content.
 
 **LinkReference** includes the mixin [**Reference**][dfn-mxn-reference].
 
@@ -951,26 +949,11 @@ type ListContent = ListItem
 ### `PhrasingContent`
 
 ```idl
-type PhrasingContent = Link | LinkReference | StaticPhrasingContent
+type PhrasingContent = Break | Emphasis | HTML | Image | ImageReference
+  | InlineCode | Link | LinkReference | Strong | Text
 ```
 
 **Phrasing** content represent the text in a document, and its markup.
-
-### `StaticPhrasingContent`
-
-```idl
-type StaticPhrasingContent =
-  Break | Emphasis | HTML | Image | ImageReference | InlineCode | Strong | Text
-```
-
-**StaticPhrasing** content represent the text in a document, and its
-markup, that is not intended for user interaction.
-
-### `TransparentContent`
-
-The **transparent** content model is derived from the content model of its
-[parent][dfn-parent].
-Effectively, this is used to prohibit nested links (and link references).
 
 ## Extensions
 
@@ -1186,7 +1169,7 @@ or indeterminate or not applicable (when `null` or not present).
 ```idl
 interface Delete <: Parent {
   type: 'delete'
-  children: [TransparentContent]
+  children: [PhrasingContent]
 }
 ```
 
@@ -1195,7 +1178,7 @@ accurate or no longer relevant.
 
 **Delete** can be used where [**phrasing**][dfn-phrasing-content] content is
 expected.
-Its content model is [**transparent**][dfn-transparent-content] content.
+Its content model is [**phrasing**][dfn-phrasing-content] content.
 
 For example, the following markdown:
 
@@ -1259,11 +1242,10 @@ type RowContent = TableCell
 type ListContentGfm = ListItemGfm
 ```
 
-#### `StaticPhrasingContent` (GFM)
+#### `PhrasingContent` (GFM)
 
 ```idl
-type StaticPhrasingContentGfm =
-  FootnoteReference | Delete | StaticPhrasingContent
+type PhrasingContentGfm = FootnoteReference | Delete | PhrasingContent
 ```
 
 ### Frontmatter
@@ -1355,10 +1337,10 @@ Yields:
 }
 ```
 
-#### `StaticPhrasingContent` (footnotes)
+#### `PhrasingContent` (footnotes)
 
 ```idl
-type StaticPhrasingContentFootnotes = Footnote | StaticPhrasingContent
+type PhrasingContentFootnotes = Footnote | PhrasingContent
 ```
 
 ### MDX
@@ -1660,10 +1642,6 @@ projects!
 [dfn-row-content]: #rowcontent
 
 [dfn-phrasing-content]: #phrasingcontent
-
-[dfn-static-phrasing-content]: #staticphrasingcontent
-
-[dfn-transparent-content]: #transparentcontent
 
 [gfm-section]: #gfm
 
