@@ -57,7 +57,6 @@ The latest released version is [`4.0.0`][latest].
 *   [Extensions](#extensions)
     *   [GFM](#gfm)
     *   [Frontmatter](#frontmatter)
-    *   [Footnotes](#footnotes)
     *   [MDX](#mdx)
 *   [Glossary](#glossary)
 *   [List of utilities](#list-of-utilities)
@@ -1311,51 +1310,6 @@ If frontmatter is present, it must be limited to one node in the
 type FlowContentFrontmatter = FrontmatterContent | FlowContent
 ```
 
-### Footnotes
-
-The following interfaces are found with footnotes (pandoc).
-Note that pandoc also uses [**FootnoteReference**][dfn-footnote-reference]
-and [**FootnoteDefinition**][dfn-footnote-definition], but since
-[GFM now supports footnotes][gfm-footnote], their definitions were moved to the
-[GFM][gfm-section] section
-
-#### `Footnote`
-
-```idl
-interface Footnote <: Parent {
-  type: 'footnote'
-  children: [PhrasingContent]
-}
-```
-
-**Footnote** ([**Parent**][dfn-parent]) represents content relating to the
-document that is outside its flow.
-
-**Footnote** can be used where [**phrasing**][dfn-phrasing-content] content is
-expected.
-Its content model is also [**phrasing**][dfn-phrasing-content] content.
-
-For example, the following markdown:
-
-```markdown
-^[alpha bravo]
-```
-
-Yields:
-
-```js
-{
-  type: 'footnote',
-  children: [{type: 'text', value: 'alpha bravo'}]
-}
-```
-
-#### `PhrasingContent` (footnotes)
-
-```idl
-type PhrasingContentFootnotes = Footnote | PhrasingContent
-```
-
 ### MDX
 
 See [`remark-mdx`](https://mdxjs.com/packages/remark-mdx/#syntax-tree).
@@ -1655,10 +1609,6 @@ projects!
 [dfn-row-content]: #rowcontent
 
 [dfn-phrasing-content]: #phrasingcontent
-
-[gfm-section]: #gfm
-
-[gfm-footnote]: https://github.blog/changelog/2021-09-30-footnotes-now-supported-in-markdown-fields/
 
 [list-of-utilities]: #list-of-utilities
 
