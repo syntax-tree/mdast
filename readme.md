@@ -19,38 +19,39 @@ The latest released version is [`4.0.0`][latest].
 *   [Introduction](#introduction)
     *   [Where this specification fits](#where-this-specification-fits)
 *   [Types](#types)
-*   [Nodes](#nodes)
-    *   [`Parent`](#parent)
+*   [Nodes (abstract)](#nodes-abstract)
     *   [`Literal`](#literal)
-    *   [`Root`](#root)
-    *   [`Paragraph`](#paragraph)
-    *   [`Heading`](#heading)
-    *   [`ThematicBreak`](#thematicbreak)
+    *   [`Parent`](#parent)
+*   [Nodes](#nodes)
     *   [`Blockquote`](#blockquote)
-    *   [`List`](#list)
-    *   [`ListItem`](#listitem)
-    *   [`HTML`](#html)
+    *   [`Break`](#break)
     *   [`Code`](#code)
     *   [`Definition`](#definition)
-    *   [`Text`](#text)
     *   [`Emphasis`](#emphasis)
-    *   [`Strong`](#strong)
-    *   [`InlineCode`](#inlinecode)
-    *   [`Break`](#break)
-    *   [`Link`](#link)
+    *   [`Heading`](#heading)
+    *   [`HTML`](#html)
     *   [`Image`](#image)
-    *   [`LinkReference`](#linkreference)
     *   [`ImageReference`](#imagereference)
+    *   [`InlineCode`](#inlinecode)
+    *   [`Link`](#link)
+    *   [`LinkReference`](#linkreference)
+    *   [`List`](#list)
+    *   [`ListItem`](#listitem)
+    *   [`Paragraph`](#paragraph)
+    *   [`Root`](#root)
+    *   [`Strong`](#strong)
+    *   [`Text`](#text)
+    *   [`ThematicBreak`](#thematicbreak)
 *   [Mixin](#mixin)
-    *   [`Resource`](#resource)
+    *   [`Alternative`](#alternative)
     *   [`Association`](#association)
     *   [`Reference`](#reference)
-    *   [`Alternative`](#alternative)
+    *   [`Resource`](#resource)
 *   [Enumeration](#enumeration)
     *   [`referenceType`](#referencetype)
 *   [Content model](#content-model)
-    *   [`FlowContent`](#flowcontent)
     *   [`Content`](#content)
+    *   [`FlowContent`](#flowcontent)
     *   [`ListContent`](#listcontent)
     *   [`PhrasingContent`](#phrasingcontent)
 *   [Extensions](#extensions)
@@ -98,20 +99,7 @@ with npm:
 npm install @types/mdast
 ```
 
-## Nodes
-
-### `Parent`
-
-```idl
-interface Parent <: UnistParent {
-  children: [MdastContent]
-}
-```
-
-**Parent** ([**UnistParent**][dfn-unist-parent]) represents an abstract
-interface in mdast containing other nodes (said to be [*children*][term-child]).
-
-Its content is limited to only other [**mdast content**][dfn-mdast-content].
+## Nodes (abstract)
 
 ### `Literal`
 
@@ -126,112 +114,20 @@ interface in mdast containing a value.
 
 Its `value` field is a `string`.
 
-### `Root`
+### `Parent`
 
 ```idl
-interface Root <: Parent {
-  type: 'root'
+interface Parent <: UnistParent {
+  children: [MdastContent]
 }
 ```
 
-**Root** ([**Parent**][dfn-parent]) represents a document.
+**Parent** ([**UnistParent**][dfn-unist-parent]) represents an abstract
+interface in mdast containing other nodes (said to be [*children*][term-child]).
 
-**Root** can be used as the [*root*][term-root] of a [*tree*][term-tree], never
-as a [*child*][term-child].
-Its content model is **not** limited to [**flow**][dfn-flow-content] content,
-but instead can contain any [**mdast content**][dfn-mdast-content] with the
-restriction that all content must be of the same category.
+Its content is limited to only other [**mdast content**][dfn-mdast-content].
 
-### `Paragraph`
-
-```idl
-interface Paragraph <: Parent {
-  type: 'paragraph'
-  children: [PhrasingContent]
-}
-```
-
-**Paragraph** ([**Parent**][dfn-parent]) represents a unit of discourse dealing
-with a particular point or idea.
-
-**Paragraph** can be used where [**content**][dfn-content] is expected.
-Its content model is [**phrasing**][dfn-phrasing-content] content.
-
-For example, the following markdown:
-
-```markdown
-Alpha bravo charlie.
-```
-
-Yields:
-
-```js
-{
-  type: 'paragraph',
-  children: [{type: 'text', value: 'Alpha bravo charlie.'}]
-}
-```
-
-### `Heading`
-
-```idl
-interface Heading <: Parent {
-  type: 'heading'
-  depth: 1 <= number <= 6
-  children: [PhrasingContent]
-}
-```
-
-**Heading** ([**Parent**][dfn-parent]) represents a heading of a section.
-
-**Heading** can be used where [**flow**][dfn-flow-content] content is expected.
-Its content model is [**phrasing**][dfn-phrasing-content] content.
-
-A `depth` field must be present.
-A value of `1` is said to be the highest rank and `6` the lowest.
-
-For example, the following markdown:
-
-```markdown
-# Alpha
-```
-
-Yields:
-
-```js
-{
-  type: 'heading',
-  depth: 1,
-  children: [{type: 'text', value: 'Alpha'}]
-}
-```
-
-### `ThematicBreak`
-
-```idl
-interface ThematicBreak <: Node {
-  type: 'thematicBreak'
-}
-```
-
-**ThematicBreak** ([**Node**][dfn-node]) represents a thematic break, such as a
-scene change in a story, a transition to another topic, or a new document.
-
-**ThematicBreak** can be used where [**flow**][dfn-flow-content] content is
-expected.
-It has no content model.
-
-For example, the following markdown:
-
-```markdown
-***
-```
-
-Yields:
-
-```js
-{type: 'thematicBreak'}
-```
+## Nodes
 
 ### `Blockquote`
 
@@ -267,127 +163,39 @@ Yields:
 }
 ```
 
-### `List`
+### `Break`
 
 ```idl
-interface List <: Parent {
-  type: 'list'
-  ordered: boolean?
-  start: number?
-  spread: boolean?
-  children: [ListContent]
+interface Break <: Node {
+  type: 'break'
 }
 ```
 
-**List** ([**Parent**][dfn-parent]) represents a list of items.
+**Break** ([**Node**][dfn-node]) represents a line break, such as in poems or
+addresses.
 
-**List** can be used where [**flow**][dfn-flow-content] content is expected.
-Its content model is [**list**][dfn-list-content] content.
-
-An `ordered` field can be present.
-It represents that the items have been intentionally ordered (when `true`), or
-that the order of items is not important (when `false` or not present).
-
-A `start` field can be present.
-It represents, when the `ordered` field is `true`, the starting number of the
-list.
-
-A `spread` field can be present.
-It represents that one or more of its children are separated with a blank line
-from its [siblings][term-sibling] (when `true`), or not (when `false` or not
-present).
+**Break** can be used where [**phrasing**][dfn-phrasing-content] content is
+expected.
+It has no content model.
 
 For example, the following markdown:
 
 ```markdown
-1. foo
+foo··
+bar
 ```
 
 Yields:
 
 ```js
 {
-  type: 'list',
-  ordered: true,
-  start: 1,
-  spread: false,
-  children: [{
-    type: 'listItem',
-    spread: false,
-    children: [{
-      type: 'paragraph',
-      children: [{type: 'text', value: 'foo'}]
-    }]
-  }]
+  type: 'paragraph',
+  children: [
+    {type: 'text', value: 'foo'},
+    {type: 'break'},
+    {type: 'text', value: 'bar'}
+  ]
 }
-```
-
-### `ListItem`
-
-```idl
-interface ListItem <: Parent {
-  type: 'listItem'
-  spread: boolean?
-  children: [FlowContent]
-}
-```
-
-**ListItem** ([**Parent**][dfn-parent]) represents an item in a
-[**List**][dfn-list].
-
-**ListItem** can be used where [**list**][dfn-list-content] content is expected.
-Its content model is [**flow**][dfn-flow-content] content.
-
-A `spread` field can be present.
-It represents that the item contains two or more [*children*][term-child]
-separated by a blank line (when `true`), or not (when `false` or not present).
-
-For example, the following markdown:
-
-```markdown
-* bar
-```
-
-Yields:
-
-```js
-{
-  type: 'listItem',
-  spread: false,
-  children: [{
-    type: 'paragraph',
-    children: [{type: 'text', value: 'bar'}]
-  }]
-}
-```
-
-### `HTML`
-
-```idl
-interface HTML <: Literal {
-  type: 'html'
-}
-```
-
-**HTML** ([**Literal**][dfn-literal]) represents a fragment of raw [HTML][].
-
-**HTML** can be used where [**flow**][dfn-flow-content] or
-[**phrasing**][dfn-phrasing-content] content is expected.
-Its content is represented by its `value` field.
-
-HTML nodes do not have the restriction of being valid or complete HTML
-([\[HTML\]][html]) constructs.
-
-For example, the following markdown:
-
-```markdown
-<div>
-```
-
-Yields:
-
-```js
-{type: 'html', value: '<div>'}
 ```
 
 ### `Code`
@@ -494,32 +302,6 @@ Yields:
 }
 ```
 
-### `Text`
-
-```idl
-interface Text <: Literal {
-  type: 'text'
-}
-```
-
-**Text** ([**Literal**][dfn-literal]) represents everything that is just text.
-
-**Text** can be used where [**phrasing**][dfn-phrasing-content] content is
-expected.
-Its content is represented by its `value` field.
-
-For example, the following markdown:
-
-```markdown
-Alpha bravo charlie.
-```
-
-Yields:
-
-```js
-{type: 'text', value: 'Alpha bravo charlie.'}
-```
-
 ### `Emphasis`
 
 ```idl
@@ -561,146 +343,67 @@ Yields:
 }
 ```
 
-### `Strong`
+### `Heading`
 
 ```idl
-interface Strong <: Parent {
-  type: 'strong'
+interface Heading <: Parent {
+  type: 'heading'
+  depth: 1 <= number <= 6
   children: [PhrasingContent]
 }
 ```
 
-**Strong** ([**Parent**][dfn-parent]) represents strong importance, seriousness,
-or urgency for its contents.
+**Heading** ([**Parent**][dfn-parent]) represents a heading of a section.
 
-**Strong** can be used where [**phrasing**][dfn-phrasing-content] content is
-expected.
+**Heading** can be used where [**flow**][dfn-flow-content] content is expected.
 Its content model is [**phrasing**][dfn-phrasing-content] content.
 
+A `depth` field must be present.
+A value of `1` is said to be the highest rank and `6` the lowest.
+
 For example, the following markdown:
 
 ```markdown
-**alpha** __bravo__
+# Alpha
 ```
 
 Yields:
 
 ```js
 {
-  type: 'paragraph',
-  children: [
-    {
-      type: 'strong',
-      children: [{type: 'text', value: 'alpha'}]
-    },
-    {type: 'text', value: ' '},
-    {
-      type: 'strong',
-      children: [{type: 'text', value: 'bravo'}]
-    }
-  ]
+  type: 'heading',
+  depth: 1,
+  children: [{type: 'text', value: 'Alpha'}]
 }
 ```
 
-### `InlineCode`
+### `HTML`
 
 ```idl
-interface InlineCode <: Literal {
-  type: 'inlineCode'
+interface HTML <: Literal {
+  type: 'html'
 }
 ```
 
-**InlineCode** ([**Literal**][dfn-literal]) represents a fragment of computer
-code, such as a file name, computer program, or anything a computer could parse.
+**HTML** ([**Literal**][dfn-literal]) represents a fragment of raw [HTML][].
 
-**InlineCode** can be used where [**phrasing**][dfn-phrasing-content] content
-is expected.
+**HTML** can be used where [**flow**][dfn-flow-content] or
+[**phrasing**][dfn-phrasing-content] content is expected.
 Its content is represented by its `value` field.
 
-This node relates to the [**flow**][dfn-flow-content] content concept
-[**Code**][dfn-code].
+HTML nodes do not have the restriction of being valid or complete HTML
+([\[HTML\]][html]) constructs.
 
 For example, the following markdown:
 
 ```markdown
-`foo()`
+<div>
 ```
 
 Yields:
 
 ```js
-{type: 'inlineCode', value: 'foo()'}
-```
-
-### `Break`
-
-```idl
-interface Break <: Node {
-  type: 'break'
-}
-```
-
-**Break** ([**Node**][dfn-node]) represents a line break, such as in poems or
-addresses.
-
-**Break** can be used where [**phrasing**][dfn-phrasing-content] content is
-expected.
-It has no content model.
-
-For example, the following markdown:
-
-```markdown
-foo··
-bar
-```
-
-Yields:
-
-```js
-{
-  type: 'paragraph',
-  children: [
-    {type: 'text', value: 'foo'},
-    {type: 'break'},
-    {type: 'text', value: 'bar'}
-  ]
-}
-```
-
-### `Link`
-
-```idl
-interface Link <: Parent {
-  type: 'link'
-  children: [PhrasingContent]
-}
-
-Link includes Resource
-```
-
-**Link** ([**Parent**][dfn-parent]) represents a hyperlink.
-
-**Link** can be used where [**phrasing**][dfn-phrasing-content] content is
-expected.
-Its content model is also [**phrasing**][dfn-phrasing-content] content.
-
-**Link** includes the mixin [**Resource**][dfn-mxn-resource].
-
-For example, the following markdown:
-
-```markdown
-[alpha](https://example.com "bravo")
-```
-
-Yields:
-
-```js
-{
-  type: 'link',
-  url: 'https://example.com',
-  title: 'bravo',
-  children: [{type: 'text', value: 'alpha'}]
-}
+{type: 'html', value: '<div>'}
 ```
 
 ### `Image`
@@ -737,46 +440,6 @@ Yields:
   url: 'https://example.com/favicon.ico',
   title: 'bravo',
   alt: 'alpha'
-}
-```
-
-### `LinkReference`
-
-```idl
-interface LinkReference <: Parent {
-  type: 'linkReference'
-  children: [PhrasingContent]
-}
-
-LinkReference includes Reference
-```
-
-**LinkReference** ([**Parent**][dfn-parent]) represents a hyperlink through
-association, or its original source if there is no association.
-
-**LinkReference** can be used where [**phrasing**][dfn-phrasing-content] content
-is expected.
-Its content model is also [**phrasing**][dfn-phrasing-content] content.
-
-**LinkReference** includes the mixin [**Reference**][dfn-mxn-reference].
-
-**LinkReferences** should be associated with a [**Definition**][dfn-definition].
-
-For example, the following markdown:
-
-```markdown
-[alpha][Bravo]
-```
-
-Yields:
-
-```js
-{
-  type: 'linkReference',
-  identifier: 'bravo',
-  label: 'Bravo',
-  referenceType: 'full',
-  children: [{type: 'text', value: 'alpha'}]
 }
 ```
 
@@ -821,25 +484,361 @@ Yields:
 }
 ```
 
-## Mixin
-
-### `Resource`
+### `InlineCode`
 
 ```idl
-interface mixin Resource {
-  url: string
-  title: string?
+interface InlineCode <: Literal {
+  type: 'inlineCode'
 }
 ```
 
-**Resource** represents a reference to resource.
+**InlineCode** ([**Literal**][dfn-literal]) represents a fragment of computer
+code, such as a file name, computer program, or anything a computer could parse.
 
-A `url` field must be present.
-It represents a URL to the referenced resource.
+**InlineCode** can be used where [**phrasing**][dfn-phrasing-content] content
+is expected.
+Its content is represented by its `value` field.
 
-A `title` field can be present.
-It represents  advisory information for the resource, such as would be
-appropriate for a tooltip.
+This node relates to the [**flow**][dfn-flow-content] content concept
+[**Code**][dfn-code].
+
+For example, the following markdown:
+
+```markdown
+`foo()`
+```
+
+Yields:
+
+```js
+{type: 'inlineCode', value: 'foo()'}
+```
+
+### `Link`
+
+```idl
+interface Link <: Parent {
+  type: 'link'
+  children: [PhrasingContent]
+}
+
+Link includes Resource
+```
+
+**Link** ([**Parent**][dfn-parent]) represents a hyperlink.
+
+**Link** can be used where [**phrasing**][dfn-phrasing-content] content is
+expected.
+Its content model is also [**phrasing**][dfn-phrasing-content] content.
+
+**Link** includes the mixin [**Resource**][dfn-mxn-resource].
+
+For example, the following markdown:
+
+```markdown
+[alpha](https://example.com "bravo")
+```
+
+Yields:
+
+```js
+{
+  type: 'link',
+  url: 'https://example.com',
+  title: 'bravo',
+  children: [{type: 'text', value: 'alpha'}]
+}
+```
+
+### `LinkReference`
+
+```idl
+interface LinkReference <: Parent {
+  type: 'linkReference'
+  children: [PhrasingContent]
+}
+
+LinkReference includes Reference
+```
+
+**LinkReference** ([**Parent**][dfn-parent]) represents a hyperlink through
+association, or its original source if there is no association.
+
+**LinkReference** can be used where [**phrasing**][dfn-phrasing-content] content
+is expected.
+Its content model is also [**phrasing**][dfn-phrasing-content] content.
+
+**LinkReference** includes the mixin [**Reference**][dfn-mxn-reference].
+
+**LinkReferences** should be associated with a [**Definition**][dfn-definition].
+
+For example, the following markdown:
+
+```markdown
+[alpha][Bravo]
+```
+
+Yields:
+
+```js
+{
+  type: 'linkReference',
+  identifier: 'bravo',
+  label: 'Bravo',
+  referenceType: 'full',
+  children: [{type: 'text', value: 'alpha'}]
+}
+```
+
+### `List`
+
+```idl
+interface List <: Parent {
+  type: 'list'
+  ordered: boolean?
+  start: number?
+  spread: boolean?
+  children: [ListContent]
+}
+```
+
+**List** ([**Parent**][dfn-parent]) represents a list of items.
+
+**List** can be used where [**flow**][dfn-flow-content] content is expected.
+Its content model is [**list**][dfn-list-content] content.
+
+An `ordered` field can be present.
+It represents that the items have been intentionally ordered (when `true`), or
+that the order of items is not important (when `false` or not present).
+
+A `start` field can be present.
+It represents, when the `ordered` field is `true`, the starting number of the
+list.
+
+A `spread` field can be present.
+It represents that one or more of its children are separated with a blank line
+from its [siblings][term-sibling] (when `true`), or not (when `false` or not
+present).
+
+For example, the following markdown:
+
+```markdown
+1. foo
+```
+
+Yields:
+
+```js
+{
+  type: 'list',
+  ordered: true,
+  start: 1,
+  spread: false,
+  children: [{
+    type: 'listItem',
+    spread: false,
+    children: [{
+      type: 'paragraph',
+      children: [{type: 'text', value: 'foo'}]
+    }]
+  }]
+}
+```
+
+### `ListItem`
+
+```idl
+interface ListItem <: Parent {
+  type: 'listItem'
+  spread: boolean?
+  children: [FlowContent]
+}
+```
+
+**ListItem** ([**Parent**][dfn-parent]) represents an item in a
+[**List**][dfn-list].
+
+**ListItem** can be used where [**list**][dfn-list-content] content is expected.
+Its content model is [**flow**][dfn-flow-content] content.
+
+A `spread` field can be present.
+It represents that the item contains two or more [*children*][term-child]
+separated by a blank line (when `true`), or not (when `false` or not present).
+
+For example, the following markdown:
+
+```markdown
+* bar
+```
+
+Yields:
+
+```js
+{
+  type: 'listItem',
+  spread: false,
+  children: [{
+    type: 'paragraph',
+    children: [{type: 'text', value: 'bar'}]
+  }]
+}
+```
+
+### `Paragraph`
+
+```idl
+interface Paragraph <: Parent {
+  type: 'paragraph'
+  children: [PhrasingContent]
+}
+```
+
+**Paragraph** ([**Parent**][dfn-parent]) represents a unit of discourse dealing
+with a particular point or idea.
+
+**Paragraph** can be used where [**content**][dfn-content] is expected.
+Its content model is [**phrasing**][dfn-phrasing-content] content.
+
+For example, the following markdown:
+
+```markdown
+Alpha bravo charlie.
+```
+
+Yields:
+
+```js
+{
+  type: 'paragraph',
+  children: [{type: 'text', value: 'Alpha bravo charlie.'}]
+}
+```
+
+### `Root`
+
+```idl
+interface Root <: Parent {
+  type: 'root'
+}
+```
+
+**Root** ([**Parent**][dfn-parent]) represents a document.
+
+**Root** can be used as the [*root*][term-root] of a [*tree*][term-tree], never
+as a [*child*][term-child].
+Its content model is **not** limited to [**flow**][dfn-flow-content] content,
+but instead can contain any [**mdast content**][dfn-mdast-content] with the
+restriction that all content must be of the same category.
+
+### `Strong`
+
+```idl
+interface Strong <: Parent {
+  type: 'strong'
+  children: [PhrasingContent]
+}
+```
+
+**Strong** ([**Parent**][dfn-parent]) represents strong importance, seriousness,
+or urgency for its contents.
+
+**Strong** can be used where [**phrasing**][dfn-phrasing-content] content is
+expected.
+Its content model is [**phrasing**][dfn-phrasing-content] content.
+
+For example, the following markdown:
+
+```markdown
+**alpha** __bravo__
+```
+
+Yields:
+
+```js
+{
+  type: 'paragraph',
+  children: [
+    {
+      type: 'strong',
+      children: [{type: 'text', value: 'alpha'}]
+    },
+    {type: 'text', value: ' '},
+    {
+      type: 'strong',
+      children: [{type: 'text', value: 'bravo'}]
+    }
+  ]
+}
+```
+
+### `Text`
+
+```idl
+interface Text <: Literal {
+  type: 'text'
+}
+```
+
+**Text** ([**Literal**][dfn-literal]) represents everything that is just text.
+
+**Text** can be used where [**phrasing**][dfn-phrasing-content] content is
+expected.
+Its content is represented by its `value` field.
+
+For example, the following markdown:
+
+```markdown
+Alpha bravo charlie.
+```
+
+Yields:
+
+```js
+{type: 'text', value: 'Alpha bravo charlie.'}
+```
+
+### `ThematicBreak`
+
+```idl
+interface ThematicBreak <: Node {
+  type: 'thematicBreak'
+}
+```
+
+**ThematicBreak** ([**Node**][dfn-node]) represents a thematic break, such as a
+scene change in a story, a transition to another topic, or a new document.
+
+**ThematicBreak** can be used where [**flow**][dfn-flow-content] content is
+expected.
+It has no content model.
+
+For example, the following markdown:
+
+```markdown
+***
+```
+
+Yields:
+
+```js
+{type: 'thematicBreak'}
+```
+
+## Mixin
+
+### `Alternative`
+
+```idl
+interface mixin Alternative {
+  alt: string?
+}
+```
+
+**Alternative** represents a node with a fallback
+
+An `alt` field should be present.
+It represents equivalent content for environments that cannot represent the
+node as intended.
 
 ### `Association`
 
@@ -890,19 +889,23 @@ A `referenceType` field must be present.
 Its value must be a [**referenceType**][dfn-enum-reference-type].
 It represents the explicitness of the reference.
 
-### `Alternative`
+### `Resource`
 
 ```idl
-interface mixin Alternative {
-  alt: string?
+interface mixin Resource {
+  url: string
+  title: string?
 }
 ```
 
-**Alternative** represents a node with a fallback
+**Resource** represents a reference to resource.
 
-An `alt` field should be present.
-It represents equivalent content for environments that cannot represent the
-node as intended.
+A `url` field must be present.
+It represents a URL to the referenced resource.
+
+A `title` field can be present.
+It represents  advisory information for the resource, such as would be
+appropriate for a tooltip.
 
 ## Enumeration
 
@@ -931,6 +934,14 @@ type MdastContent = FlowContent | ListContent | PhrasingContent
 Each node in mdast falls into one or more categories of **Content** that group
 nodes with similar characteristics together.
 
+### `Content`
+
+```idl
+type Content = Definition | Paragraph
+```
+
+**Content** represents runs of text that form definitions and paragraphs.
+
 ### `FlowContent`
 
 ```idl
@@ -939,14 +950,6 @@ type FlowContent =
 ```
 
 **Flow** content represent the sections of document.
-
-### `Content`
-
-```idl
-type Content = Definition | Paragraph
-```
-
-**Content** represents runs of text that form definitions and paragraphs.
 
 ### `ListContent`
 
@@ -974,6 +977,49 @@ However, a short list of frequently used extensions are shown below.
 ### GFM
 
 The following interfaces are found in [GitHub Flavored Markdown][gfm].
+
+#### `Delete`
+
+```idl
+interface Delete <: Parent {
+  type: 'delete'
+  children: [PhrasingContent]
+}
+```
+
+**Delete** ([**Parent**][dfn-parent]) represents contents that are no longer
+accurate or no longer relevant.
+
+**Delete** can be used where [**phrasing**][dfn-phrasing-content] content is
+expected.
+Its content model is [**phrasing**][dfn-phrasing-content] content.
+
+For example, the following markdown:
+
+```markdown
+~~alpha~~
+```
+
+Yields:
+
+```js
+{
+  type: 'delete',
+  children: [{type: 'text', value: 'alpha'}]
+}
+```
+
+#### `ListItem` (GFM)
+
+```idl
+interface ListItemGfm <: ListItem {
+  checked: boolean?
+}
+```
+
+In GFM, a `checked` field can be present.
+It represents whether the item is done (when `true`), not done (when `false`),
+or indeterminate or not applicable (when `null` or not present).
 
 #### `FootnoteDefinition`
 
@@ -1123,26 +1169,6 @@ Yields:
 }
 ```
 
-#### `TableRow`
-
-```idl
-interface TableRow <: Parent {
-  type: 'tableRow'
-  children: [RowContent]
-}
-```
-
-**TableRow** ([**Parent**][dfn-parent]) represents a row of cells in a table.
-
-**TableRow** can be used where [**table**][dfn-table-content] content is
-expected.
-Its content model is [**row**][dfn-row-content] content.
-
-If the node is a [*head*][term-head], it represents the labels of the columns
-for its parent [**Table**][dfn-table].
-
-For an example, see [**Table**][dfn-table].
-
 #### `TableCell`
 
 ```idl
@@ -1162,48 +1188,25 @@ Its content model is [**phrasing**][dfn-phrasing-content] content excluding
 
 For an example, see [**Table**][dfn-table].
 
-#### `ListItem` (GFM)
+#### `TableRow`
 
 ```idl
-interface ListItemGfm <: ListItem {
-  checked: boolean?
+interface TableRow <: Parent {
+  type: 'tableRow'
+  children: [RowContent]
 }
 ```
 
-In GFM, a `checked` field can be present.
-It represents whether the item is done (when `true`), not done (when `false`),
-or indeterminate or not applicable (when `null` or not present).
+**TableRow** ([**Parent**][dfn-parent]) represents a row of cells in a table.
 
-#### `Delete`
-
-```idl
-interface Delete <: Parent {
-  type: 'delete'
-  children: [PhrasingContent]
-}
-```
-
-**Delete** ([**Parent**][dfn-parent]) represents contents that are no longer
-accurate or no longer relevant.
-
-**Delete** can be used where [**phrasing**][dfn-phrasing-content] content is
+**TableRow** can be used where [**table**][dfn-table-content] content is
 expected.
-Its content model is [**phrasing**][dfn-phrasing-content] content.
+Its content model is [**row**][dfn-row-content] content.
 
-For example, the following markdown:
+If the node is a [*head*][term-head], it represents the labels of the columns
+for its parent [**Table**][dfn-table].
 
-```markdown
-~~alpha~~
-```
-
-Yields:
-
-```js
-{
-  type: 'delete',
-  children: [{type: 'text', value: 'alpha'}]
-}
-```
+For an example, see [**Table**][dfn-table].
 
 #### `alignType`
 
@@ -1230,22 +1233,6 @@ enum alignType {
 type FlowContentGfm = FootnoteDefinition | Table | FlowContent
 ```
 
-#### `TableContent`
-
-```idl
-type TableContent = TableRow
-```
-
-**Table** content represent the rows in a table.
-
-#### `RowContent`
-
-```idl
-type RowContent = TableCell
-```
-
-**Row** content represent the cells in a row.
-
 #### `ListContent` (GFM)
 
 ```idl
@@ -1257,6 +1244,22 @@ type ListContentGfm = ListItemGfm
 ```idl
 type PhrasingContentGfm = FootnoteReference | Delete | PhrasingContent
 ```
+
+#### `RowContent`
+
+```idl
+type RowContent = TableCell
+```
+
+**Row** content represent the cells in a row.
+
+#### `TableContent`
+
+```idl
+type TableContent = TableRow
+```
+
+**Table** content represent the rows in a table.
 
 ### Frontmatter
 
