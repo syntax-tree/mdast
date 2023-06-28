@@ -1265,18 +1265,18 @@ type TableContent = TableRow
 
 The following interfaces are found with YAML.
 
-#### `YAML`
+#### `Yaml`
 
 ```idl
-interface YAML <: Literal {
+interface Yaml <: Literal {
   type: 'yaml'
 }
 ```
 
-**YAML** ([**Literal**][dfn-literal]) represents a collection of metadata for
+**Yaml** ([**Literal**][dfn-literal]) represents a collection of metadata for
 the document in the YAML ([\[YAML\]][yaml]) data serialisation language.
 
-**YAML** can be used where [**frontmatter**][dfn-frontmatter-content] content is
+**Yaml** can be used where [**frontmatter**][dfn-frontmatter-content] content is
 expected.
 Its content is represented by its `value` field.
 
@@ -1297,7 +1297,7 @@ Yields:
 #### `FrontmatterContent`
 
 ```idl
-type FrontmatterContent = YAML
+type FrontmatterContent = Yaml
 ```
 
 **Frontmatter** content represent out-of-band information about the document.
