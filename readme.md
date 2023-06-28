@@ -12,7 +12,7 @@ and [GitHub Flavored Markdown][gfm].
 
 This document may not be released.
 See [releases][] for released documents.
-The latest released version is [`4.0.0`][latest].
+The latest released version is [`5.0.0`][latest].
 
 ## Contents
 
@@ -1540,7 +1540,7 @@ projects!
 
 [releases]: https://github.com/syntax-tree/mdast/releases
 
-[latest]: https://github.com/syntax-tree/mdast/releases/tag/4.0.0
+[latest]: https://github.com/syntax-tree/mdast/releases/tag/5.0.0
 
 [dfn-node]: https://github.com/syntax-tree/unist#node
 
