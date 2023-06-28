@@ -29,7 +29,7 @@ The latest released version is [`4.0.0`][latest].
     *   [`Definition`](#definition)
     *   [`Emphasis`](#emphasis)
     *   [`Heading`](#heading)
-    *   [`HTML`](#html)
+    *   [`Html`](#html)
     *   [`Image`](#image)
     *   [`ImageReference`](#imagereference)
     *   [`InlineCode`](#inlinecode)
@@ -377,21 +377,21 @@ Yields:
 }
 ```
 
-### `HTML`
+### `Html`
 
 ```idl
-interface HTML <: Literal {
+interface Html <: Literal {
   type: 'html'
 }
 ```
 
-**HTML** ([**Literal**][dfn-literal]) represents a fragment of raw [HTML][].
+**Html** ([**Literal**][dfn-literal]) represents a fragment of raw [HTML][].
 
-**HTML** can be used where [**flow**][dfn-flow-content] or
+**Html** can be used where [**flow**][dfn-flow-content] or
 [**phrasing**][dfn-phrasing-content] content is expected.
 Its content is represented by its `value` field.
 
-HTML nodes do not have the restriction of being valid or complete HTML
+**Html** nodes do not have the restriction of being valid or complete HTML
 ([\[HTML\]][html]) constructs.
 
 For example, the following markdown:
@@ -946,7 +946,7 @@ type Content = Definition | Paragraph
 
 ```idl
 type FlowContent =
-  Blockquote | Code | Heading | HTML | List | ThematicBreak | Content
+  Blockquote | Code | Heading | Html | List | ThematicBreak | Content
 ```
 
 **Flow** content represent the sections of document.
@@ -962,7 +962,7 @@ type ListContent = ListItem
 ### `PhrasingContent`
 
 ```idl
-type PhrasingContent = Break | Emphasis | HTML | Image | ImageReference
+type PhrasingContent = Break | Emphasis | Html | Image | ImageReference
   | InlineCode | Link | LinkReference | Strong | Text
 ```
 
