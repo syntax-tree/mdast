@@ -16,56 +16,56 @@ The latest released version is [`5.0.0`][latest].
 
 ## Contents
 
-*   [Introduction](#introduction)
-    *   [Where this specification fits](#where-this-specification-fits)
-*   [Types](#types)
-*   [Nodes (abstract)](#nodes-abstract)
-    *   [`Literal`](#literal)
-    *   [`Parent`](#parent)
-*   [Nodes](#nodes)
-    *   [`Blockquote`](#blockquote)
-    *   [`Break`](#break)
-    *   [`Code`](#code)
-    *   [`Definition`](#definition)
-    *   [`Emphasis`](#emphasis)
-    *   [`Heading`](#heading)
-    *   [`Html`](#html)
-    *   [`Image`](#image)
-    *   [`ImageReference`](#imagereference)
-    *   [`InlineCode`](#inlinecode)
-    *   [`Link`](#link)
-    *   [`LinkReference`](#linkreference)
-    *   [`List`](#list)
-    *   [`ListItem`](#listitem)
-    *   [`Paragraph`](#paragraph)
-    *   [`Root`](#root)
-    *   [`Strong`](#strong)
-    *   [`Text`](#text)
-    *   [`ThematicBreak`](#thematicbreak)
-*   [Mixin](#mixin)
-    *   [`Alternative`](#alternative)
-    *   [`Association`](#association)
-    *   [`Reference`](#reference)
-    *   [`Resource`](#resource)
-*   [Enumeration](#enumeration)
-    *   [`referenceType`](#referencetype)
-*   [Content model](#content-model)
-    *   [`Content`](#content)
-    *   [`FlowContent`](#flowcontent)
-    *   [`ListContent`](#listcontent)
-    *   [`PhrasingContent`](#phrasingcontent)
-*   [Extensions](#extensions)
-    *   [GFM](#gfm)
-    *   [Frontmatter](#frontmatter)
-    *   [MDX](#mdx)
-*   [Glossary](#glossary)
-*   [List of utilities](#list-of-utilities)
-*   [References](#references)
-*   [Security](#security)
-*   [Related](#related)
-*   [Contribute](#contribute)
-*   [Acknowledgments](#acknowledgments)
-*   [License](#license)
+* [Introduction](#introduction)
+  * [Where this specification fits](#where-this-specification-fits)
+* [Types](#types)
+* [Nodes (abstract)](#nodes-abstract)
+  * [`Literal`](#literal)
+  * [`Parent`](#parent)
+* [Nodes](#nodes)
+  * [`Blockquote`](#blockquote)
+  * [`Break`](#break)
+  * [`Code`](#code)
+  * [`Definition`](#definition)
+  * [`Emphasis`](#emphasis)
+  * [`Heading`](#heading)
+  * [`Html`](#html)
+  * [`Image`](#image)
+  * [`ImageReference`](#imagereference)
+  * [`InlineCode`](#inlinecode)
+  * [`Link`](#link)
+  * [`LinkReference`](#linkreference)
+  * [`List`](#list)
+  * [`ListItem`](#listitem)
+  * [`Paragraph`](#paragraph)
+  * [`Root`](#root)
+  * [`Strong`](#strong)
+  * [`Text`](#text)
+  * [`ThematicBreak`](#thematicbreak)
+* [Mixin](#mixin)
+  * [`Alternative`](#alternative)
+  * [`Association`](#association)
+  * [`Reference`](#reference)
+  * [`Resource`](#resource)
+* [Enumeration](#enumeration)
+  * [`referenceType`](#referencetype)
+* [Content model](#content-model)
+  * [`Content`](#content)
+  * [`FlowContent`](#flowcontent)
+  * [`ListContent`](#listcontent)
+  * [`PhrasingContent`](#phrasingcontent)
+* [Extensions](#extensions)
+  * [GFM](#gfm)
+  * [Frontmatter](#frontmatter)
+  * [MDX](#mdx)
+* [Glossary](#glossary)
+* [List of utilities](#list-of-utilities)
+* [References](#references)
+* [Security](#security)
+* [Related](#related)
+* [Contribute](#contribute)
+* [Acknowledgments](#acknowledgments)
+* [License](#license)
 
 ## Introduction
 
@@ -954,12 +954,12 @@ enum referenceType {
 
 **referenceType** represents the explicitness of a reference.
 
-*   **shortcut**: the reference is implicit,
-    its identifier inferred from its content
-*   **collapsed**: the reference is explicit,
-    its identifier inferred from its content
-*   **full**: the reference is explicit,
-    its identifier explicitly set
+* **shortcut**: the reference is implicit,
+  its identifier inferred from its content
+* **collapsed**: the reference is explicit,
+  its identifier inferred from its content
+* **full**: the reference is explicit,
+  its identifier explicitly set
 
 ## Content model
 
@@ -1266,13 +1266,13 @@ enum alignType {
 **alignType** represents how phrasing content is aligned
 ([\[CSSTEXT\]][css-text]).
 
-*   **`'left'`**: See the [`left`][css-left] value of the `text-align` CSS
-    property
-*   **`'right'`**: See the [`right`][css-right] value of the `text-align`
-    CSS property
-*   **`'center'`**: See the [`center`][css-center] value of the `text-align`
-    CSS property
-*   **`null`**: phrasing content is aligned as defined by the host environment
+* **`'left'`**: See the [`left`][css-left] value of the `text-align` CSS
+  property
+* **`'right'`**: See the [`right`][css-right] value of the `text-align`
+  CSS property
+* **`'center'`**: See the [`center`][css-center] value of the `text-align`
+  CSS property
+* **`null`**: phrasing content is aligned as defined by the host environment
 
 #### `FlowContent` (GFM)
 
@@ -1374,117 +1374,117 @@ See the [unist list of utilities][utilities] for more utilities.
 
 <!--lint disable list-item-spacing-->
 
-*   [`mdast-add-list-metadata`](https://gitlab.com/staltz/mdast-add-list-metadata)
-    — enhance the metadata of `list` and `listItem` nodes
-*   [`mdast-util-assert`](https://github.com/syntax-tree/mdast-util-assert)
-    — assert nodes
-*   [`mdast-builder`](https://github.com/mike-north/mdast-builder)
-    — build mdast structures with composable functions
-*   [`mdast-comment-marker`](https://github.com/syntax-tree/mdast-comment-marker)
-    — parse a comment marker
-*   [`mdast-util-compact`](https://github.com/syntax-tree/mdast-util-compact)
-    — make a tree compact
-*   [`mdast-util-definitions`](https://github.com/syntax-tree/mdast-util-definitions)
-    — find definition nodes
-*   [`mdast-util-directive`](https://github.com/syntax-tree/mdast-util-directive)
-    — parse and serialize directives
-*   [`mdast-util-find-and-replace`](https://github.com/syntax-tree/mdast-util-find-and-replace)
-    — find and replace text
-*   [`mdast-flatten-image-paragraphs`](https://gitlab.com/staltz/mdast-flatten-image-paragraphs)
-    — flatten `paragraph` and `image` into one `image` node
-*   [`mdast-flatten-listitem-paragraphs`](https://gitlab.com/staltz/mdast-flatten-listitem-paragraphs)
-    — flatten `listItem` and (nested) paragraph into one listItem node
-*   [`mdast-flatten-nested-lists`](https://gitlab.com/staltz/mdast-flatten-nested-lists)
-    — transform a tree to avoid lists in lists
-*   [`mdast-util-from-adf`](https://github.com/bitcrowd/mdast-util-from-adf)
-    — build mdast syntax tree from Atlassian Document Format (ADF)
-*   [`mdast-util-from-markdown`](https://github.com/syntax-tree/mdast-util-from-markdown)
-    — parse markdown
-*   [`mdast-util-frontmatter`](https://github.com/syntax-tree/mdast-util-frontmatter)
-    — parse and serialize frontmatter
-*   [`mdast-util-gfm`](https://github.com/syntax-tree/mdast-util-gfm)
-    — parse and serialize GFM
-*   [`mdast-util-gfm-autolink-literal`](https://github.com/syntax-tree/mdast-util-gfm-autolink-literal)
-    — parse and serialize GFM autolink literals
-*   [`mdast-util-gfm-footnote`](https://github.com/syntax-tree/mdast-util-gfm-footnote)
-    — parse and serialize GFM footnotes
-*   [`mdast-util-gfm-strikethrough`](https://github.com/syntax-tree/mdast-util-gfm-strikethrough)
-    — parse and serialize GFM strikethrough
-*   [`mdast-util-gfm-table`](https://github.com/syntax-tree/mdast-util-gfm-table)
-    — parse and serialize GFM tables
-*   [`mdast-util-gfm-task-list-item`](https://github.com/syntax-tree/mdast-util-gfm-task-list-item)
-    — parse and serialize GFM task list items
-*   [`mdast-util-gridtables`](https://github.com/syntax-tree/mdast-util-gridtables)
-    — parse and serialize gridtables
-*   [`mdast-util-heading-range`](https://github.com/syntax-tree/mdast-util-heading-range)
-    — markdown heading as ranges
-*   [`mdast-util-heading-style`](https://github.com/syntax-tree/mdast-util-heading-style)
-    — get the style of a heading node
-*   [`mdast-util-hidden`](https://github.com/Xunnamius/unified-utils/tree/main/packages/mdast-util-hidden)
-    — prevent nodes from being seen by transformers.
-*   [`mdast-util-math`](https://github.com/syntax-tree/mdast-util-math)
-    — parse and serialize math
-*   [`mdast-util-mdx`](https://github.com/syntax-tree/mdast-util-mdx)
-    — parse and serialize MDX
-*   [`mdast-util-mdx-expression`](https://github.com/syntax-tree/mdast-util-mdx-expression)
-    — parse and serialize MDX expressions
-*   [`mdast-util-mdx-jsx`](https://github.com/syntax-tree/mdast-util-mdx-jsx)
-    — parse and serialize MDX JSX
-*   [`mdast-util-mdxjs-esm`](https://github.com/syntax-tree/mdast-util-mdxjs-esm)
-    — parse and serialize MDX ESM
-*   [`mdast-move-images-to-root`](https://gitlab.com/staltz/mdast-move-images-to-root)
-    — move image nodes up the tree until they are direct children of the root
-*   [`mdast-normalize-headings`](https://github.com/syntax-tree/mdast-normalize-headings)
-    — ensure at most one top-level heading is in the document
-*   [`mdast-util-phrasing`](https://github.com/syntax-tree/mdast-util-phrasing)
-    — check if a node is phrasing content
-*   [`mdast-squeeze-paragraphs`](https://github.com/syntax-tree/mdast-squeeze-paragraphs)
-    — remove empty paragraphs
-*   [`mdast-util-toc`](https://github.com/syntax-tree/mdast-util-toc)
-    — generate a table of contents from a tree
-*   [`mdast-util-to-hast`](https://github.com/syntax-tree/mdast-util-to-hast)
-    — transform to hast
-*   [`mdast-util-to-markdown`](https://github.com/syntax-tree/mdast-util-to-markdown)
-    — serialize markdown
-*   [`mdast-util-to-nlcst`](https://github.com/syntax-tree/mdast-util-to-nlcst)
-    — transform to nlcst
-*   [`mdast-util-to-string`](https://github.com/syntax-tree/mdast-util-to-string)
-    — get the plain text content of a node
-*   [`mdast-zone`](https://github.com/syntax-tree/mdast-zone)
-    — HTML comments as ranges or markers
+* [`mdast-add-list-metadata`](https://gitlab.com/staltz/mdast-add-list-metadata)
+  — enhance the metadata of `list` and `listItem` nodes
+* [`mdast-util-assert`](https://github.com/syntax-tree/mdast-util-assert)
+  — assert nodes
+* [`mdast-builder`](https://github.com/mike-north/mdast-builder)
+  — build mdast structures with composable functions
+* [`mdast-comment-marker`](https://github.com/syntax-tree/mdast-comment-marker)
+  — parse a comment marker
+* [`mdast-util-compact`](https://github.com/syntax-tree/mdast-util-compact)
+  — make a tree compact
+* [`mdast-util-definitions`](https://github.com/syntax-tree/mdast-util-definitions)
+  — find definition nodes
+* [`mdast-util-directive`](https://github.com/syntax-tree/mdast-util-directive)
+  — parse and serialize directives
+* [`mdast-util-find-and-replace`](https://github.com/syntax-tree/mdast-util-find-and-replace)
+  — find and replace text
+* [`mdast-flatten-image-paragraphs`](https://gitlab.com/staltz/mdast-flatten-image-paragraphs)
+  — flatten `paragraph` and `image` into one `image` node
+* [`mdast-flatten-listitem-paragraphs`](https://gitlab.com/staltz/mdast-flatten-listitem-paragraphs)
+  — flatten `listItem` and (nested) paragraph into one listItem node
+* [`mdast-flatten-nested-lists`](https://gitlab.com/staltz/mdast-flatten-nested-lists)
+  — transform a tree to avoid lists in lists
+* [`mdast-util-from-adf`](https://github.com/bitcrowd/mdast-util-from-adf)
+  — build mdast syntax tree from Atlassian Document Format (ADF)
+* [`mdast-util-from-markdown`](https://github.com/syntax-tree/mdast-util-from-markdown)
+  — parse markdown
+* [`mdast-util-frontmatter`](https://github.com/syntax-tree/mdast-util-frontmatter)
+  — parse and serialize frontmatter
+* [`mdast-util-gfm`](https://github.com/syntax-tree/mdast-util-gfm)
+  — parse and serialize GFM
+* [`mdast-util-gfm-autolink-literal`](https://github.com/syntax-tree/mdast-util-gfm-autolink-literal)
+  — parse and serialize GFM autolink literals
+* [`mdast-util-gfm-footnote`](https://github.com/syntax-tree/mdast-util-gfm-footnote)
+  — parse and serialize GFM footnotes
+* [`mdast-util-gfm-strikethrough`](https://github.com/syntax-tree/mdast-util-gfm-strikethrough)
+  — parse and serialize GFM strikethrough
+* [`mdast-util-gfm-table`](https://github.com/syntax-tree/mdast-util-gfm-table)
+  — parse and serialize GFM tables
+* [`mdast-util-gfm-task-list-item`](https://github.com/syntax-tree/mdast-util-gfm-task-list-item)
+  — parse and serialize GFM task list items
+* [`mdast-util-gridtables`](https://github.com/syntax-tree/mdast-util-gridtables)
+  — parse and serialize gridtables
+* [`mdast-util-heading-range`](https://github.com/syntax-tree/mdast-util-heading-range)
+  — markdown heading as ranges
+* [`mdast-util-heading-style`](https://github.com/syntax-tree/mdast-util-heading-style)
+  — get the style of a heading node
+* [`mdast-util-hidden`](https://github.com/Xunnamius/unified-utils/tree/main/packages/mdast-util-hidden)
+  — prevent nodes from being seen by transformers.
+* [`mdast-util-math`](https://github.com/syntax-tree/mdast-util-math)
+  — parse and serialize math
+* [`mdast-util-mdx`](https://github.com/syntax-tree/mdast-util-mdx)
+  — parse and serialize MDX
+* [`mdast-util-mdx-expression`](https://github.com/syntax-tree/mdast-util-mdx-expression)
+  — parse and serialize MDX expressions
+* [`mdast-util-mdx-jsx`](https://github.com/syntax-tree/mdast-util-mdx-jsx)
+  — parse and serialize MDX JSX
+* [`mdast-util-mdxjs-esm`](https://github.com/syntax-tree/mdast-util-mdxjs-esm)
+  — parse and serialize MDX ESM
+* [`mdast-move-images-to-root`](https://gitlab.com/staltz/mdast-move-images-to-root)
+  — move image nodes up the tree until they are direct children of the root
+* [`mdast-normalize-headings`](https://github.com/syntax-tree/mdast-normalize-headings)
+  — ensure at most one top-level heading is in the document
+* [`mdast-util-phrasing`](https://github.com/syntax-tree/mdast-util-phrasing)
+  — check if a node is phrasing content
+* [`mdast-squeeze-paragraphs`](https://github.com/syntax-tree/mdast-squeeze-paragraphs)
+  — remove empty paragraphs
+* [`mdast-util-toc`](https://github.com/syntax-tree/mdast-util-toc)
+  — generate a table of contents from a tree
+* [`mdast-util-to-hast`](https://github.com/syntax-tree/mdast-util-to-hast)
+  — transform to hast
+* [`mdast-util-to-markdown`](https://github.com/syntax-tree/mdast-util-to-markdown)
+  — serialize markdown
+* [`mdast-util-to-nlcst`](https://github.com/syntax-tree/mdast-util-to-nlcst)
+  — transform to nlcst
+* [`mdast-util-to-string`](https://github.com/syntax-tree/mdast-util-to-string)
+  — get the plain text content of a node
+* [`mdast-zone`](https://github.com/syntax-tree/mdast-zone)
+  — HTML comments as ranges or markers
 
 ## References
 
-*   **unist**:
-    [Universal Syntax Tree][unist].
-    T. Wormer; et al.
-*   **Markdown**:
-    [Markdown][].
-    J. Gruber.
-*   **CommonMark**:
-    [CommonMark][].
-    J. MacFarlane; et al.
-*   **GFM**:
-    [GitHub Flavored Markdown][gfm].
-    GitHub.
-*   **HTML**:
-    [HTML Standard][html],
-    A. van Kesteren; et al.
-    WHATWG.
-*   **CSSTEXT**:
-    [CSS Text][css-text],
-    CSS Text, E. Etemad, K. Ishii.
-    W3C.
-*   **JavaScript**:
-    [ECMAScript Language Specification][javascript].
-    Ecma International.
-*   **YAML**:
-    [YAML Ain’t Markup Language][yaml],
-    O. Ben-Kiki, C. Evans, I. döt Net.
-*   **Web IDL**:
-    [Web IDL][webidl],
-    C. McCormack.
-    W3C.
+* **unist**:
+  [Universal Syntax Tree][unist].
+  T. Wormer; et al.
+* **Markdown**:
+  [Markdown][].
+  J. Gruber.
+* **CommonMark**:
+  [CommonMark][].
+  J. MacFarlane; et al.
+* **GFM**:
+  [GitHub Flavored Markdown][gfm].
+  GitHub.
+* **HTML**:
+  [HTML Standard][html],
+  A. van Kesteren; et al.
+  WHATWG.
+* **CSSTEXT**:
+  [CSS Text][css-text],
+  CSS Text, E. Etemad, K. Ishii.
+  W3C.
+* **JavaScript**:
+  [ECMAScript Language Specification][javascript].
+  Ecma International.
+* **YAML**:
+  [YAML Ain’t Markup Language][yaml],
+  O. Ben-Kiki, C. Evans, I. döt Net.
+* **Web IDL**:
+  [Web IDL][webidl],
+  C. McCormack.
+  W3C.
 
 ## Security
 
@@ -1498,12 +1498,12 @@ make the hast tree safe.
 
 ## Related
 
-*   [hast](https://github.com/syntax-tree/hast)
-    — Hypertext Abstract Syntax Tree format
-*   [nlcst](https://github.com/syntax-tree/nlcst)
-    — Natural Language Concrete Syntax Tree format
-*   [xast](https://github.com/syntax-tree/xast)
-    — Extensible Abstract Syntax Tree
+* [hast](https://github.com/syntax-tree/hast)
+  — Hypertext Abstract Syntax Tree format
+* [nlcst](https://github.com/syntax-tree/nlcst)
+  — Natural Language Concrete Syntax Tree format
+* [xast](https://github.com/syntax-tree/xast)
+  — Extensible Abstract Syntax Tree
 
 ## Contribute
 
