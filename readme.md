@@ -7,8 +7,8 @@
 **mdast** is a specification for representing markdown in a [syntax
 tree][syntax-tree].
 It implements **[unist][]**.
-It can represent several flavours of [markdown][], such as [CommonMark][]
-and [GitHub Flavored Markdown][gfm].
+It can represent several flavours of [markdown][],
+such as [CommonMark][] and [GitHub Flavored Markdown][gfm].
 
 This document may not be released.
 See [releases][] for released documents.
@@ -71,19 +71,22 @@ The latest released version is [`5.0.0`][latest].
 
 This document defines a format for representing [markdown][] as an [abstract
 syntax tree][syntax-tree].
-Development of mdast started in July 2014, in **[remark][]**, before [unist][]
-existed.
+Development of mdast started in July 2014,
+in **[remark][]**,
+before [unist][] existed.
 This specification is written in a [Web IDL][webidl]-like grammar.
 
 ### Where this specification fits
 
-mdast extends [unist][], a format for syntax trees, to benefit from its
-[ecosystem of utilities][utilities].
+mdast extends [unist][],
+a format for syntax trees,
+to benefit from its [ecosystem of utilities][utilities].
 
 mdast relates to [JavaScript][] in that it has a rich [ecosystem of
 utilities][list-of-utilities] for working with compliant syntax trees in
 JavaScript.
-However, mdast is not limited to JavaScript and can be used in other programming
+However,
+mdast is not limited to JavaScript and can be used in other programming
 languages.
 
 mdast relates to the [unified][] and [remark][] projects in that mdast syntax
@@ -91,8 +94,8 @@ trees are used throughout their ecosystems.
 
 ## Types
 
-If you are using TypeScript, you can use the unist types by installing them
-with npm:
+If you are using TypeScript,
+you can use the unist types by installing them with npm:
 
 ```sh
 npm install @types/mdast
@@ -144,7 +147,8 @@ somewhere else.
 expected.
 Its content model is also [**flow**][dfn-flow-content] content.
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 > Alpha bravo charlie.
@@ -170,14 +174,15 @@ interface Break <: Node {
 }
 ```
 
-**Break** ([**Node**][dfn-node]) represents a line break, such as in poems or
-addresses.
+**Break** ([**Node**][dfn-node]) represents a line break,
+such as in poems or addresses.
 
 **Break** can be used where [**phrasing**][dfn-phrasing-content] content is
 expected.
 It has no content model.
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 foo··
@@ -219,10 +224,12 @@ This node relates to the [**phrasing**][dfn-phrasing-content] content concept
 A `lang` field can be present.
 It represents the language of computer code being marked up.
 
-If the `lang` field is present, a `meta` field can be present.
+If the `lang` field is present,
+a `meta` field can be present.
 It represents custom information relating to the node.
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
     foo()
@@ -283,7 +290,8 @@ It has no content model.
 [**LinkReferences**][dfn-link-reference] and
 [**ImageReferences**][dfn-image-reference].
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 [Alpha]: https://example.com
@@ -317,7 +325,8 @@ contents.
 expected.
 Its content model is [**phrasing**][dfn-phrasing-content] content.
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 *alpha* _bravo_
@@ -360,7 +369,8 @@ Its content model is [**phrasing**][dfn-phrasing-content] content.
 A `depth` field must be present.
 A value of `1` is said to be the highest rank and `6` the lowest.
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 # Alpha
@@ -393,7 +403,8 @@ Its content is represented by its `value` field.
 **Html** nodes do not have the restriction of being valid or complete HTML
 ([\[HTML\]][html]) constructs.
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 <div>
@@ -420,12 +431,14 @@ Image includes Alternative
 
 **Image** can be used where [**phrasing**][dfn-phrasing-content] content is
 expected.
-It has no content model, but is described by its `alt` field.
+It has no content model,
+but is described by its `alt` field.
 
 **Image** includes the mixins [**Resource**][dfn-mxn-resource] and
 [**Alternative**][dfn-mxn-alternative].
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 ![alpha](https://example.com/favicon.ico "bravo")
@@ -454,18 +467,21 @@ ImageReference includes Alternative
 ```
 
 **ImageReference** ([**Node**][dfn-node]) represents an image through
-association, or its original source if there is no association.
+association,
+or its original source if there is no association.
 
 **ImageReference** can be used where [**phrasing**][dfn-phrasing-content]
 content is expected.
-It has no content model, but is described by its `alt` field.
+It has no content model,
+but is described by its `alt` field.
 
 **ImageReference** includes the mixins [**Reference**][dfn-mxn-reference] and
 [**Alternative**][dfn-mxn-alternative].
 
 **ImageReference** should be associated with a [**Definition**][dfn-definition].
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 ![alpha][bravo]
@@ -492,7 +508,10 @@ interface InlineCode <: Literal {
 ```
 
 **InlineCode** ([**Literal**][dfn-literal]) represents a fragment of computer
-code, such as a file name, computer program, or anything a computer could parse.
+code,
+such as a file name,
+computer program,
+or anything a computer could parse.
 
 **InlineCode** can be used where [**phrasing**][dfn-phrasing-content] content
 is expected.
@@ -501,7 +520,8 @@ Its content is represented by its `value` field.
 This node relates to the [**flow**][dfn-flow-content] content concept
 [**Code**][dfn-code].
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 `foo()`
@@ -532,7 +552,8 @@ Its content model is also [**phrasing**][dfn-phrasing-content] content.
 
 **Link** includes the mixin [**Resource**][dfn-mxn-resource].
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 [alpha](https://example.com "bravo")
@@ -561,7 +582,8 @@ LinkReference includes Reference
 ```
 
 **LinkReference** ([**Parent**][dfn-parent]) represents a hyperlink through
-association, or its original source if there is no association.
+association,
+or its original source if there is no association.
 
 **LinkReference** can be used where [**phrasing**][dfn-phrasing-content] content
 is expected.
@@ -571,7 +593,8 @@ Its content model is also [**phrasing**][dfn-phrasing-content] content.
 
 **LinkReferences** should be associated with a [**Definition**][dfn-definition].
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 [alpha][Bravo]
@@ -607,19 +630,21 @@ interface List <: Parent {
 Its content model is [**list**][dfn-list-content] content.
 
 An `ordered` field can be present.
-It represents that the items have been intentionally ordered (when `true`), or
-that the order of items is not important (when `false` or not present).
+It represents that the items have been intentionally ordered (when `true`),
+or that the order of items is not important (when `false` or not present).
 
 A `start` field can be present.
-It represents, when the `ordered` field is `true`, the starting number of the
-list.
+It represents,
+when the `ordered` field is `true`,
+the starting number of the list.
 
 A `spread` field can be present.
 It represents that one or more of its children are separated with a blank line
-from its [siblings][term-sibling] (when `true`), or not (when `false` or not
-present).
+from its [siblings][term-sibling] (when `true`),
+or not (when `false` or not present).
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 1. foo
@@ -662,9 +687,11 @@ Its content model is [**flow**][dfn-flow-content] content.
 
 A `spread` field can be present.
 It represents that the item contains two or more [*children*][term-child]
-separated by a blank line (when `true`), or not (when `false` or not present).
+separated by a blank line (when `true`),
+or not (when `false` or not present).
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 * bar
@@ -698,7 +725,8 @@ with a particular point or idea.
 **Paragraph** can be used where [**content**][dfn-content] is expected.
 Its content model is [**phrasing**][dfn-phrasing-content] content.
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 Alpha bravo charlie.
@@ -723,8 +751,8 @@ interface Root <: Parent {
 
 **Root** ([**Parent**][dfn-parent]) represents a document.
 
-**Root** can be used as the [*root*][term-root] of a [*tree*][term-tree], never
-as a [*child*][term-child].
+**Root** can be used as the [*root*][term-root] of a [*tree*][term-tree],
+never as a [*child*][term-child].
 Its content model is **not** limited to [**flow**][dfn-flow-content] content,
 but instead can contain any [**mdast content**][dfn-mdast-content] with the
 restriction that all content must be of the same category.
@@ -738,14 +766,16 @@ interface Strong <: Parent {
 }
 ```
 
-**Strong** ([**Parent**][dfn-parent]) represents strong importance, seriousness,
+**Strong** ([**Parent**][dfn-parent]) represents strong importance,
+seriousness,
 or urgency for its contents.
 
 **Strong** can be used where [**phrasing**][dfn-phrasing-content] content is
 expected.
 Its content model is [**phrasing**][dfn-phrasing-content] content.
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 **alpha** __bravo__
@@ -784,7 +814,8 @@ interface Text <: Literal {
 expected.
 Its content is represented by its `value` field.
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 Alpha bravo charlie.
@@ -804,14 +835,17 @@ interface ThematicBreak <: Node {
 }
 ```
 
-**ThematicBreak** ([**Node**][dfn-node]) represents a thematic break, such as a
-scene change in a story, a transition to another topic, or a new document.
+**ThematicBreak** ([**Node**][dfn-node]) represents a thematic break,
+such as a scene change in a story,
+a transition to another topic,
+or a new document.
 
 **ThematicBreak** can be used where [**flow**][dfn-flow-content] content is
 expected.
 It has no content model.
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 ***
@@ -860,16 +894,18 @@ A `label` field can be present.
 `label` is a string value: it works just like `title` on a link or a `lang` on
 code: character escapes and character references are parsed.
 
-To normalize a value, collapse markdown whitespace (`[\t\n\r ]+`) to a space,
-trim the optional initial and/or final space, and perform case-folding.
+To normalize a value,
+collapse markdown whitespace (`[\t\n\r ]+`) to a space,
+trim the optional initial and/or final space,
+and perform case-folding.
 
 Whether the value of `identifier` (or normalized `label` if there is no
 `identifier`) is expected to be a unique identifier or not depends on the type
 of node including the **Association**.
 An example of this is that they should be unique on
-[**Definition**][dfn-definition], whereas multiple
-[**LinkReference**][dfn-link-reference]s can be non-unique to be associated with
-one definition.
+[**Definition**][dfn-definition],
+whereas multiple [**LinkReference**][dfn-link-reference]s can be non-unique to
+be associated with one definition.
 
 ### `Reference`
 
@@ -903,8 +939,8 @@ A `url` field must be present.
 It represents a URL to the referenced resource.
 
 A `title` field can be present.
-It represents  advisory information for the resource, such as would be
-appropriate for a tooltip.
+It represents  advisory information for the resource,
+such as would be appropriate for a tooltip.
 
 ## Enumeration
 
@@ -918,11 +954,12 @@ enum referenceType {
 
 **referenceType** represents the explicitness of a reference.
 
-*   **shortcut**: the reference is implicit, its identifier inferred from its
-    content
-*   **collapsed**: the reference is explicit, its identifier inferred from its
-    content
-*   **full**: the reference is explicit, its identifier explicitly set
+*   **shortcut**: the reference is implicit,
+    its identifier inferred from its content
+*   **collapsed**: the reference is explicit,
+    its identifier inferred from its content
+*   **full**: the reference is explicit,
+    its identifier explicitly set
 
 ## Content model
 
@@ -965,13 +1002,14 @@ type PhrasingContent = Break | Emphasis | Html | Image | ImageReference
   | InlineCode | Link | LinkReference | Strong | Text
 ```
 
-**Phrasing** content represent the text in a document, and its markup.
+**Phrasing** content represent the text in a document and its markup.
 
 ## Extensions
 
 Markdown syntax is often extended.
 It is not a goal of this specification to list all possible extensions.
-However, a short list of frequently used extensions are shown below.
+However,
+a short list of frequently used extensions are shown below.
 
 ### GFM
 
@@ -993,7 +1031,8 @@ accurate or no longer relevant.
 expected.
 Its content model is [**phrasing**][dfn-phrasing-content] content.
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 ~~alpha~~
@@ -1016,8 +1055,10 @@ interface ListItemGfm <: ListItem {
 }
 ```
 
-In GFM, a `checked` field can be present.
-It represents whether the item is done (when `true`), not done (when `false`),
+In GFM,
+a `checked` field can be present.
+It represents whether the item is done (when `true`),
+not done (when `false`),
 or indeterminate or not applicable (when `null` or not present).
 
 #### `FootnoteDefinition`
@@ -1044,7 +1085,8 @@ Its content model is also [**flow**][dfn-flow-content] content.
 **FootnoteDefinition** should be associated with
 [**FootnoteReferences**][dfn-footnote-reference].
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 [^alpha]: bravo and charlie.
@@ -1086,7 +1128,8 @@ It has no content model.
 **FootnoteReference** should be associated with a
 [**FootnoteDefinition**][dfn-footnote-definition].
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 [^alpha]
@@ -1120,10 +1163,12 @@ Its content model is [**table**][dfn-table-content] content.
 The [*head*][term-head] of the node represents the labels of the columns.
 
 An `align` field can be present.
-If present, it must be a list of [**alignType**s][dfn-enum-align-type].
+If present,
+it must be a list of [**alignType**s][dfn-enum-align-type].
 It represents how cells in columns are aligned.
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 | foo | bar |
@@ -1178,14 +1223,16 @@ interface TableCell <: Parent {
 ```
 
 **TableCell** ([**Parent**][dfn-parent]) represents a header cell in a
-[**Table**][dfn-table], if its parent is a [*head*][term-head], or a data
-cell otherwise.
+[**Table**][dfn-table],
+if its parent is a [*head*][term-head],
+or a data cell otherwise.
 
 **TableCell** can be used where [**row**][dfn-row-content] content is expected.
 Its content model is [**phrasing**][dfn-phrasing-content] content excluding
 [**Break**][dfn-break] nodes.
 
-For an example, see [**Table**][dfn-table].
+For an example,
+see [**Table**][dfn-table].
 
 #### `TableRow`
 
@@ -1202,10 +1249,11 @@ interface TableRow <: Parent {
 expected.
 Its content model is [**row**][dfn-row-content] content.
 
-If the node is a [*head*][term-head], it represents the labels of the columns
-for its parent [**Table**][dfn-table].
+If the node is a [*head*][term-head],
+it represents the labels of the columns for its parent [**Table**][dfn-table].
 
-For an example, see [**Table**][dfn-table].
+For an example,
+see [**Table**][dfn-table].
 
 #### `alignType`
 
@@ -1279,7 +1327,8 @@ the document in the YAML ([\[YAML\]][yaml]) data serialisation language.
 expected.
 Its content is represented by its `value` field.
 
-For example, the following markdown:
+For example,
+the following markdown:
 
 ```markdown
 ---
@@ -1301,8 +1350,9 @@ type FrontmatterContent = Yaml
 
 **Frontmatter** content represent out-of-band information about the document.
 
-If frontmatter is present, it must be limited to one node in the
-[*tree*][term-tree], and can only exist as a [*head*][term-head].
+If frontmatter is present,
+it must be limited to one node in the [*tree*][term-tree],
+and can only exist as a [*head*][term-head].
 
 #### `FlowContent` (frontmatter)
 
@@ -1438,12 +1488,13 @@ See the [unist list of utilities][utilities] for more utilities.
 
 ## Security
 
-As mdast can contain HTML and be used to represent HTML, and improper use of
-HTML can open you up to a [cross-site scripting (XSS)][xss] attack, improper use
-of mdast is also unsafe.
-When transforming to HTML (typically through [**hast**][hast]), always be
-careful with user input and use [`hast-util-santize`][sanitize] to make the hast
-tree safe.
+As mdast can contain HTML and be used to represent HTML,
+and improper use of HTML can open you up to a [cross-site scripting (XSS)][xss]
+attack,
+improper use of mdast is also unsafe.
+When transforming to HTML (typically through [**hast**][hast]),
+always be careful with user input and use [`hast-util-santize`][sanitize] to
+make the hast tree safe.
 
 ## Related
 
@@ -1461,12 +1512,18 @@ ways to get started.
 See [`support.md`][support] for ways to get help.
 Ideas for new utilities and tools can be posted in [`syntax-tree/ideas`][ideas].
 
-A curated list of awesome syntax-tree, unist, mdast, hast, xast, and nlcst
-resources can be found in [awesome syntax-tree][awesome].
+A curated list of awesome `syntax-tree`,
+unist,
+mdast,
+hast,
+xast,
+and nlcst resources,
+can be found in [awesome syntax-tree][awesome].
 
 This project has a [code of conduct][coc].
-By interacting with this repository, organization, or community you agree to
-abide by its terms.
+By interacting with this repository,
+organization,
+or community you agree to abide by its terms.
 
 ## Acknowledgments
 
@@ -1474,7 +1531,8 @@ The initial release of this project was authored by
 [**@wooorm**](https://github.com/wooorm).
 
 Special thanks to [**@eush77**](https://github.com/eush77) for their work,
-ideas, and incredibly valuable feedback!
+ideas,
+and incredibly valuable feedback!
 
 Thanks to
 [**@anandthakker**](https://github.com/anandthakker),
@@ -1511,8 +1569,7 @@ Thanks to
 [**@stefanprobst**](https://github.com/stefanprobst),
 [**@tmcw**](https://github.com/tmcw),
 and [**@vhf**](https://github.com/vhf)
-for contributing to mdast and related
-projects!
+for contributing to mdast and related projects!
 
 ## License
 
