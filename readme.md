@@ -261,7 +261,7 @@ Yields:
 ```js
 {
   type: 'code',
-  lang: 'javascript',
+  lang: 'js',
   meta: 'highlight-line="2"',
   value: 'foo()\nbar()\nbaz()'
 }
